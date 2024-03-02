@@ -12,7 +12,7 @@ public class User {
     String birthDate;
     List<Borrowed> borrowedBooks;
 
-    User(String username, String password, String firstName, String lastName, String idNum, String email, String address, String birthDate) {
+    public User(String username, String password, String firstName, String lastName, String idNum, String email, String address, String birthDate) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -58,17 +58,78 @@ public class User {
     }
 
     
-    void reviewBook(Book book, int rating, String comment) {
+    public void reviewBook(Book book, int rating, String comment) {
         book.addReview(this, rating, comment);
     }
 
-    void reviewBook(Book book, int rating) {
+    public void reviewBook(Book book, int rating) {
         book.addReview(this, rating);
     }
 
-    void reviewBook(Book book, String comment) {
+    public void reviewBook(Book book, String comment) {
         book.addReview(this, comment);
     }
 
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getIdNum() {
+        return idNum;
+    }
+    public void setIdNum(String idNum) {
+        this.idNum = idNum;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public List<Borrowed> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+    public void setBorrowedBooks(List<Borrowed> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
 }

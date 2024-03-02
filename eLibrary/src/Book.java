@@ -19,7 +19,7 @@ public class Book {
         private int rating;
         private String comment;
     
-        Review(User user, int rating, String comment){
+        public Review(User user, int rating, String comment){
             this.user = user;
             this.rating = rating;
             this.comment = comment;
@@ -58,7 +58,7 @@ public class Book {
     }
 
 
-    Book(String title, String author, String publisher, String ISBN, int yearPublished, String category, int copiesAvailable) {
+    public Book(String title, String author, String publisher, String ISBN, int yearPublished, String category, int copiesAvailable) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;

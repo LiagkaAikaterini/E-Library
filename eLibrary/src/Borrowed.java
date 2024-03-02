@@ -7,7 +7,7 @@ public class Borrowed {
     private LocalDate returnDate;
     private boolean isReturned;
 
-    Borrowed(Book book, User user){
+    public Borrowed(Book book, User user){
         this.borrowedBook = book;
         this.borrower = user;
         this.borrowingDate = java.time.LocalDate.now();
