@@ -22,13 +22,13 @@ public class App extends Application {
         root.getChildren().add(btn);
     
 
-Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 300, 250);
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-public static void main(String[] args) {
-    launch(args);
-}
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
