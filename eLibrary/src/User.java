@@ -37,6 +37,9 @@ public class User {
         return (borrows_allowed > 0) ;
     }
 
+    /*
+        MAYBE DONT RETURN A STRING AND IMPLEMENT WITH EXCEPTIONS ?????????????????????
+    */ 
     public String borrowBook(Book book) {
         boolean canUserBorrow = canBorrow();
 

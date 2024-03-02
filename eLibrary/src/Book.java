@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,8 +6,9 @@ public class Book {
     private String title;
     private String author;
     private String publisher;
+    private String summary;
     private String ISBN;
-    private int yearPublished;
+    private LocalDate datePublished;
     private String category;
     private int copiesAvailable;
     private List<Review> reviews;
@@ -58,12 +60,13 @@ public class Book {
     }
 
 
-    public Book(String title, String author, String publisher, String ISBN, int yearPublished, String category, int copiesAvailable) {
+    public Book(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, String category, int copiesAvailable) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
+        this.summary = summary;
         this.ISBN = ISBN;
-        this.yearPublished = yearPublished;
+        this.datePublished = datePublished;
         this.category = category;
         this.copiesAvailable = copiesAvailable;
         this.reviews = new ArrayList<Review>();
@@ -71,24 +74,31 @@ public class Book {
     }
 
     public void updateAvgRating() {
+        // check if there are no reviews for the book yet
         if (this.reviews.isEmpty()){
             this.avgRating = 0;
             return;
         }
-        else{
-            int count = 0;
-            int sum = 0;
-            for (Review rev : this.reviews){
-                if (rev.rating != 0){
-                    sum += rev.rating;
-                    count++;
-                }
-            }
-            this.avgRating = (sum/count);
-            return;
-        }  
-    }
 
+        int count = 0;
+        int sum = 0;
+        for (Review rev : this.reviews){
+            if (rev.rating != 0){
+                sum += rev.rating;
+                count++;
+            }
+        }
+
+        // check if all the reviews have only comments and no ratings 
+        if (sum == 0){
+            this.avgRating = 0;
+            return;
+        }
+
+        this.avgRating = (sum/count);
+        return;
+          
+    }
 
     public void addReview(User user, int rating, String comment) {
         for (Borrowed b : user.borrowedBooks) {
@@ -149,6 +159,10 @@ public class Book {
         }
     }
 
+    public int getPublicationYear() {
+        return this.datePublished.getYear();
+    }
+
     public String getTitle() {
         return title;
     }
@@ -170,6 +184,13 @@ public class Book {
         this.publisher = publisher;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     public String getISBN() {
         return ISBN;
     }
@@ -177,11 +198,11 @@ public class Book {
         ISBN = iSBN;
     }
 
-    public int getYearPublished() {
-        return yearPublished;
+    public LocalDate getDatePublished() {
+        return datePublished;
     }
-    public void setYearPublished(int yearPublished) {
-        this.yearPublished = yearPublished;
+    public void setDatePublished(LocalDate datePublished) {
+        this.datePublished = datePublished;
     }
 
     public String getCategory() {
