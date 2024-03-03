@@ -20,7 +20,7 @@ public class Book {
         private int rating;
         private String comment;
     
-        public Review(User user, int rating, String comment){
+        public Review(User user, int rating, String comment) {
             this.user = user;
             this.rating = rating;
             this.comment = comment;
@@ -38,7 +38,7 @@ public class Book {
             return rating;
         }
         public void setRating(int rating) {
-            try{
+            try {
                 if (rating > 5 || rating < 1) {
                     throw new Exception("The rating should be between 1 and 5");
                 }
@@ -73,22 +73,22 @@ public class Book {
 
     public void updateAvgRating() {
         // check if there are no reviews for the book yet
-        if (this.reviews.isEmpty()){
+        if (this.reviews.isEmpty()) {
             this.avgRating = 0;
             return;
         }
 
         int count = 0;
         int sum = 0;
-        for (Review rev : this.reviews){
-            if (rev.rating != 0){
+        for (Review rev : this.reviews) {
+            if (rev.rating != 0) {
                 sum += rev.rating;
                 count++;
             }
         }
 
         // check if all the reviews have only comments and no ratings 
-        if (sum == 0){
+        if (sum == 0) {
             this.avgRating = 0;
             return;
         }
@@ -100,10 +100,10 @@ public class Book {
 
     public void addReview(User user, int rating, String comment) {
         // if this user has already reviewed that book change the existing review
-        for (Review r: this.reviews) {
-            if (r.user.getUsername() == user.getUsername()){
-                r.setComment(comment);
-                r.setRating(rating);
+        for (Review rev: this.reviews) {
+            if ( (rev.user).equals(user) ) {
+                rev.setComment(comment);
+                rev.setRating(rating);
                 updateAvgRating();
                 return;
             }
@@ -118,9 +118,9 @@ public class Book {
 
     public void addReview(User user, int rating) {
         // if this user has already reviewed that book change the existing review
-        for (Review r: this.reviews) {
-            if (r.user.getUsername() == user.getUsername()){
-                r.setRating(rating);
+        for (Review rev: this.reviews) {
+            if ( (rev.user).equals(user) ) {
+                rev.setRating(rating);
                 updateAvgRating();
                 return;
             }
@@ -135,9 +135,9 @@ public class Book {
 
     public void addReview(User user, String comment) {
         // if this user has already reviewed that book change the existing review
-        for (Review r: this.reviews) {
-            if (r.user.getUsername() == user.getUsername()){
-                r.setComment(comment);
+        for (Review rev: this.reviews) {
+            if ( (rev.user).equals(user) ) {
+                rev.setComment(comment);
                 return;
             }
         }

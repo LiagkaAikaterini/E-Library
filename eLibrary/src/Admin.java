@@ -11,7 +11,7 @@ public class Admin extends User{
     }
 
 
-    public void createBook(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName){
+    public void createBook(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) {
         Book newBook = new Book(title, author, publisher, summary, ISBN, datePublished, copiesAvailable);   
         App.addBook(newBook);
 
@@ -19,10 +19,10 @@ public class Admin extends User{
         addBookToCategory(newBook, categoryName);
     }
 
-    public void addBookToCategory(Book book, String categoryName){
+    public void addBookToCategory(Book book, String categoryName) {
         List<Category> categories = App.getAllCategories();
 
-        for (Category cat : categories){
+        for (Category cat : categories) {
             if ( (cat.getCategoryName()).equals(categoryName) ) {
                 cat.addToCategoryBooks(book);
                 return;
@@ -35,23 +35,23 @@ public class Admin extends User{
         return;
     }
 
-    public void createCategory(String categoryName){
+    public void createCategory(String categoryName) {
         Category newCat = new Category(categoryName);
         App.addCategory(newCat);
     }
 
-    public void deleteCategory(Category category){
+    public void deleteCategory(Category category) {
         App.removeCategory(category);
-        for (Book book : category.getCategoryBooks()){
+        for (Book book : category.getCategoryBooks()) {
             deleteBook(book);
         }
     }
 
     // I assume the category given actually exists !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void changeCategoryName(String categoryName, String newCategoryName){
+    public void changeCategoryName(String categoryName, String newCategoryName) {
         List<Category> categories = App.getAllCategories();
 
-        for (Category cat : categories){
+        for (Category cat : categories) {
             if ( (cat.getCategoryName()).equals(categoryName) ) {
                 cat.setCategoryName(newCategoryName);
                 return;
@@ -61,58 +61,63 @@ public class Admin extends User{
 
     /*
      *  what do i get BookISBN or Book ??????????????????????????????????????????????????????
-     * I assume the frontend gives the obgect to be removed
+     *  I assume the frontend gives the object to be removed
      */
-    public void deleteBook(Book bookToDelete){
+    public void deleteBook(Book bookToDelete) {
         // delete all borrows that has not been returned
-        for (Borrowed bor : App.getAllActiveBorrows()){
+        for (Borrowed bor : App.getAllActiveBorrows()) {
             if( (bor.getBorrowedBook()).equals(bookToDelete) ) {
-                // remove active borrow from user borrow history
-                bor.getBorrower().getBorrowsNow().remove(bor);
-                // remove active borrow from active borrow list
+                // remove active borrow from user borrowsNow list
+                bor.getBorrower().removeBorrowsNow(bor);
+                // remove active borrow from the App's active borrow list
                 App.removeActiveBorrow(bor);
             }
         }
 
+        //delete book from all histories - if user has not borrowed book nothing will happen
+        // preserve history  ?????????????????????????????????????????????????????????????????????????????
+        for (User user : App.getAllUsers()) {
+            user.removeBorrowHistory(bookToDelete);
+        }
+
         // delete book
-        App.removeBook(bookToDelete);
-        
-        // -------------- THIS WILL BE USED IF I TAKE ONLY ISBN STRING FROM FRONTEND ----------------------
-        /*
-        List<Book> books = App.getAllBooks();
-        // delete the book from the list
-        for (Book book : books){
-            if ( (book.getISBN()).equals(bookToDeleteISBN) ){
-                books.remove(bookToDelete);
-            }
+        App.removeBook(bookToDelete);        
+    }
+
+    public void deleteUser(User user) {
+        // terminate all borrows of user 
+        // the active borrow list AND the available copies of books will be fixed
+        for (Borrowed bor : user.getBorrowsNow()) {
+            terminateBorrow(bor);
         }
-        */
 
-
-        
+        // delete user
+        App.removeUser(user);;        
     }
 
-    /*
-     *  ----------------------------------- INCOMPLETE -----------------------------------------------
-     * 
-     *  MAYBE BORROWLIST CAN BE MODIFIED ELSEWHERE IN THE APP AND NOT HERE ???????????????????????????????????????????????
-     */
-    public void deleteActiveBorrow(Borrowed borrow){
-        for(Borrowed bor : App.getAllActiveBorrows()){
-            //???????????????????????????????????? should i delete from borrow history of users
-            
+    public void terminateBorrow(Borrowed borrow) {
+        User user = borrow.getBorrower();
+        Book book = borrow.getBorrowedBook();
+
+        // fix user's borrow and history lists - no duplicates allowed in history list
+        user.removeBorrowsNow(borrow);
+        if ( !user.containsInBorrowHistory(book) ) {
+            user.addBorrowHistory(book);
         }
+
+        //remove from app's active borrows
+        App.removeActiveBorrow(borrow);
+
+        //fix copies of book
+        int currCopies = book.getCopiesAvailable();
+        book.setCopiesAvailable(currCopies + 1);
     }
 
-    public void terminateBorrow(Borrowed borrow){
-        
-    }
-
-    public List<Borrowed> watchActiveBorrows(){
+    public List<Borrowed> watchActiveBorrows() {
         return App.getAllActiveBorrows();
     }
 
-    public void changeBookTitle(Book book, String title){
+    public void changeBookTitle(Book book, String title) {
         book.setTitle(title);
     }
 

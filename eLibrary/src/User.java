@@ -55,7 +55,7 @@ public class User {
         }
     }
 
-    public boolean hasBookBeenBorrowed(Book book){
+    public boolean hasBookBeenBorrowed(Book book) {
         // check if he borrows it now
         for (Borrowed bor : this.borrowsNow) {
             if ( (bor.getBorrowedBook()).equals(book) ) {
@@ -76,14 +76,14 @@ public class User {
     
     public String reviewBook(Book book, int rating, String comment) {
         // check if user has actually borrowed the book he is trying to review
-        if ( !hasBookBeenBorrowed(book) ){
+        if ( !hasBookBeenBorrowed(book) ) {
             return "You have not borrowed this book yet. Please borrow the book before you try to review it.";
         }
 
-        if (rating == 0){
+        if (rating == 0) {
             book.addReview(this, comment);
         }
-        else if (comment.isEmpty()){
+        else if (comment.isEmpty()) {
             book.addReview(this, rating);
         }
         else{
@@ -92,6 +92,25 @@ public class User {
         
         return "The review has been registered";
     }
+
+
+    public void addBorrowsNow(Borrowed borrow) {
+        this.borrowsNow.add(borrow);
+    }
+    public void removeBorrowsNow(Borrowed borrow) {
+        this.borrowsNow.remove(borrow);
+    }
+
+    public void addBorrowHistory(Book book) {
+        this.borrowHistory.add(book);
+    }
+    public void removeBorrowHistory(Book book) {
+        this.borrowHistory.remove(book);
+    }
+    public boolean containsInBorrowHistory(Book book) {
+        return this.borrowHistory.contains(book);
+    }
+
 
     public String getUsername() {
         return username;

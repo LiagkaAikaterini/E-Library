@@ -5,16 +5,16 @@ public class Category {
     private String categoryName;
     private List<Book> categoryBooks;
 
-    public Category(String name){
+    public Category(String name) {
         this.categoryName = name;
         this.categoryBooks = new ArrayList<Book>();
     }
 
-    public void addToCategoryBooks(Book book){
+    public void addToCategoryBooks(Book book) {
         this.categoryBooks.add(book);
     }
 
-    public void removeFromCategoryBooks(Book book){
+    public void removeFromCategoryBooks(Book book) {
         this.categoryBooks.remove(book);
     }
 

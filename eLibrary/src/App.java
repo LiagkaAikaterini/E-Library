@@ -78,13 +78,13 @@ public class App extends Application {
     }
 
     @Override
-    public void init(){}
+    public void init() {}
 
     @Override
     public void start(Stage primaryStage) {}
 
     @Override
-    public void stop(){}
+    public void stop() {}
     /* 
     private static List<Book> libary_books;
     @Override
@@ -93,7 +93,7 @@ public class App extends Application {
         btn.setText("say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event){
+            public void handle(ActionEvent event) {
                 System.out.println("Hello World");
             }
         });
