@@ -9,7 +9,6 @@ public class Book {
     private String summary;
     private String ISBN;
     private LocalDate datePublished;
-    private String category;
     private int copiesAvailable;
     private List<Review> reviews;
     private double avgRating;
@@ -60,14 +59,13 @@ public class Book {
     }
 
 
-    public Book(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, String category, int copiesAvailable) {
+    public Book(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.summary = summary;
         this.ISBN = ISBN;
         this.datePublished = datePublished;
-        this.category = category;
         this.copiesAvailable = copiesAvailable;
         this.reviews = new ArrayList<Review>();
         this.avgRating = 0;
@@ -101,11 +99,11 @@ public class Book {
     }
 
     public void addReview(User user, int rating, String comment) {
-        for (Borrowed b : user.borrowedBooks) {
+        for (Borrowed b : user.getborrowHistory()) {
             if (b.getBorrowedBook().getISBN() == this.ISBN) {
                 // if this user has already reviewed that book change the existing review
                 for (Review r: this.reviews) {
-                    if (r.user.username == user.username){
+                    if (r.user.getUsername() == user.getUsername()){
                         r.setComment(comment);
                         r.setRating(rating);
                         updateAvgRating();
@@ -122,18 +120,18 @@ public class Book {
     }
 
     public void addReview(User user, int rating) {
-        for (Borrowed b : user.borrowedBooks) {
+        for (Borrowed b : user.getborrowHistory()) {
             if (b.getBorrowedBook().getISBN() == this.ISBN) {
                 // if this user has already reviewed that book change the existing review
                 for (Review r: this.reviews) {
-                    if (r.user.username == user.username){
+                    if (r.user.getUsername() == user.getUsername()){
                         r.setRating(rating);
                         updateAvgRating();
                         return;
                     }
                 }
                 // else create new review and add it to the review list
-                Review newReview = new Review(user, rating, null);
+                Review newReview = new Review(user, rating, "");
                 this.reviews.add(newReview);
                 updateAvgRating();
                 return;
@@ -142,11 +140,11 @@ public class Book {
     }
 
     public void addReview(User user, String comment) {
-        for (Borrowed b : user.borrowedBooks) {
+        for (Borrowed b : user.getborrowHistory()) {
             if (b.getBorrowedBook().getISBN() == this.ISBN) {
                 // if this user has already reviewed that book change the existing review
                 for (Review r: this.reviews) {
-                    if (r.user.username == user.username){
+                    if (r.user.getUsername() == user.getUsername()){
                         r.setComment(comment);
                         return;
                     }
@@ -203,13 +201,6 @@ public class Book {
     }
     public void setDatePublished(LocalDate datePublished) {
         this.datePublished = datePublished;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public int getCopiesAvailable() {
