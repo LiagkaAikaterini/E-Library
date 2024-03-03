@@ -2,8 +2,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.beans.binding.StringBinding;
-
 public class Admin extends User{
 
     public Admin(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) {
@@ -117,8 +115,72 @@ public class Admin extends User{
         return App.getAllActiveBorrows();
     }
 
+    /* ??????????????????????????????????????????????????????????
+    *  the histories and borrows will change automatically -------- CHECK
+    *  modify book information
+    */
+    // NOT REVIEWS AND AVG RATING
     public void changeBookTitle(Book book, String title) {
         book.setTitle(title);
+    }
+
+    public void changeBookAuthor(Book book, String author) {
+        book.setAuthor(author);
+    }
+
+    public void changeBookPublisher(Book book, String publisher) {
+        book.setPublisher(publisher);
+    }
+
+    public void changeBookSummary(Book book, String summary) {
+        book.setSummary(summary);
+    }
+
+    public void changeBookISBN(Book book, String isbn) {
+        book.setISBN(isbn);
+    }
+
+    public void changeBookDatePublished(Book book, LocalDate date) {
+        book.setDatePublished(date);
+    }
+
+    public void changeBookCopies(Book book, int copies) {
+        book.setCopiesAvailable(copies);
+    }
+
+
+    // modify User information
+    // NOT BORROW HISTORY OR BORROW NOW LISTS
+    public void changeUserUsername(User user, String username) {
+        user.setUsername(username);
+    }
+
+    public void changeUserPassword(User user, String password) {
+        user.setPassword(password);
+    }
+
+    public void changeUserFirstname(User user, String firstname) {
+        user.setFirstName(firstname);
+    }
+
+    public void changeUserLastname(User user, String lastname) {
+        user.setLastName(lastname);
+    }
+
+    public void changeUserIdNum(User user, String id) {
+        user.setIdNum(id);
+    }
+
+    public void changeUserEmail(User user, String email) {
+        user.setEmail(email);
+    }
+
+    public void changeUserAddress(User user, String address) {
+        user.setAddress(address);
+    }
+
+    public void changeUserBirthday(User user, LocalDate date) {
+        user.setBirthDate(date);
     }
 
 }
