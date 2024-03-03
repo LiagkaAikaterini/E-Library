@@ -99,62 +99,53 @@ public class Book {
     }
 
     public void addReview(User user, int rating, String comment) {
-        for (Borrowed b : user.getborrowHistory()) {
-            if (b.getBorrowedBook().getISBN() == this.ISBN) {
-                // if this user has already reviewed that book change the existing review
-                for (Review r: this.reviews) {
-                    if (r.user.getUsername() == user.getUsername()){
-                        r.setComment(comment);
-                        r.setRating(rating);
-                        updateAvgRating();
-                        return;
-                    }
-                }
-                // else create new review and add it to the review list
-                Review newReview = new Review(user, rating, comment);
-                this.reviews.add(newReview);
+        // if this user has already reviewed that book change the existing review
+        for (Review r: this.reviews) {
+            if (r.user.getUsername() == user.getUsername()){
+                r.setComment(comment);
+                r.setRating(rating);
                 updateAvgRating();
                 return;
             }
         }
+        // else create new review and add it to the review list
+        Review newReview = new Review(user, rating, comment);
+        this.reviews.add(newReview);
+        updateAvgRating();
+        return;
+            
     }
 
     public void addReview(User user, int rating) {
-        for (Borrowed b : user.getborrowHistory()) {
-            if (b.getBorrowedBook().getISBN() == this.ISBN) {
-                // if this user has already reviewed that book change the existing review
-                for (Review r: this.reviews) {
-                    if (r.user.getUsername() == user.getUsername()){
-                        r.setRating(rating);
-                        updateAvgRating();
-                        return;
-                    }
-                }
-                // else create new review and add it to the review list
-                Review newReview = new Review(user, rating, "");
-                this.reviews.add(newReview);
+        // if this user has already reviewed that book change the existing review
+        for (Review r: this.reviews) {
+            if (r.user.getUsername() == user.getUsername()){
+                r.setRating(rating);
                 updateAvgRating();
                 return;
             }
         }
+        // else create new review and add it to the review list
+        Review newReview = new Review(user, rating, "");
+        this.reviews.add(newReview);
+        updateAvgRating();
+        return;
+            
     }
 
     public void addReview(User user, String comment) {
-        for (Borrowed b : user.getborrowHistory()) {
-            if (b.getBorrowedBook().getISBN() == this.ISBN) {
-                // if this user has already reviewed that book change the existing review
-                for (Review r: this.reviews) {
-                    if (r.user.getUsername() == user.getUsername()){
-                        r.setComment(comment);
-                        return;
-                    }
-                }
-                // else create new review and add it to the review list
-                Review newReview = new Review(user, 0, comment);
-                this.reviews.add(newReview);
+        // if this user has already reviewed that book change the existing review
+        for (Review r: this.reviews) {
+            if (r.user.getUsername() == user.getUsername()){
+                r.setComment(comment);
                 return;
             }
         }
+        // else create new review and add it to the review list
+        Review newReview = new Review(user, 0, comment);
+        this.reviews.add(newReview);
+        return;
+            
     }
 
     public int getPublicationYear() {

@@ -66,9 +66,9 @@ public class Admin extends User{
     public void deleteBook(Book bookToDelete){
         // delete all borrows that has not been returned
         for (Borrowed bor : App.getAllActiveBorrows()){
-            if( (bor.getBorrowedBook().getISBN()).equals(bookToDelete.getISBN()) ) {
+            if( (bor.getBorrowedBook()).equals(bookToDelete) ) {
                 // remove active borrow from user borrow history
-                bor.getBorrower().getborrowHistory().remove(bor);
+                bor.getBorrower().getBorrowsNow().remove(bor);
                 // remove active borrow from active borrow list
                 App.removeActiveBorrow(bor);
             }
@@ -100,9 +100,7 @@ public class Admin extends User{
     public void deleteActiveBorrow(Borrowed borrow){
         for(Borrowed bor : App.getAllActiveBorrows()){
             //???????????????????????????????????? should i delete from borrow history of users
-            if (borrow.getBorrowedBook().getISBN().equals(borrow) && !bor.getIsReturned()){
-
-            }
+            
         }
     }
 

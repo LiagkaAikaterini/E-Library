@@ -5,14 +5,12 @@ public class Borrowed {
     private User borrower;
     private LocalDate borrowingDate;
     private LocalDate returnDate;
-    private boolean isReturned;
 
     public Borrowed(Book book, User user){
         this.borrowedBook = book;
         this.borrower = user;
         this.borrowingDate = java.time.LocalDate.now();
         this.returnDate = borrowingDate.plusDays(5);
-        this.isReturned = false;
     }
 
     public Book getBorrowedBook() {
@@ -41,13 +39,6 @@ public class Borrowed {
     }
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public boolean getIsReturned() {
-        return isReturned;
-    }
-    public void setIsReturned(boolean isReturned) {
-        this.isReturned = isReturned;
     }
 
 }

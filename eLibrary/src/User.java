@@ -11,7 +11,8 @@ public class User {
     private String email;
     private String address;
     private LocalDate birthDate;
-    private List<Borrowed> borrowHistory;
+    private List<Book> borrowHistory;
+    private List<Borrowed> borrowsNow;
 
     public User(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) {
         this.username = username;
@@ -22,29 +23,21 @@ public class User {
         this.email = email;
         this.address = address;
         this.birthDate = birthDate;
-        borrowHistory = new ArrayList<Borrowed>();
+        borrowHistory = new ArrayList<Book>();
+        borrowsNow = new ArrayList<Borrowed>();
     }
 
 
     public boolean canBorrow() {
         // check if you can borrow anymore books
-        int borrows_allowed = 2;
-        for (Borrowed b : this.borrowHistory) {
-            if (b.getIsReturned() == false) {
-                borrows_allowed--;
-            }
-        }
-
-        return (borrows_allowed > 0) ;
+        return borrowsNow.size() < 2;
     }
 
     /*
         MAYBE DONT RETURN A STRING AND IMPLEMENT WITH EXCEPTIONS ?????????????????????
     */ 
     public String borrowBook(Book book) {
-        boolean canUserBorrow = canBorrow();
-
-        if (!canUserBorrow) {
+        if ( !canBorrow() ) {
             return "You have already borrowed 2 books. Return a book first to borrow another one.";
         }
         
@@ -53,7 +46,7 @@ public class User {
         if (copies > 0) {
             book.setCopiesAvailable(copies - 1);
             Borrowed newBorrow = new Borrowed(book, this);
-            this.borrowHistory.add(newBorrow);
+            this.borrowsNow.add(newBorrow);
             App.addActiveBorrow(newBorrow);
             return "The book was borrowed successfully.";
         }
@@ -63,18 +56,27 @@ public class User {
     }
 
     public boolean hasBookBeenBorrowed(Book book){
-        for (Borrowed b : this.borrowHistory) {
-            if (b.getBorrowedBook().getISBN() == book.getISBN()) {
+        // check if he borrows it now
+        for (Borrowed bor : this.borrowsNow) {
+            if ( (bor.getBorrowedBook()).equals(book) ) {
                 return true;
             }
         }
+        
+        // check if he has borrowed it in the past
+        for (Book b : borrowHistory) {
+            if ( (b).equals(book) ) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     
     public String reviewBook(Book book, int rating, String comment) {
         // check if user has actually borrowed the book he is trying to review
-        if(hasBookBeenBorrowed(book)){
+        if ( !hasBookBeenBorrowed(book) ){
             return "You have not borrowed this book yet. Please borrow the book before you try to review it.";
         }
 
@@ -147,10 +149,17 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public List<Borrowed> getborrowHistory() {
+    public List<Book> getBorrowHistory() {
         return borrowHistory;
     }
-    public void setborrowHistory(List<Borrowed> borrowHistory) {
+    public void setBorrowHistory(List<Book> borrowHistory) {
         this.borrowHistory = borrowHistory;
+    }
+
+    public List<Borrowed> getBorrowsNow() {
+        return borrowsNow;
+    }
+    public void setBorrowsNow(List<Borrowed> borrowsNow) {
+        this.borrowsNow = borrowsNow;
     }
 }
