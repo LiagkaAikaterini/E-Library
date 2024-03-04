@@ -2,9 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
-    private String username;
-    private String password;
+public class User extends UserBase{
     private String firstName;
     private String lastName;
     private String idNum;
@@ -15,8 +13,7 @@ public class User {
     private List<Borrowed> borrowsNow;
 
     public User(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) {
-        this.username = username;
-        this.password = password;
+        super(username, password, false);
         this.firstName = firstName;
         this.lastName = lastName;
         this.idNum = idNum;
@@ -111,20 +108,6 @@ public class User {
         return this.borrowHistory.contains(book);
     }
 
-
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getFirstName() {
         return firstName;

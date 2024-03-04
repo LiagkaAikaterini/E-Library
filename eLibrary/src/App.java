@@ -8,8 +8,47 @@ public class App extends Application {
     private static List<Book> allBooks;
     private static List<Category> allCategories;
     private static List<Borrowed> allActiveBorrows;
-    private static User logedUser;
-    private static boolean adminMode;
+    private static UserBase logedUser;
+
+    @Override
+    public void init() {}
+
+    @Override
+    public void start(Stage primaryStage) {}
+
+    @Override
+    public void stop() {}
+
+    public static void main(String[] args) {
+        allAdmins = new ArrayList<>();
+        Admin a = new Admin("example", "asdfg");
+        Admin b = new Admin("example2", "222222");
+        allAdmins.add(a);
+        allAdmins.add(b);
+
+        for (Admin x : allAdmins) {
+            System.out.println(x.getClass());
+            System.out.println(x.getUsername());
+            System.out.println(x.getPassword());
+            System.out.println(x.getIsAdmin());
+            
+        }
+        System.out.println(allAdmins);
+
+        DataManagement.serialize("src/medialab/example.ser", allAdmins);
+        List<Admin> des = DataManagement.deserializeAdmins("src/medialab/example.ser");
+
+        for (Admin x : des) {
+            System.out.println(x.getClass());
+            System.out.println(x.getUsername());
+            System.out.println(x.getPassword());
+            System.out.println(x.getIsAdmin());
+            
+        }
+
+        System.out.println(des);
+        //launch(args);
+    }
 
     
     public static List<Admin> getAllAdmins() {
@@ -63,28 +102,15 @@ public class App extends Application {
         App.allActiveBorrows.remove(borrow);
     }
 
-    public static User getLogedUser() {
+    // Retrieve User or Admin seperately ??????????????????????????????????????
+    public static UserBase getLogedUser() {
         return logedUser;
     }
-    public static void setLogedUser(User logedUser) {
+    public static void setLogedUser(UserBase logedUser) {
         App.logedUser = logedUser;
     }
 
-    public static boolean getAdminMode() {
-        return adminMode;
-    }
-    public static void setAdminMode(boolean adminMode) {
-        App.adminMode = adminMode;
-    }
-
-    @Override
-    public void init() {}
-
-    @Override
-    public void start(Stage primaryStage) {}
-
-    @Override
-    public void stop() {}
+   
     /* 
     private static List<Book> libary_books;
     @Override
@@ -109,8 +135,5 @@ public class App extends Application {
         primaryStage.show();
     }
     */
-    public static void main(String[] args) {
-        launch(args);
-    }
     
 }

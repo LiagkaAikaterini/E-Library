@@ -1,11 +1,10 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Admin extends User{
+public class Admin extends UserBase{
 
-    public Admin(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) {
-        super(username, password, firstName, lastName, idNum, email, address, birthDate);
+    public Admin(String username, String password) {
+        super(username, password, true);
     }
 
 
@@ -65,7 +64,7 @@ public class Admin extends User{
         // delete all borrows that has not been returned
         for (Borrowed bor : App.getAllActiveBorrows()) {
             if( (bor.getBorrowedBook()).equals(bookToDelete) ) {
-                // remove active borrow from user borrowsNow list
+                // remove active borrow from user borrowsNow list - DOES IT HAPPEN AUTOMATICALLY ?????????????????????????????????????????????????????
                 bor.getBorrower().removeBorrowsNow(bor);
                 // remove active borrow from the App's active borrow list
                 App.removeActiveBorrow(bor);
@@ -152,12 +151,21 @@ public class Admin extends User{
     // modify User information
     // NOT BORROW HISTORY OR BORROW NOW LISTS
     public void changeUserUsername(User user, String username) {
-        user.setUsername(username);
+        try {
+            List<User> users = App.getAllUsers();
+            for (User u : users) {
+                if ( (user.getUsername()).equals(u.getUsername()) ) {
+                    throw new Exception("This username is not available. Please enter a unique username.");
+                }
+            }
+            user.setUsername(username);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void changeUserPassword(User user, String password) {
-        user.setPassword(password);
-    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!! CANNOT CHANGE USERS PASSWORD
 
     public void changeUserFirstname(User user, String firstname) {
         user.setFirstName(firstname);
