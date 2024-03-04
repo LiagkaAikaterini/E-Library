@@ -1,6 +1,8 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import javafx.util.Pair;
+
 import java.util.*;
 
 public class App extends Application {
@@ -13,59 +15,37 @@ public class App extends Application {
 
     @Override
     public void init() {
+
+        // initialize empty lists to pass to the deserializer
+        allAdmins = new ArrayList<>();
+        allUsers = new ArrayList<>(); 
+        allBooks = new ArrayList<>(); 
+        allCategories = new ArrayList<>(); 
+        allActiveBorrows = new ArrayList<>(); 
         
-        System.out.println("init is executed");
-
-        // initialize empty lists if lists == null
-        if (allAdmins == null) { 
-            allAdmins = new ArrayList<>(); 
-        }
-        if (allUsers == null) { 
-            allUsers = new ArrayList<>(); 
-        }
-        if (allBooks == null) {
-            allBooks = new ArrayList<>(); 
-        }
-        if (allCategories == null) { 
-            allCategories = new ArrayList<>(); 
-        }
-        if (allActiveBorrows == null) { 
-            allActiveBorrows = new ArrayList<>(); 
-        }
-
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // nul pointer exception 
-
-        allAdmins = DataManagement.deserialize("src/medialab/admins.ser");
-
-        // deserialize data from data files
-        /*
+        // deserialize data from each data file and populate the corresponding list
         allAdmins = DataManagement.deserialize("src/medialab/admins.ser");
         allUsers = DataManagement.deserialize("src/medialab/users.ser");
         allBooks = DataManagement.deserialize("src/medialab/books.ser");
         allCategories = DataManagement.deserialize("src/medialab/categories.ser");
         allActiveBorrows = DataManagement.deserialize("src/medialab/borrows.ser");
-         */
+         
     }
 
     @Override
     public void start(Stage primaryStage) {
-        System.out.println("start is executed - initial data entering the ");
-        for (Admin x : allAdmins) {
-            System.out.println(x.getClass());
-            System.out.println(x.getUsername());
-            System.out.println(x.getPassword());
-            
-        }
-        System.out.println(allAdmins);
-           
-        Platform.exit();
+                  
+        //Platform.exit();
     }
 
     @Override
     public void stop() {
-        System.out.println("stop is executed");
-        DataManagement.serialize("src/medialab/example.ser", allAdmins);
+        // serialize data from each data file and populate the corresponding list
+        DataManagement.serialize("src/medialab/admins.ser", allAdmins);
+        DataManagement.serialize("src/medialab/users.ser", allUsers);
+        DataManagement.serialize("src/medialab/books.ser", allBooks);
+        DataManagement.serialize("src/medialab/categories.ser", allCategories);
+        DataManagement.serialize("src/medialab/borrows.ser", allActiveBorrows);
     }
 
     public static void main(String[] args) {
