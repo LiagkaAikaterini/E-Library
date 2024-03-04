@@ -29,7 +29,7 @@ public class DataManagement {
     }
 
     // deserialize whole list of any type
-    public static <T> List<T> deserializeAdmins(String file) {
+    public static <T> List<T> deserialize(String file) {
         List<T> dataList = null;
         try {
             FileInputStream fileIn = new FileInputStream(file);

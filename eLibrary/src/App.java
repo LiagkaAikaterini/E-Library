@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import java.util.*;
 
@@ -11,39 +12,64 @@ public class App extends Application {
     private static UserBase logedUser;
 
     @Override
-    public void init() {}
+    public void init() {
+        
+        System.out.println("init is executed");
+
+        // initialize empty lists if lists == null
+        if (allAdmins == null) { 
+            allAdmins = new ArrayList<>(); 
+        }
+        if (allUsers == null) { 
+            allUsers = new ArrayList<>(); 
+        }
+        if (allBooks == null) {
+            allBooks = new ArrayList<>(); 
+        }
+        if (allCategories == null) { 
+            allCategories = new ArrayList<>(); 
+        }
+        if (allActiveBorrows == null) { 
+            allActiveBorrows = new ArrayList<>(); 
+        }
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // nul pointer exception 
+
+        allAdmins = DataManagement.deserialize("src/medialab/admins.ser");
+
+        // deserialize data from data files
+        /*
+        allAdmins = DataManagement.deserialize("src/medialab/admins.ser");
+        allUsers = DataManagement.deserialize("src/medialab/users.ser");
+        allBooks = DataManagement.deserialize("src/medialab/books.ser");
+        allCategories = DataManagement.deserialize("src/medialab/categories.ser");
+        allActiveBorrows = DataManagement.deserialize("src/medialab/borrows.ser");
+         */
+    }
 
     @Override
-    public void start(Stage primaryStage) {}
-
-    @Override
-    public void stop() {}
-
-    public static void main(String[] args) {
-        //allAdmins = new ArrayList<>();
-
+    public void start(Stage primaryStage) {
+        System.out.println("start is executed - initial data entering the ");
         for (Admin x : allAdmins) {
             System.out.println(x.getClass());
             System.out.println(x.getUsername());
             System.out.println(x.getPassword());
-            System.out.println(x.getIsAdmin());
             
         }
         System.out.println(allAdmins);
+           
+        Platform.exit();
+    }
 
+    @Override
+    public void stop() {
+        System.out.println("stop is executed");
         DataManagement.serialize("src/medialab/example.ser", allAdmins);
-        List<Admin> des = DataManagement.deserializeAdmins("src/medialab/example.ser");
+    }
 
-        for (Admin x : des) {
-            System.out.println(x.getClass());
-            System.out.println(x.getUsername());
-            System.out.println(x.getPassword());
-            System.out.println(x.getIsAdmin());
-            
-        }
-
-        System.out.println(des);
-        //launch(args);
+    public static void main(String[] args) {
+        launch(args);        
     }
 
     
