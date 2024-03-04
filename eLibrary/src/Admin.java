@@ -165,7 +165,9 @@ public class Admin extends UserBase{
         }
     }
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!! CANNOT CHANGE USERS PASSWORD
+    public void changeUserPassword(User user, String password) {
+        user.setPassword(password);
+    }
 
     public void changeUserFirstname(User user, String firstname) {
         user.setFirstName(firstname);

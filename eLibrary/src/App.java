@@ -20,11 +20,7 @@ public class App extends Application {
     public void stop() {}
 
     public static void main(String[] args) {
-        allAdmins = new ArrayList<>();
-        Admin a = new Admin("example", "asdfg");
-        Admin b = new Admin("example2", "222222");
-        allAdmins.add(a);
-        allAdmins.add(b);
+        //allAdmins = new ArrayList<>();
 
         for (Admin x : allAdmins) {
             System.out.println(x.getClass());
