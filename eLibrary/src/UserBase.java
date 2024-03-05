@@ -52,6 +52,19 @@ public class UserBase implements Serializable {
         return searchResult;
     }
 
+    public static List<Book> searchByPublisher(String publisher) {
+        List<Book> books = App.getAllBooks();
+        List<Book> searchResult = new ArrayList<Book>();
+        
+        for (Book book : books) {
+            if ( (book.getPublisher()).equals(publisher) ) {
+                searchResult.add(book);
+            }
+        }
+        
+        return searchResult;
+    }
+
     
     public static List<Book> combineSearches(List<Book> booksRes1, List<Book> booksRes2) {
         try {
