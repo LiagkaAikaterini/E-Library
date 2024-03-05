@@ -1,4 +1,6 @@
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserBase implements Serializable {
     private String username;
@@ -9,6 +11,62 @@ public class UserBase implements Serializable {
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+    }
+
+    public static List<Book> searchByYear(int year) {
+        List<Book> books = App.getAllBooks();
+        List<Book> searchResult = new ArrayList<Book>();
+        
+        for (Book book : books) {
+            if (book.getPublicationYear() == year) {
+                searchResult.add(book);
+            }
+        }
+
+        return searchResult;
+    }
+
+    public static List<Book> searchByTitle(String title) {
+        List<Book> books = App.getAllBooks();
+        List<Book> searchResult = new ArrayList<Book>();
+        
+        for (Book book : books) {
+            if ( (book.getTitle()).equals(title) ) {
+                searchResult.add(book);
+            }
+        }
+        
+        return searchResult;
+    }
+
+    public static List<Book> searchByAuthor(String author) {
+        List<Book> books = App.getAllBooks();
+        List<Book> searchResult = new ArrayList<Book>();
+        
+        for (Book book : books) {
+            if ( (book.getAuthor()).equals(author) ) {
+                searchResult.add(book);
+            }
+        }
+        
+        return searchResult;
+    }
+
+    
+    public static List<Book> combineSearches(List<Book> booksRes1, List<Book> booksRes2) {
+        try {
+            List<Book> searchResult = new ArrayList<Book>();
+
+            searchResult = booksRes1;
+            searchResult.retainAll(booksRes2);
+            
+            return searchResult;
+        }
+        catch (NullPointerException n) {
+            // if any of the lists is null return empty list
+            return new ArrayList<Book>();
+        }
+        
     }
 
     public String getPassword() {
