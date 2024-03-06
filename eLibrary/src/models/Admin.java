@@ -1,3 +1,5 @@
+package models;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,14 +12,14 @@ public class Admin extends UserBase{
 
     public void createBook(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) {
         Book newBook = new Book(title, author, publisher, summary, ISBN, datePublished, copiesAvailable);   
-        App.addBook(newBook);
+        Library.addBook(newBook);
 
         // all books must be in some category
         addBookToCategory(newBook, categoryName);
     }
 
     public void addBookToCategory(Book book, String categoryName) {
-        List<Category> categories = App.getAllCategories();
+        List<Category> categories = Library.getAllCategories();
 
         for (Category cat : categories) {
             if ( (cat.getCategoryName()).equals(categoryName) ) {
@@ -34,11 +36,11 @@ public class Admin extends UserBase{
 
     public void createCategory(String categoryName) {
         Category newCat = new Category(categoryName);
-        App.addCategory(newCat);
+        Library.addCategory(newCat);
     }
 
     public void deleteCategory(Category category) {
-        App.removeCategory(category);
+        Library.removeCategory(category);
         for (Book book : category.getCategoryBooks()) {
             deleteBook(book);
         }
@@ -46,7 +48,7 @@ public class Admin extends UserBase{
 
     // I assume the category given actually exists !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public void changeCategoryName(String categoryName, String newCategoryName) {
-        List<Category> categories = App.getAllCategories();
+        List<Category> categories = Library.getAllCategories();
 
         for (Category cat : categories) {
             if ( (cat.getCategoryName()).equals(categoryName) ) {
@@ -62,23 +64,23 @@ public class Admin extends UserBase{
      */
     public void deleteBook(Book bookToDelete) {
         // delete all borrows that has not been returned
-        for (Borrowed bor : App.getAllActiveBorrows()) {
+        for (Borrowed bor : Library.getAllActiveBorrows()) {
             if( (bor.getBorrowedBook()).equals(bookToDelete) ) {
                 // remove active borrow from user borrowsNow list - DOES IT HAPPEN AUTOMATICALLY ?????????????????????????????????????????????????????
                 bor.getBorrower().removeBorrowsNow(bor);
                 // remove active borrow from the App's active borrow list
-                App.removeActiveBorrow(bor);
+                Library.removeActiveBorrow(bor);
             }
         }
 
         //delete book from all histories - if user has not borrowed book nothing will happen
         // preserve history  ?????????????????????????????????????????????????????????????????????????????
-        for (User user : App.getAllUsers()) {
+        for (User user : Library.getAllUsers()) {
             user.removeBorrowHistory(bookToDelete);
         }
 
         // delete book
-        App.removeBook(bookToDelete);        
+        Library.removeBook(bookToDelete);        
     }
 
     public void deleteUser(User user) {
@@ -89,7 +91,7 @@ public class Admin extends UserBase{
         }
 
         // delete user
-        App.removeUser(user);;        
+        Library.removeUser(user);;        
     }
 
     public void terminateBorrow(Borrowed borrow) {
@@ -103,7 +105,7 @@ public class Admin extends UserBase{
         }
 
         //remove from app's active borrows
-        App.removeActiveBorrow(borrow);
+        Library.removeActiveBorrow(borrow);
 
         //fix copies of book
         int currCopies = book.getCopiesAvailable();
@@ -111,7 +113,7 @@ public class Admin extends UserBase{
     }
 
     public List<Borrowed> watchActiveBorrows() {
-        return App.getAllActiveBorrows();
+        return Library.getAllActiveBorrows();
     }
 
     /* ??????????????????????????????????????????????????????????
@@ -152,7 +154,7 @@ public class Admin extends UserBase{
     // NOT BORROW HISTORY OR BORROW NOW LISTS
     public void changeUserUsername(User user, String username) {
         try {
-            List<User> users = App.getAllUsers();
+            List<User> users = Library.getAllUsers();
             for (User u : users) {
                 if ( (user.getUsername()).equals(u.getUsername()) ) {
                     throw new Exception("This username is not available. Please enter a unique username.");

@@ -1,3 +1,5 @@
+package models;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class User extends UserBase{
             book.setCopiesAvailable(copies - 1);
             Borrowed newBorrow = new Borrowed(book, this);
             this.borrowsNow.add(newBorrow);
-            App.addActiveBorrow(newBorrow);
+            Library.addActiveBorrow(newBorrow);
             return "The book was borrowed successfully.";
         }
         else {
@@ -71,23 +73,28 @@ public class User extends UserBase{
     }
 
     
-    public String reviewBook(Book book, int rating, String comment) {
+    public boolean reviewBook(Book book, int rating, String comment) {
         // check if user has actually borrowed the book he is trying to review
-        if ( !hasBookBeenBorrowed(book) ) {
-            return "You have not borrowed this book yet. Please borrow the book before you try to review it.";
-        }
+        try {
+            if ( !hasBookBeenBorrowed(book) ) {
+                throw new Exception("You have not borrowed this book yet. Please borrow the book before you try to review it.");
+            }
 
-        if (rating == 0) {
-            book.addReview(this, comment);
+            if (rating == 0) {
+                book.addReview(this, comment);
+            }
+            else if (comment.isEmpty()) {
+                book.addReview(this, rating);
+            }
+            else{
+                book.addReview(this, rating, comment);
+            }
+            
+            return true;
         }
-        else if (comment.isEmpty()) {
-            book.addReview(this, rating);
+        catch(Exception e){
+            return false;
         }
-        else{
-            book.addReview(this, rating, comment);
-        }
-        
-        return "The review has been registered";
     }
 
 

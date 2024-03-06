@@ -1,6 +1,9 @@
+package models;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class UserBase implements Serializable {
     private String username;
@@ -14,7 +17,7 @@ public class UserBase implements Serializable {
     }
 
     public static List<Book> searchByYear(int year) {
-        List<Book> books = App.getAllBooks();
+        List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
         for (Book book : books) {
@@ -27,7 +30,7 @@ public class UserBase implements Serializable {
     }
 
     public static List<Book> searchByTitle(String title) {
-        List<Book> books = App.getAllBooks();
+        List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
         for (Book book : books) {
@@ -40,7 +43,7 @@ public class UserBase implements Serializable {
     }
 
     public static List<Book> searchByAuthor(String author) {
-        List<Book> books = App.getAllBooks();
+        List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
         for (Book book : books) {
@@ -53,7 +56,7 @@ public class UserBase implements Serializable {
     }
 
     public static List<Book> searchByPublisher(String publisher) {
-        List<Book> books = App.getAllBooks();
+        List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
         for (Book book : books) {
