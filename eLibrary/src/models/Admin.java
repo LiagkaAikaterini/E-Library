@@ -3,6 +3,7 @@ package models;
 import java.time.LocalDate;
 import java.util.List;
 
+
 public class Admin extends UserBase{
 
     public Admin(String username, String password) {

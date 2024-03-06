@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Book implements Serializable{
     private String title;
     private String author;
@@ -18,7 +19,7 @@ public class Book implements Serializable{
 
 
     // class for a book review
-    public class Review {
+    public static class Review {
         private User user;
         private int rating;
         private String comment;
@@ -29,6 +30,9 @@ public class Book implements Serializable{
             this.comment = comment;
         }
     
+        public boolean isRatingValid(int rating) {
+            return (this.rating >= 1 && this.rating <= 5);
+        }
     
         public String getComment() {
             return comment;
@@ -42,7 +46,7 @@ public class Book implements Serializable{
         }
         public void setRating(int rating) {
             try {
-                if (rating > 5 || rating < 1) {
+                if ( !isRatingValid(rating) ) {
                     throw new Exception("The rating should be between 1 and 5");
                 }
     
@@ -75,33 +79,44 @@ public class Book implements Serializable{
     }
 
     public void updateAvgRating() {
-        // check if there are no reviews for the book yet
-        if (this.reviews.isEmpty()) {
-            this.avgRating = 0;
-            return;
-        }
-
-        int count = 0;
-        int sum = 0;
-        for (Review rev : this.reviews) {
-            if (rev.rating != 0) {
-                sum += rev.rating;
-                count++;
+        // if there are no reviews for the book yet
+        // if all the reviews have only comments and no ratings
+        // int count will remain zero throw an ArithmetcException so i handle that 
+        
+        try {
+            /*
+            if (this.reviews.isEmpty()) {
+                this.avgRating = 0;
+                return;
             }
-        }
+            */
+            int count = 0;
+            int sum = 0;
+            for (Review rev : this.reviews) {
+                if (rev.rating != 0) {
+                    sum += rev.rating;
+                    count++;
+                }
+            }
 
-        // check if all the reviews have only comments and no ratings 
-        if (sum == 0) {
-            this.avgRating = 0;
+            /* check if all the reviews have only comments and no ratings 
+            if (sum == 0) {
+                this.avgRating = 0;
+                return;
+            }
+            */
+
+            this.avgRating = (sum/count);
             return;
         }
-
-        this.avgRating = (sum/count);
-        return;
+        catch(ArithmeticException d) {
+            // IS IT ONLY DIVISION BY ZERO - DO NOT KNOW 
+            this.avgRating = 0;
+        }
           
     }
 
-    public void addReview(User user, int rating, String comment) {
+    public void addReview(User user, int rating, String comment) throws Exception {
         // if this user has already reviewed that book change the existing review
         for (Review rev: this.reviews) {
             if ( (rev.user).equals(user) ) {
@@ -111,15 +126,19 @@ public class Book implements Serializable{
                 return;
             }
         }
-        // else create new review and add it to the review list
+        // else create new review - check if rating valid - add it to the review list
         Review newReview = new Review(user, rating, comment);
+        if ( !newReview.isRatingValid(rating) ) {
+            throw new Exception("invalid rating");
+        }
+
         this.reviews.add(newReview);
         updateAvgRating();
         return;
             
     }
 
-    public void addReview(User user, int rating) {
+    public void addReview(User user, int rating) throws Exception {
         // if this user has already reviewed that book change the existing review
         for (Review rev: this.reviews) {
             if ( (rev.user).equals(user) ) {
@@ -130,6 +149,9 @@ public class Book implements Serializable{
         }
         // else create new review and add it to the review list
         Review newReview = new Review(user, rating, "");
+        if ( !newReview.isRatingValid(rating) ) {
+            throw new Exception("invalid rating");
+        }
         this.reviews.add(newReview);
         updateAvgRating();
         return;

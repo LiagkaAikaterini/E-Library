@@ -1,30 +1,45 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import models.*;
 
 import java.util.*;
+
 
 public class App extends Application {
 
     @Override
     public void init() {
         // LOGIN LOGIC TO RETRIEVE CURRENT USER
-        UserBase currUser = new Admin("", "");
+        //UserBase currUser = new Admin("", "");
 
-        Library.retrieveData(currUser);
+        //Library.retrieveData(currUser);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        //Platform.exit();
+        try {
+        List<Integer> reviews = new ArrayList<>();
+        int count = 0;
+        int sum = 0;
+        for (int rev : reviews) {
+            if (rev != 0) {
+                sum += rev;
+                count++;
+            }
+        }
+        System.out.println(sum/count);
+    }
+    catch(ArithmeticException e){
+        System.out.println("heyyy");
+    }
+        Platform.exit();
     }
 
     @Override
     public void stop() {
-        Library.saveData();
+        //Library.saveData();
     }
 
     public static void main(String[] args) {
