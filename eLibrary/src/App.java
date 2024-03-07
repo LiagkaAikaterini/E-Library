@@ -4,42 +4,24 @@ import javafx.stage.Stage;
 
 import models.*;
 
-import java.util.*;
+public class App extends Application  {
+    public Library libraryInstance;
 
-
-public class App extends Application {
-
+    // MAYBE NOT IN INIT BUT IN START!!!!
     @Override
     public void init() {
-        // LOGIN LOGIC TO RETRIEVE CURRENT USER
-        //UserBase currUser = new Admin("", "");
-
-        //Library.retrieveData(currUser);
+        libraryInstance = new Library();
     }
 
     @Override
     public void start(Stage primaryStage) {
-        try {
-        List<Integer> reviews = new ArrayList<>();
-        int count = 0;
-        int sum = 0;
-        for (int rev : reviews) {
-            if (rev != 0) {
-                sum += rev;
-                count++;
-            }
-        }
-        System.out.println(sum/count);
-    }
-    catch(ArithmeticException e){
-        System.out.println("heyyy");
-    }
+        // LOGIN LOGIC TO RETRIEVE CURRENT USER
         Platform.exit();
     }
 
     @Override
     public void stop() {
-        //Library.saveData();
+        libraryInstance.saveData();
     }
 
     public static void main(String[] args) {
