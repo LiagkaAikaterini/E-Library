@@ -34,7 +34,7 @@ public class UserBase implements Serializable {
         List<Book> searchResult = new ArrayList<Book>();
         
         for (Book book : books) {
-            if ( (book.getTitle()).equals(title) ) {
+            if ( (book.getTitle()).contains(title) ) {
                 searchResult.add(book);
             }
         }
@@ -47,7 +47,7 @@ public class UserBase implements Serializable {
         List<Book> searchResult = new ArrayList<Book>();
         
         for (Book book : books) {
-            if ( (book.getAuthor()).equals(author) ) {
+            if ( (book.getAuthor()).contains(author) ) {
                 searchResult.add(book);
             }
         }
@@ -60,7 +60,7 @@ public class UserBase implements Serializable {
         List<Book> searchResult = new ArrayList<Book>();
         
         for (Book book : books) {
-            if ( (book.getPublisher()).equals(publisher) ) {
+            if ( (book.getPublisher()).contains(publisher) ) {
                 searchResult.add(book);
             }
         }

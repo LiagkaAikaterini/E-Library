@@ -30,10 +30,6 @@ public class Book implements Serializable{
             this.comment = comment;
         }
     
-        public boolean isRatingValid(int rating) {
-            return (this.rating >= 1 && this.rating <= 5);
-        }
-    
         public String getComment() {
             return comment;
         }
@@ -46,7 +42,7 @@ public class Book implements Serializable{
         }
         public void setRating(int rating) {
             try {
-                if ( !isRatingValid(rating) ) {
+                if ( !(rating >= 0  && rating <= 5) ) {
                     throw new Exception("The rating should be between 1 and 5");
                 }
     
@@ -109,33 +105,44 @@ public class Book implements Serializable{
             this.avgRating = (sum/count);
             return;
         }
-        catch(ArithmeticException d) {
-            // IS IT ONLY DIVISION BY ZERO - DO NOT KNOW 
-            this.avgRating = 0;
+        catch(ArithmeticException e) {
+            // IF ONLY DIVISION BY ZERO - DO NOT KNOW 
+            if ( (e.getMessage()).contains("/ by zero") ) {
+                this.avgRating = 0;
+            }
+            else {
+                throw e;
+            }
         }
           
     }
 
-    public void addReview(User user, int rating, String comment) throws Exception {
+    public void addReview(User user, int rating, String comment) {
         // if this user has already reviewed that book change the existing review
-        for (Review rev: this.reviews) {
-            if ( (rev.user).equals(user) ) {
-                rev.setComment(comment);
-                rev.setRating(rating);
-                updateAvgRating();
-                return;
+        try {
+            for (Review rev: this.reviews) {
+                if ( (rev.user).equals(user) ) {
+                    rev.setComment(comment);
+                    rev.setRating(rating);
+                    updateAvgRating();
+                    return;
+                }
             }
-        }
-        // else create new review - check if rating valid - add it to the review list
-        Review newReview = new Review(user, rating, comment);
-        if ( !newReview.isRatingValid(rating) ) {
-            throw new Exception("invalid rating");
-        }
+            // else create new review - check if rating valid - add it to the review list
+            if ( !(rating >= 1 && rating <= 5) ) {
+                Review newReview = new Review(user, rating, comment);
+                this.reviews.add(newReview);
+                updateAvgRating();
+            }
+            else {
+                throw new Exception("invalid rating");
+            }
 
-        this.reviews.add(newReview);
-        updateAvgRating();
-        return;
-            
+            return;
+        } 
+        catch(Exception e){
+            e.printStackTrace();
+        }  
     }
 
     public void addReview(User user, int rating) throws Exception {
@@ -148,14 +155,15 @@ public class Book implements Serializable{
             }
         }
         // else create new review and add it to the review list
-        Review newReview = new Review(user, rating, "");
-        if ( !newReview.isRatingValid(rating) ) {
+        if ( !(rating >= 1 && rating <= 5) ) {
+            Review newReview = new Review(user, rating, "");
+            this.reviews.add(newReview);
+            updateAvgRating();
+        }
+        else {
             throw new Exception("invalid rating");
         }
-        this.reviews.add(newReview);
-        updateAvgRating();
-        return;
-            
+                    
     }
 
     public void addReview(User user, String comment) {
