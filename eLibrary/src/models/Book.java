@@ -20,12 +20,12 @@ public class Book implements Serializable{
 
     // class for a book review
     public static class Review {
-        private User user;
+        private String username;
         private int rating;
         private String comment;
     
-        public Review(User user, int rating, String comment) {
-            this.user = user;
+        public Review(String username, int rating, String comment) {
+            this.username = username;
             this.rating = rating;
             this.comment = comment;
         }
@@ -42,7 +42,7 @@ public class Book implements Serializable{
         }
         public void setRating(int rating) {
             try {
-                if ( !(rating >= 0  && rating <= 5) ) {
+                if ( !(rating >= 0 && rating <= 5) ) {
                     throw new Exception("The rating should be between 1 and 5");
                 }
     
@@ -53,11 +53,11 @@ public class Book implements Serializable{
             }
         }
     
-        public User getUser() {
-            return user;
+        public String getUsername() {
+            return username;
         }
-        public void setUser(User user) {
-            this.user = user;
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 
@@ -111,74 +111,107 @@ public class Book implements Serializable{
                 this.avgRating = 0;
             }
             else {
-                throw e;
+                //throw e;
+                e.printStackTrace();
             }
         }
           
     }
 
-    public void addReview(User user, int rating, String comment) {
-        // if this user has already reviewed that book change the existing review
+    public boolean addReview(String username, int rating, String comment) {
         try {
+            // !!!!!!!!!!!!!!!!!!! WHAT HAPPENS IF HE DELETES RATING - 0 SHOULD BE ALLOWED
+            //check if rating valid
+            if ( !(rating >= 0 && rating <= 5) ) {
+                throw new Exception("invalid rating");   
+            }
+
+            // if this user has already reviewed that book change the existing review
             for (Review rev: this.reviews) {
-                if ( (rev.user).equals(user) ) {
+                if ( (rev.username).equals(username) ) {
                     rev.setComment(comment);
                     rev.setRating(rating);
                     updateAvgRating();
-                    return;
+                    return true;
                 }
             }
-            // else create new review - check if rating valid - add it to the review list
-            if ( !(rating >= 1 && rating <= 5) ) {
-                Review newReview = new Review(user, rating, comment);
-                this.reviews.add(newReview);
-                updateAvgRating();
-            }
-            else {
-                throw new Exception("invalid rating");
-            }
 
-            return;
+            // else create new review - add it to the review list
+            
+            Review newReview = new Review(username, rating, comment);
+            this.reviews.add(newReview);
+            updateAvgRating();
+            return true;
         } 
         catch(Exception e){
             e.printStackTrace();
-        }  
+            return false;
+        }
     }
 
-    public void addReview(User user, int rating) throws Exception {
-        // if this user has already reviewed that book change the existing review
-        for (Review rev: this.reviews) {
-            if ( (rev.user).equals(user) ) {
-                rev.setRating(rating);
-                updateAvgRating();
-                return;
+    public boolean addReview(String username, int rating) {
+        try {
+            // !!!!!!!!!!!!!!!!!!! WHAT HAPPENS IF HE DELETES RATING - 0 SHOULD BE ALLOWED
+            //check if rating valid
+            if ( !(rating >= 0 && rating <= 5) ) {
+                throw new Exception("invalid rating");   
             }
-        }
-        // else create new review and add it to the review list
-        if ( !(rating >= 1 && rating <= 5) ) {
-            Review newReview = new Review(user, rating, "");
+
+            // if this user has already reviewed that book change the existing review
+            for (Review rev: this.reviews) {
+                if ( (rev.username).equals(username) ) {
+                    rev.setRating(rating);
+                    updateAvgRating();
+                    return true;
+                }
+            }
+            // else create new review and add it to the review list
+            Review newReview = new Review(username, rating, "");
             this.reviews.add(newReview);
             updateAvgRating();
+            return true;
+            
         }
-        else {
-            throw new Exception("invalid rating");
+        catch (Exception e) {
+            return false;
         }
                     
     }
 
-    public void addReview(User user, String comment) {
+    public boolean addReview(String username, String comment) {
         // if this user has already reviewed that book change the existing review
-        for (Review rev: this.reviews) {
-            if ( (rev.user).equals(user) ) {
-                rev.setComment(comment);
-                return;
+        try {    
+            for (Review rev: this.reviews) {
+                if ( (rev.username).equals(username) ) {
+                    rev.setComment(comment);
+                    return true;
+                }
+            }
+            // else create new review and add it to the review list
+            Review newReview = new Review(username, 0, comment);
+            this.reviews.add(newReview);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+            
+    }
+
+    public void deleteReviewsOfUser(String username) {
+        for (Review rev : this.reviews){
+            if ( (rev.getUsername()).equals(username) ) {
+                this.reviews.remove(rev);
             }
         }
-        // else create new review and add it to the review list
-        Review newReview = new Review(user, 0, comment);
-        this.reviews.add(newReview);
-        return;
-            
+    }
+
+    public void changeReviewsUsername(String oldUsername, String newUsername) {
+        for (Review rev : this.reviews){
+            if ( (rev.getUsername()).equals(oldUsername) ) {
+                rev.setUsername(newUsername);
+            }
+        }
     }
 
     public int getPublicationYear() {
@@ -216,8 +249,16 @@ public class Book implements Serializable{
     public String getISBN() {
         return ISBN;
     }
-    public void setISBN(String iSBN) {
-        ISBN = iSBN;
+    public void setISBN(String iSBN) throws Exception{
+        if (iSBN.equals(this.ISBN)) {
+            return;
+        }
+
+        if ( !Query.isIsbnAvailable(iSBN) ) {
+            throw new Exception("This isbn is not available. Please enter unique isbn.");
+        }
+
+        this.ISBN = iSBN;
     }
 
     public LocalDate getDatePublished() {

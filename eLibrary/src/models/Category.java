@@ -5,35 +5,35 @@ import java.util.ArrayList;
 
 
 public class Category implements Serializable {
-    private String categoryName;
-    private List<Book> categoryBooks;
+    private String name;
+    private List<String> booksISBN;
 
     public Category(String name) {
-        this.categoryName = name;
-        this.categoryBooks = new ArrayList<Book>();
+        this.name  = name;
+        this.booksISBN  = new ArrayList<String>();
     }
 
-    public void addToCategoryBooks(Book book) {
-        this.categoryBooks.add(book);
+    public void addToCategoryBooks(String bookIsbn) {
+        this.booksISBN.add(bookIsbn);
     }
 
-    public void removeFromCategoryBooks(Book book) {
-        this.categoryBooks.remove(book);
+    public void removeFromCategoryBooks(String bookIsbn) {
+        this.booksISBN.remove(bookIsbn);
     }
 
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getName() {
+        return name;
     }
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<Book> getCategoryBooks() {
-        return categoryBooks;
+    public List<String> getBooksISBN() {
+        return booksISBN;
     }
-    public void setCategoryBooks(List<Book> categoryBooks) {
-        this.categoryBooks = categoryBooks;
+    public void setBooksISBN(List<String> booksISBN) {
+        this.booksISBN = booksISBN;
     }
 
 }

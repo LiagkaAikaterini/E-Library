@@ -95,7 +95,16 @@ public class UserBase implements Serializable {
     public String getUsername() {
         return username;
     }
-    public void setUsername(String username) {
+    public void setUsername(String username) throws Exception{
+        if ( username.equals(this.username) ) {
+            return;
+        }
+
+        // check if username already exists - Usernames Must be unique
+        if ( !Query.isUsernameAvailable(username) ) {
+            throw new Exception("This username is not available. Please try a different username.");
+        }
+        
         this.username = username;
     }
 

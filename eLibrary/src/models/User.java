@@ -12,8 +12,7 @@ public class User extends UserBase{
     private String email;
     private String address;
     private LocalDate birthDate;
-    private List<Book> borrowHistory;
-    private List<Borrowed> borrowsNow;
+    private List<String> borrowHistory;
 
     public User(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) {
         super(username, password, false);
@@ -23,49 +22,53 @@ public class User extends UserBase{
         this.email = email;
         this.address = address;
         this.birthDate = birthDate;
-        borrowHistory = new ArrayList<Book>();
-        borrowsNow = new ArrayList<Borrowed>();
+        borrowHistory = new ArrayList<String>();
     }
 
 
     public boolean canBorrow() {
         // check if you can borrow anymore books
-        return borrowsNow.size() < 2;
+        List<Borrowed> myActiveBorrows = Query.findUsersActiveBorrows(this.getUsername());
+        
+        return (myActiveBorrows.size() < 2);
     }
 
-    /*
-        MAYBE DONT RETURN A STRING AND IMPLEMENT WITH EXCEPTIONS ?????????????????????
-    */ 
-    public String borrowBook(Book book) {
-        if ( !canBorrow() ) {
-            return "You have already borrowed 2 books. Return a book first to borrow another one.";
+    
+    public boolean borrowBook(Book book) {
+        try {
+            if ( !canBorrow() ) {
+                throw new Exception("You have already borrowed 2 books. Return a book first to borrow another one.");
+            }
+            
+            // now that i have assured that this user can borrow a new book do the borrowing
+            int copies = book.getCopiesAvailable();
+            if (copies > 0) {
+                String isbn = book.getISBN();
+                Borrowed newBorrow = new Borrowed(isbn, this.getUsername());
+                Library.addActiveBorrow(newBorrow);
+                // add to borrow history imediatelly after the book is borrowed - even if borrow is active - No duplicated allowed
+                if ( !(this.borrowHistory).contains(isbn) ) {
+                    this.borrowHistory.add(isbn);
+                }
+                
+                // update copies
+                book.setCopiesAvailable(copies - 1);
+                return true;
+            }
+            else {
+                throw new Exception("The book has no available copies.");
+            }
         }
-        
-        // now that i have assured that this user can borrow a new book do the borrowing
-        int copies = book.getCopiesAvailable();
-        if (copies > 0) {
-            book.setCopiesAvailable(copies - 1);
-            Borrowed newBorrow = new Borrowed(book, this);
-            this.borrowsNow.add(newBorrow);
-            Library.addActiveBorrow(newBorrow);
-            return "The book was borrowed successfully.";
+        catch(Exception e) {
+            return false;
         }
-        else {
-            return "The book has no available copies.";
-        }
+
     }
 
     public boolean hasBookBeenBorrowed(Book book) {
-        // check if he borrows it now
-        for (Borrowed bor : this.borrowsNow) {
-            if ( (bor.getBorrowedBook()).equals(book) ) {
-                return true;
-            }
-        }
-        
-        // check if he has borrowed it in the past
-        for (Book b : borrowHistory) {
-            if ( (b).equals(book) ) {
+        // check if he has borrowed it in the past - it contains active borrowed books' isbns as well
+        for (String b : this.borrowHistory) {
+            if ( b.equals(book.getISBN()) ) {
                 return true;
             }
         }
@@ -81,17 +84,18 @@ public class User extends UserBase{
                 throw new Exception("You have not borrowed this book yet. Please borrow the book before you try to review it.");
             }
 
+        boolean res;
             if (rating == 0) {
-                book.addReview(this, comment);
+                res = book.addReview(this.getUsername(), comment);
             }
             else if (comment.isEmpty()) {
-                book.addReview(this, rating);
+                res = book.addReview(this.getUsername(), rating);
             }
             else{
-                book.addReview(this, rating, comment);
+                res = book.addReview(this.getUsername(), rating, comment);
             }
             
-            return true;
+            return res;
         }
         catch(Exception e){
             return false;
@@ -99,21 +103,12 @@ public class User extends UserBase{
     }
 
 
-    public void addBorrowsNow(Borrowed borrow) {
-        this.borrowsNow.add(borrow);
-    }
-    public void removeBorrowsNow(Borrowed borrow) {
-        this.borrowsNow.remove(borrow);
-    }
 
-    public void addBorrowHistory(Book book) {
-        this.borrowHistory.add(book);
+    public void addBorrowHistory(String bookISBN) {
+        this.borrowHistory.add(bookISBN);
     }
-    public void removeBorrowHistory(Book book) {
-        this.borrowHistory.remove(book);
-    }
-    public boolean containsInBorrowHistory(Book book) {
-        return this.borrowHistory.contains(book);
+    public void removeBorrowHistory(String bookISBN) {
+        this.borrowHistory.remove(bookISBN);
     }
 
 
@@ -159,17 +154,10 @@ public class User extends UserBase{
         this.birthDate = birthDate;
     }
 
-    public List<Book> getBorrowHistory() {
+    public List<String> getBorrowHistory() {
         return borrowHistory;
     }
-    public void setBorrowHistory(List<Book> borrowHistory) {
+    public void setBorrowHistory(List<String> borrowHistory) {
         this.borrowHistory = borrowHistory;
-    }
-
-    public List<Borrowed> getBorrowsNow() {
-        return borrowsNow;
-    }
-    public void setBorrowsNow(List<Borrowed> borrowsNow) {
-        this.borrowsNow = borrowsNow;
     }
 }

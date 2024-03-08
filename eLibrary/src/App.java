@@ -1,8 +1,11 @@
+import java.time.LocalDate;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import models.*;
+import models.Book.Review;
 
 public class App extends Application  {
     public Library libraryInstance;
@@ -15,7 +18,56 @@ public class App extends Application  {
 
     @Override
     public void start(Stage primaryStage) {
-        // LOGIN LOGIC TO RETRIEVE CURRENT USER
+        /*
+        Admin a = new Admin("admin1", "STYLESHEET_CASPIAN");
+        Book b1 = new Book("book1", "author1", "publisher1", "sumaryy", "111", java.time.LocalDate.now(), 3);
+        Book b2 = new Book("book2", "author2", "publisher2", "sumaryy", "222", java.time.LocalDate.now(), 5);
+        User user = new User("username", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_MODENA", "STYLESHEET_CASPIAN", java.time.LocalDate.now());
+        Library.addAdmins(a);
+        Library.addUsers(user);
+        Library.addBook(b2);
+        Library.addBook(b1);
+
+        user.borrowBook(b2);
+         */
+
+        
+        
+        System.out.println();
+        System.out.println("ADMINS");
+        System.out.println();
+        for (Admin user : Library.getAllAdmins()) {
+            System.out.println(user.getUsername());
+            for (Book b : Library.getAllBooks()) {
+                user.changeBookTitle(b, "changed name");
+            }
+        }
+
+        System.out.println();
+        System.out.println("USERS");
+        System.out.println();
+        for (User user : Library.getAllUsers()) {
+            System.out.println(user.getUsername());
+            for (String bo : user.getBorrowHistory()) {
+                System.out.println("History books");
+            }
+        }
+
+        System.out.println();
+        System.out.println("Books");
+        System.out.println();
+        for (Book b : Library.getAllBooks()) {
+            System.out.println(b.getTitle());
+            System.out.println(b.getCopiesAvailable());
+            System.out.println(b.getAvgRating());
+            for (Review r : b.getReviews()) {
+                System.out.println("Review of book");
+                System.out.println(r.getRating());
+                System.out.println(r.getComment());
+            }
+        }
+        
+        
         Platform.exit();
     }
 
