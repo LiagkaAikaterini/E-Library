@@ -60,7 +60,7 @@
             <ColorAdjust saturation="-0.6" />
          </effect>
          <children>
-            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Library Catalog" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Library Catalog" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

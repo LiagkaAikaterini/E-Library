@@ -60,12 +60,12 @@
             <ColorAdjust saturation="-0.6" />
          </effect>
          <children>
-            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="14.0" layoutY="39.2" onMouseClicked="#goToReviewPage" onMouseEntered="#showReviewText" prefHeight="122.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
+            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="14.0" layoutY="39.2" onMouseClicked="#goToReviewPage" onMouseEntered="#showReviewText" prefHeight="122.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
                <effect>
                   <ColorAdjust brightness="-0.02" />
                </effect>

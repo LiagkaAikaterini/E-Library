@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
@@ -60,26 +59,19 @@
             <ColorAdjust saturation="-0.6" />
          </effect>
          <children>
-            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+            <Label layoutX="14.0" layoutY="14.0" text="Advanced Book Search" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="14.0" layoutY="39.2" onMouseClicked="#goToReviewPage" onMouseEntered="#showReviewText" prefHeight="122.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
-               <effect>
-                  <ColorAdjust brightness="-0.02" />
-               </effect>
-            </ListView>
-            <Label layoutX="10.0" layoutY="175.0" prefHeight="28.0" prefWidth="450.0" text="Borrow History" AnchorPane.topAnchor="170.0">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="15.0" layoutY="203.0" onMouseClicked="#goToBookPage" prefHeight="121.0" prefWidth="429.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="195.0">
-               <effect>
-                  <ColorAdjust brightness="-0.02" />
-               </effect>
-            </ListView>
+            <TextField layoutX="14.0" layoutY="69.0" promptText="Type the book title here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0" />
+            <TextField layoutX="14.0" layoutY="141.0" promptText="Type the book author here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="180.0" />
+            <TextField layoutX="14.0" layoutY="215.0" promptText="Type the year the book was published here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="240.0" />
+            <Label layoutX="14.0" layoutY="52.0" text="Search by Title" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
+            <Label layoutX="21.0" layoutY="123.0" text="Search by Author" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="160.0" />
+            <Label layoutX="33.0" layoutY="197.0" text="Search by Publishing Year" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="220.0" />
+            <Button blendMode="MULTIPLY" layoutX="11.0" layoutY="255.0" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-color: #B69E7A;" text="Search" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="300.0" />
+            <Label layoutX="14.0" layoutY="29.0" minWidth="429.0" prefWidth="429.0" text="Here you can search for books based on the author, title, or/and release year. You can also combine these criteria to refine your search further. Simply fill in any of the following text areas you want with your desired criteria." wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
          </children>
       </AnchorPane>
    </center>

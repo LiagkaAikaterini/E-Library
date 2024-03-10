@@ -60,22 +60,12 @@
             <ColorAdjust saturation="-0.6" />
          </effect>
          <children>
-            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Book Search Results" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="14.0" layoutY="39.2" onMouseClicked="#goToReviewPage" onMouseEntered="#showReviewText" prefHeight="122.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
-               <effect>
-                  <ColorAdjust brightness="-0.02" />
-               </effect>
-            </ListView>
-            <Label layoutX="10.0" layoutY="175.0" prefHeight="28.0" prefWidth="450.0" text="Borrow History" AnchorPane.topAnchor="170.0">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="15.0" layoutY="203.0" onMouseClicked="#goToBookPage" prefHeight="121.0" prefWidth="429.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="195.0">
+            <ListView blendMode="MULTIPLY" fixedCellSize="80.0" layoutX="14.0" layoutY="39.2" prefHeight="311.0" prefWidth="450.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                <effect>
                   <ColorAdjust brightness="-0.02" />
                </effect>

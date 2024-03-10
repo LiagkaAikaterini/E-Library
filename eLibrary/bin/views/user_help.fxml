@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
@@ -60,26 +59,43 @@
             <ColorAdjust saturation="-0.6" />
          </effect>
          <children>
-            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+            <Label layoutX="14.0" layoutY="14.0" minWidth="200.0" text="This page should provide clear guidance to users on how to navigate and utilize the key features of this e-Library. " wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
+            <Label layoutX="14.0" layoutY="14.0" text="Help Page" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="14.0" layoutY="39.2" onMouseClicked="#goToReviewPage" onMouseEntered="#showReviewText" prefHeight="122.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
-               <effect>
-                  <ColorAdjust brightness="-0.02" />
-               </effect>
-            </ListView>
-            <Label layoutX="10.0" layoutY="175.0" prefHeight="28.0" prefWidth="450.0" text="Borrow History" AnchorPane.topAnchor="170.0">
+            <Label layoutX="14.0" layoutY="84.0" minWidth="100.0" text="Starting from the homepage the user can browse through all the library's books." AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="95.0" />
+            <Label layoutX="10.0" layoutY="129.0" text="Search Books : " wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="15.0" layoutY="203.0" onMouseClicked="#goToBookPage" prefHeight="121.0" prefWidth="429.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="195.0">
-               <effect>
-                  <ColorAdjust brightness="-0.02" />
-               </effect>
-            </ListView>
+            <Label layoutX="10.0" layoutY="203.0" prefHeight="18.0" prefWidth="425.0" text="Browse Books by Categories: " wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="14.800000000000011" AnchorPane.topAnchor="210.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="275.0" text="Borrow History :" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.799999999999955" AnchorPane.topAnchor="285.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="293.0" text="Reviews :" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="360.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="6.0" layoutY="76.0" text="Homepage :" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="138.0" minWidth="400.0" text="Use the search bar at the top of the page to find books by title or you can navigate to the Advanced Book Search page by the side menu where you can perform book searches by author, title, publisher, or year of release, or even combine these criteria." wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="135.0" />
+            <Label layoutX="10.0" layoutY="229.0" minWidth="400.0" text="Explore books grouped by categories for easier navigation. Simply select your desired book category from the dropdown menu labeled 'Book Categories' in the sidebar menu." wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="225.0" />
+            <Label layoutX="10.0" layoutY="302.0" minWidth="400.0" text="In this page you can access your borrowing history to see the books you've borrowed in the past and check your currently borrowed books and their due dates. " wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="300.0" />
+            <Label layoutX="8.0" layoutY="378.0" minWidth="400.0" text="You can also leave comments and ratings for books you're currently borrowing. Simply navigate to the Borrow History page via the sidebar menu, where you will find your Currently Borrowing list. Click on the book you want to review and create your review." wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="375.0" />
+            <Label layoutX="14.0" layoutY="455.0" />
          </children>
       </AnchorPane>
    </center>
