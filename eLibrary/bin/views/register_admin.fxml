@@ -17,25 +17,29 @@
             <ColorAdjust saturation="-0.6" />
          </effect>
          <children>
-            <Label alignment="CENTER" layoutX="254.0" layoutY="21.0" prefHeight="36.0" prefWidth="600.0" text="Log In" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+            <Label alignment="CENTER" layoutX="254.0" layoutY="21.0" prefHeight="36.0" prefWidth="600.0" text="Create Admin Account" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <PasswordField layoutX="225.0" layoutY="184.0" prefWidth="150.0" promptText="Enter your password" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="160.0" />
-            <Button alignment="CENTER" layoutX="225.0" layoutY="221.0" minWidth="150.0" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Log In" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="220.0">
+            <PasswordField layoutX="225.0" layoutY="184.0" prefWidth="170.0" promptText="Create password" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="135.0" />
+            <Button alignment="CENTER" layoutX="224.0" layoutY="243.0" minWidth="150.0" mnemonicParsing="false" prefWidth="170.0" style="-fx-background-color: #B69E7A;" text="Sign Up" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="295.0">
                <effect>
                   <ColorAdjust />
                </effect>
             </Button>
-            <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="75.0" />
-            <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="140.0" />
-            <TextField layoutX="225.0" layoutY="98.0" prefWidth="150.0" promptText="Enter your username" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="95.0" />
-            <Label alignment="CENTER" contentDisplay="TOP" layoutY="255.8" prefHeight="23.0" prefWidth="600.0" text="You don't have an account? Sign Up" textAlignment="CENTER" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+            <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="60.0" />
+            <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="115.0" />
+            <TextField layoutX="218.0" layoutY="84.0" prefWidth="170.0" promptText="Create unique username" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="80.0" />
+            <Label alignment="CENTER" contentDisplay="TOP" layoutY="312.0" prefHeight="38.0" prefWidth="600.0" text="You already have an account? Log In" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="312.0">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
+            <Label layoutX="230.0" layoutY="185.0" text="Confirm Password" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="165.0" />
+            <PasswordField layoutX="224.0" layoutY="204.0" prefWidth="170.0" promptText="Confirm your password" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="185.0" />
+            <PasswordField layoutX="228.0" layoutY="200.0" prefWidth="170.0" promptText="Enter library password" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="240.0" />
+            <Label layoutX="230.0" layoutY="180.0" text="Admin Registration Password" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="220.0" />
          </children>
       </AnchorPane>
    </center>
@@ -53,7 +57,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="340.0" prefHeight="100.0" prefWidth="340.0" style="-fx-background-color: #EEDDC2;">
                <children>
-                  <Button alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Sign Up" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
+                  <Button alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Log In" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>
