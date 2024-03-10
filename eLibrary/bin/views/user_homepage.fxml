@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
@@ -16,14 +17,15 @@
       <AnchorPane prefHeight="350.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" BorderPane.alignment="CENTER">
          <children>
             <Separator layoutX="15.0" layoutY="13.0" prefHeight="3.2" prefWidth="215.2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button contentDisplay="CENTER" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Advanced Book Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+            <Button contentDisplay="CENTER" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Homepage" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
             <Button alignment="CENTER" layoutX="2.0" layoutY="290.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Help" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Button alignment="CENTER" layoutX="2.0" layoutY="126.6" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Borrow History" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0" />
-            <MenuButton alignment="CENTER" layoutX="7.0" layoutY="61.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="126.0" style="-fx-background-color: 0.2;" text="Book Categories" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="65.0">
+            <Button alignment="CENTER" layoutX="2.0" layoutY="126.6" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Advanced Book Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
+            <MenuButton alignment="CENTER" layoutX="7.0" layoutY="61.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="126.0" style="-fx-background-color: 0.2;" text="Book Categories" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="115.0">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
             </MenuButton>
+            <Button alignment="CENTER" layoutX="7.0" layoutY="152.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Borrow History" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
          </children>
          <effect>
             <ColorAdjust brightness="0.2" />
@@ -40,7 +42,7 @@
             </Label>
             <Separator layoutX="142.0" orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="0.0" />
             <TextField layoutX="160.0" layoutY="12.0" prefHeight="26.0" prefWidth="279.0" promptText="Search Book by Title" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.79999999999995" AnchorPane.topAnchor="12.0" />
-            <MenuButton alignment="CENTER" layoutX="487.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #EEDDC2;" text="Username" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="12.0">
+            <MenuButton alignment="CENTER" layoutX="487.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #EEDDC2;" text="Username" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
               <items>
                 <MenuItem mnemonicParsing="false" text="View Profile" />
                 <MenuItem mnemonicParsing="false" text="Log Out" />
@@ -57,6 +59,18 @@
          <effect>
             <ColorAdjust saturation="-0.6" />
          </effect>
+         <children>
+            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Library Catalog" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ListView blendMode="MULTIPLY" fixedCellSize="80.0" layoutX="14.0" layoutY="39.2" prefHeight="311.0" prefWidth="450.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+               <effect>
+                  <ColorAdjust brightness="-0.02" />
+               </effect>
+            </ListView>
+         </children>
       </AnchorPane>
    </center>
 </BorderPane>
