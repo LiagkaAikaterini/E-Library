@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -25,21 +26,10 @@ public class HomeController implements Initializable{
 
     private ObservableList<Book> studentObservableList;
 
-    @FXML
-    void goToLoginPage(MouseEvent event) {
-
-    }
-
-    @FXML
-    void goToSignUpPage(MouseEvent event) {
-
-    }
-
     public HomeController()  {
 
         studentObservableList = FXCollections.observableArrayList();
 
-        //add some Students
         for (Book book : Library.getAllBooks()) {
             studentObservableList.add(book);
         }

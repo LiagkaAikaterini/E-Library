@@ -2,15 +2,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import controllers.NavigationController;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import models.*;
-import models.Book.Review;
 
 public class App extends Application  {
     public Library libraryInstance;
@@ -77,14 +76,9 @@ public class App extends Application  {
          */
 
         
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("views/home.fxml"));
-            primaryStage.setTitle("Medialab");
-            primaryStage.setScene(new Scene(root, 640, 400));
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavigationController.setStage(primaryStage);
+        NavigationController.loadPage("/views/user_template.fxml");
+
         
         
         //Platform.exit();

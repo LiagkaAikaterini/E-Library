@@ -1,86 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.Label?&gt;&lt;?import javafx.scene.control.Menu?&gt;&lt;?import javafx.scene.control.MenuBar?&gt;&lt;?import javafx.scene.control.MenuItem?&gt;&lt;?import javafx.scene.control.Separator?&gt;&lt;?import javafx.scene.control.TextField?&gt;&lt;?import javafx.scene.layout.AnchorPane?&gt;&lt;?import javafx.scene.layout.BorderPane?&gt;&lt;?import javafx.scene.text.Font?&gt;&lt;BorderPane prefHeight=&quot;400.0&quot; prefWidth=&quot;600.0&quot; xmlns=&quot;http://javafx.com/javafx/21&quot; xmlns:fx=&quot;http://javafx.com/fxml/1&quot;&gt;   &lt;top&gt;      &lt;AnchorPane prefHeight=&quot;50.0&quot; prefWidth=&quot;600.0&quot; style=&quot;-fx-background-color: #EEDDC2;&quot; BorderPane.alignment=&quot;CENTER&quot;&gt;         &lt;children&gt;            &lt;Label alignment=&quot;CENTER&quot; prefHeight=&quot;50.0&quot; prefWidth=&quot;135.0&quot; style=&quot;-fx-background-color: #EEDDC2;&quot; text=&quot;Katerina's Library&quot; AnchorPane.bottomAnchor=&quot;0.0&quot; AnchorPane.leftAnchor=&quot;0.0&quot; AnchorPane.topAnchor=&quot;0.0&quot;&gt;               &lt;font&gt;                  &lt;Font name=&quot;Book Antiqua Bold Italic&quot; size=&quot;14.0&quot; /&gt;               &lt;/font&gt;            &lt;/Label&gt;            &lt;Separator layoutX=&quot;135.0&quot; orientation=&quot;VERTICAL&quot; prefHeight=&quot;50.0&quot; prefWidth=&quot;0.0&quot; AnchorPane.bottomAnchor=&quot;0.0&quot; AnchorPane.leftAnchor=&quot;135.0&quot; AnchorPane.topAnchor=&quot;0.0&quot; /&gt;            &lt;TextField layoutX=&quot;154.0&quot; layoutY=&quot;12.0&quot; prefHeight=&quot;26.0&quot; prefWidth=&quot;279.0&quot; promptText=&quot;Search Book by Title&quot; AnchorPane.leftAnchor=&quot;154.0&quot; AnchorPane.rightAnchor=&quot;166.40000000000003&quot; /&gt;            &lt;MenuBar layoutX=&quot;498.4&quot; layoutY=&quot;12.0&quot; prefHeight=&quot;50.0&quot; prefWidth=&quot;102.0&quot; style=&quot;-fx-background-color: #EEDDC2;&quot; AnchorPane.bottomAnchor=&quot;0.0&quot; AnchorPane.rightAnchor=&quot;0.0&quot; AnchorPane.topAnchor=&quot;0.0&quot;&gt;               &lt;menus&gt;                  &lt;Menu mnemonicParsing=&quot;false&quot; text=&quot;File&quot;&gt;                     &lt;items&gt;                        &lt;MenuItem mnemonicParsing=&quot;false&quot; text=&quot;Close&quot; /&gt;                     &lt;/items&gt;                  &lt;/Menu&gt;               &lt;/menus&gt;            &lt;/MenuBar&gt;         &lt;/children&gt;      &lt;/AnchorPane&gt;   &lt;/top&gt;   &lt;left&gt;      &lt;AnchorPane prefHeight=&quot;350.0&quot; prefWidth=&quot;135.0&quot; style=&quot;-fx-background-color: #B69E7A;&quot; BorderPane.alignment=&quot;CENTER&quot;&gt;         &lt;children&gt;            &lt;Separator layoutX=&quot;15.0&quot; layoutY=&quot;13.0&quot; prefHeight=&quot;3.2&quot; prefWidth=&quot;215.2&quot; AnchorPane.leftAnchor=&quot;0.0&quot; AnchorPane.rightAnchor=&quot;0.0&quot; AnchorPane.topAnchor=&quot;0.0&quot; /&gt;         &lt;/children&gt;      &lt;/AnchorPane&gt;   &lt;/left&gt;&lt;/BorderP;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <AnchorPane prefHeight="350.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" BorderPane.alignment="CENTER">
-         <children>
-            <Separator layoutX="15.0" layoutY="13.0" prefHeight="3.2" prefWidth="215.2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button contentDisplay="CENTER" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Homepage" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
-            <Button alignment="CENTER" layoutX="2.0" layoutY="290.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Help" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Button alignment="CENTER" layoutX="2.0" layoutY="126.6" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Advanced Book Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
-            <MenuButton alignment="CENTER" layoutX="7.0" layoutY="61.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="126.0" style="-fx-background-color: 0.2;" text="Book Categories" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="115.0">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </MenuButton>
-            <Button alignment="CENTER" layoutX="7.0" layoutY="152.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Borrow History" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
-         </children>
+<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <effect>
+      <ColorAdjust saturation="-0.6" />
+   </effect>
+   <children>
+      <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="activeBorrowsList" blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="14.0" layoutY="39.2" prefHeight="122.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
          <effect>
-            <ColorAdjust brightness="0.2" />
+            <ColorAdjust brightness="-0.02" />
          </effect>
-      </AnchorPane>
-   </left>
-   <top>
-      <AnchorPane prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #EEDDC2;" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #EEDDC2;" text="Katerina's Library" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font name="Book Antiqua Bold Italic" size="14.0" />
-               </font>
-            </Label>
-            <Separator layoutX="142.0" orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="0.0" />
-            <TextField layoutX="160.0" layoutY="12.0" prefHeight="26.0" prefWidth="279.0" promptText="Search Book by Title" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.79999999999995" AnchorPane.topAnchor="12.0" />
-            <MenuButton alignment="CENTER" layoutX="487.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #EEDDC2;" text="Username" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
-              <items>
-                <MenuItem mnemonicParsing="false" text="View Profile" />
-                <MenuItem mnemonicParsing="false" text="Log Out" />
-              </items>
-               <effect>
-                  <ColorAdjust brightness="-0.05" />
-               </effect>
-            </MenuButton>
-         </children>
-      </AnchorPane>
-   </top>
-   <center>
-      <AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" BorderPane.alignment="CENTER">
+      </ListView>
+      <Label layoutX="10.0" layoutY="175.0" prefHeight="28.0" prefWidth="450.0" text="Borrow History" AnchorPane.topAnchor="170.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="historyList" blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="15.0" layoutY="203.0" prefHeight="121.0" prefWidth="429.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="195.0">
          <effect>
-            <ColorAdjust saturation="-0.6" />
+            <ColorAdjust brightness="-0.02" />
          </effect>
-         <children>
-            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="14.0" layoutY="39.2" onMouseClicked="#goToReviewPage" onMouseEntered="#showReviewText" prefHeight="122.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
-               <effect>
-                  <ColorAdjust brightness="-0.02" />
-               </effect>
-            </ListView>
-            <Label layoutX="10.0" layoutY="175.0" prefHeight="28.0" prefWidth="450.0" text="Borrow History" AnchorPane.topAnchor="170.0">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <ListView blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="15.0" layoutY="203.0" onMouseClicked="#goToBookPage" prefHeight="121.0" prefWidth="429.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="195.0">
-               <effect>
-                  <ColorAdjust brightness="-0.02" />
-               </effect>
-            </ListView>
-         </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+      </ListView>
+   </children>
+</AnchorPane>
