@@ -1,7 +1,12 @@
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import models.*;
@@ -19,6 +24,12 @@ public class App extends Application  {
     @Override
     public void start(Stage primaryStage) {
         /*
+        Library.setAllAdmins(new ArrayList<>());
+        Library.setAllUsers(new ArrayList<>());
+        Library.setAllActiveBorrows(new ArrayList<>());
+        Library.setAllBooks(new ArrayList<>());
+        Library.setAllCategories(new ArrayList<>());
+        
         Admin a = new Admin("admin1", "STYLESHEET_CASPIAN");
         Book b1 = new Book("book1", "author1", "publisher1", "sumaryy", "111", java.time.LocalDate.now(), 3);
         Book b2 = new Book("book2", "author2", "publisher2", "sumaryy", "222", java.time.LocalDate.now(), 5);
@@ -32,15 +43,12 @@ public class App extends Application  {
          */
 
         
-        
+        /*
         System.out.println();
         System.out.println("ADMINS");
         System.out.println();
         for (Admin user : Library.getAllAdmins()) {
             System.out.println(user.getUsername());
-            for (Book b : Library.getAllBooks()) {
-                user.changeBookTitle(b, "changed name");
-            }
         }
 
         System.out.println();
@@ -66,9 +74,20 @@ public class App extends Application  {
                 System.out.println(r.getComment());
             }
         }
+         */
+
+        
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("views/home.fxml"));
+            primaryStage.setTitle("Medialab");
+            primaryStage.setScene(new Scene(root, 640, 400));
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         
-        Platform.exit();
+        //Platform.exit();
     }
 
     @Override

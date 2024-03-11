@@ -111,7 +111,7 @@
                   <ToggleButton mnemonicParsing="false" text="5" />
                 </toggles>
             </ToggleButtonGroup>
-            <TextArea layoutX="225.0" layoutY="233.0" maxWidth="400.0" prefHeight="100.0" prefWidth="200.0" promptText="Type your comment here" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="240.0" />
+            <TextArea layoutX="225.0" layoutY="233.0" maxWidth="400.0" prefHeight="70.0" prefWidth="200.0" promptText="Type your comment here" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="240.0" />
             <Label layoutX="15.0" layoutY="207.0" text="Add Rating" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -125,6 +125,7 @@
             <Label layoutX="10.0" layoutY="230.0" text="(choose rating between 1 and 5)" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="220.0" />
             <Separator layoutY="39.8" prefHeight="3.2" prefWidth="449.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
             <Separator layoutY="191.0" prefHeight="3.2" prefWidth="449.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="191.0" />
+            <Button blendMode="MULTIPLY" layoutX="170.4" layoutY="319.0" mnemonicParsing="false" style="-fx-background-color: #B69E7A;" text="Submit Review" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0" />
          </children>
       </AnchorPane>
    </center>

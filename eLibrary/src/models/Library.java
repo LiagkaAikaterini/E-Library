@@ -4,11 +4,11 @@ import java.util.List;
 
 
 public class Library {
-    private static List<Admin> allAdmins = DataManagement.deserialize("src/medialab/admins.ser");
-    private static List<User> allUsers = DataManagement.deserialize("src/medialab/users.ser");
-    private static List<Book> allBooks = DataManagement.deserialize("src/medialab/books.ser");
-    private static List<Category> allCategories = DataManagement.deserialize("src/medialab/categories.ser");;
-    private static List<Borrowed> allActiveBorrows = DataManagement.deserialize("src/medialab/borrows.ser");
+    private static List<Admin> allAdmins;
+    private static List<User> allUsers;
+    private static List<Book> allBooks;
+    private static List<Category> allCategories;
+    private static List<Borrowed> allActiveBorrows;
     private UserBase loggedUser;
     /*
     private User currUser;
@@ -28,6 +28,11 @@ public class Library {
      */
 
     public Library() {
+        Library.allAdmins = DataManagement.deserialize("src/medialab/admins.ser");
+        Library.allUsers = DataManagement.deserialize("src/medialab/users.ser");
+        Library.allBooks = DataManagement.deserialize("src/medialab/books.ser");
+        Library.allCategories = DataManagement.deserialize("src/medialab/categories.ser");
+        Library.allActiveBorrows = DataManagement.deserialize("src/medialab/borrows.ser");
         this.loggedUser = null;
     }
     
@@ -47,7 +52,7 @@ public class Library {
 
     // Retrieve User or Admin seperately
     // check in frontend
-    // !!!!!!!!!!!!!!!!!!!!!!!!!! Exception not logged in yet !?????????????????????????/
+    // Exception not logged in yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public User getCurrUser() {
         for (User user : Library.allUsers) {
             if ( (user.getUsername()).equals(this.loggedUser.getUsername()) ) {
