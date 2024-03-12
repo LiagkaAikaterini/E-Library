@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.Label?&gt;&lt;?import javafx.scene.control.Menu?&gt;&lt;?import javafx.scene.control.MenuBar?&gt;&lt;?import javafx.scene.control.MenuItem?&gt;&lt;?import javafx.scene.control.Separator?&gt;&lt;?import javafx.scene.control.TextField?&gt;&lt;?import javafx.scene.layout.AnchorPane?&gt;&lt;?import javafx.scene.layout.BorderPane?&gt;&lt;?import javafx.scene.text.Font?&gt;&lt;BorderPane prefHeight=&quot;400.0&quot; prefWidth=&quot;600.0&quot; xmlns=&quot;http://javafx.com/javafx/21&quot; xmlns:fx=&quot;http://javafx.com/fxml/1&quot;&gt;   &lt;top&gt;      &lt;AnchorPane prefHeight=&quot;50.0&quot; prefWidth=&quot;600.0&quot; style=&quot;-fx-background-color: #EEDDC2;&quot; BorderPane.alignment=&quot;CENTER&quot;&gt;         &lt;children&gt;            &lt;Label alignment=&quot;CENTER&quot; prefHeight=&quot;50.0&quot; prefWidth=&quot;135.0&quot; style=&quot;-fx-background-color: #EEDDC2;&quot; text=&quot;Katerina's Library&quot; AnchorPane.bottomAnchor=&quot;0.0&quot; AnchorPane.leftAnchor=&quot;0.0&quot; AnchorPane.topAnchor=&quot;0.0&quot;&gt;               &lt;font&gt;                  &lt;Font name=&quot;Book Antiqua Bold Italic&quot; size=&quot;14.0&quot; /&gt;               &lt;/font&gt;            &lt;/Label&gt;            &lt;Separator layoutX=&quot;135.0&quot; orientation=&quot;VERTICAL&quot; prefHeight=&quot;50.0&quot; prefWidth=&quot;0.0&quot; AnchorPane.bottomAnchor=&quot;0.0&quot; AnchorPane.leftAnchor=&quot;135.0&quot; AnchorPane.topAnchor=&quot;0.0&quot; /&gt;            &lt;TextField layoutX=&quot;154.0&quot; layoutY=&quot;12.0&quot; prefHeight=&quot;26.0&quot; prefWidth=&quot;279.0&quot; promptText=&quot;Search Book by Title&quot; AnchorPane.leftAnchor=&quot;154.0&quot; AnchorPane.rightAnchor=&quot;166.40000000000003&quot; /&gt;            &lt;MenuBar layoutX=&quot;498.4&quot; layoutY=&quot;12.0&quot; prefHeight=&quot;50.0&quot; prefWidth=&quot;102.0&quot; style=&quot;-fx-background-color: #EEDDC2;&quot; AnchorPane.bottomAnchor=&quot;0.0&quot; AnchorPane.rightAnchor=&quot;0.0&quot; AnchorPane.topAnchor=&quot;0.0&quot;&gt;               &lt;menus&gt;                  &lt;Menu mnemonicParsing=&quot;false&quot; text=&quot;File&quot;&gt;                     &lt;items&gt;                        &lt;MenuItem mnemonicParsing=&quot;false&quot; text=&quot;Close&quot; /&gt;                     &lt;/items&gt;                  &lt;/Menu&gt;               &lt;/menus&gt;            &lt;/MenuBar&gt;         &lt;/children&gt;      &lt;/AnchorPane&gt;   &lt;/top&gt;   &lt;left&gt;      &lt;AnchorPane prefHeight=&quot;350.0&quot; prefWidth=&quot;135.0&quot; style=&quot;-fx-background-color: #B69E7A;&quot; BorderPane.alignment=&quot;CENTER&quot;&gt;         &lt;children&gt;            &lt;Separator layoutX=&quot;15.0&quot; layoutY=&quot;13.0&quot; prefHeight=&quot;3.2&quot; prefWidth=&quot;215.2&quot; AnchorPane.leftAnchor=&quot;0.0&quot; AnchorPane.rightAnchor=&quot;0.0&quot; AnchorPane.topAnchor=&quot;0.0&quot; /&gt;         &lt;/children&gt;      &lt;/AnchorPane&gt;   &lt;/left&gt;&lt;/BorderP;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <center>
       <AnchorPane prefHeight="319.0" prefWidth="600.0" style="-fx-background-color: #EEDDC2;" BorderPane.alignment="CENTER">
          <effect>
@@ -22,15 +22,15 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <PasswordField layoutX="225.0" layoutY="184.0" prefWidth="150.0" promptText="Enter your password" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="160.0" />
-            <Button alignment="CENTER" layoutX="225.0" layoutY="221.0" minWidth="150.0" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Log In" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="220.0">
+            <PasswordField fx:id="password_input" layoutX="225.0" layoutY="184.0" prefWidth="150.0" promptText="Enter your password" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="160.0" />
+            <Button fx:id="login_btn" alignment="CENTER" layoutX="225.0" layoutY="221.0" minWidth="150.0" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Log In" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="220.0">
                <effect>
                   <ColorAdjust />
                </effect>
             </Button>
             <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="75.0" />
             <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="140.0" />
-            <TextField layoutX="225.0" layoutY="98.0" prefWidth="150.0" promptText="Enter your username" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="95.0" />
+            <TextField fx:id="username_input" layoutX="225.0" layoutY="98.0" prefWidth="150.0" promptText="Enter your username" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="95.0" />
             <Label alignment="CENTER" contentDisplay="TOP" layoutY="255.8" prefHeight="23.0" prefWidth="600.0" text="You don't have an account? Sign Up" textAlignment="CENTER" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
                <font>
                   <Font size="10.0" />
@@ -53,12 +53,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="340.0" prefHeight="100.0" prefWidth="340.0" style="-fx-background-color: #EEDDC2;">
                <children>
-                  <Button alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Sign Up" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="signupForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Sign Up" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>
                   </Button>
-                  <Button alignment="CENTER" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Back to Homepage" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="home_btn" alignment="CENTER" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Back to Homepage" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>

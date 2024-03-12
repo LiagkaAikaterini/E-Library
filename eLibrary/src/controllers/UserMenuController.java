@@ -1,28 +1,22 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-import models.Book;
+import main.App;
 
-public class UserMenuController implements Initializable{
+public class UserMenuController implements Initializable {
+    
     @FXML
     private BorderPane mainLayout;
 
@@ -49,6 +43,8 @@ public class UserMenuController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         // Load default content when the application starts
 
+        NavigationController.setMainLayout(mainLayout);
+
         // hover effect for menu items
         homepage_btn.setOnMouseEntered(this::hoverActivated);
         search_btn.setOnMouseEntered(this::hoverActivated);
@@ -69,14 +65,14 @@ public class UserMenuController implements Initializable{
         homepage_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                NavigationController.loadUserPage("/views/titledBookList.fxml", mainLayout);
+                NavigationController.loadCenter("/views/titledBookList.fxml");
             }
         });
 
         search_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                NavigationController.loadUserPage("/views/user_searchForm.fxml", mainLayout);
+                NavigationController.loadCenter("/views/user_searchForm.fxml");
             }
         });
 
@@ -94,27 +90,32 @@ public class UserMenuController implements Initializable{
         history_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                NavigationController.loadUserPage("/views/user_borrowHistory.fxml", mainLayout);
+                NavigationController.loadCenter("/views/user_borrowHistory.fxml");
             }
         });
 
         help_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                NavigationController.loadUserPage("/views/user_help.fxml", mainLayout);
+                NavigationController.loadCenter("/views/user_help.fxml");
             }
         });
 
         profile.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                NavigationController.loadUserPage("/views/user_profile.fxml", mainLayout);
+                NavigationController.loadCenter("/views/user_profile.fxml");
             }
         });
 
         logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                NavigationController.setBook(null);
+                NavigationController.setMainLayout(null);
+                
+                App.getLibraryInstance().setLoggedUser(null);
+
                 NavigationController.loadPage("/views/home.fxml");
             }
         });
@@ -142,6 +143,6 @@ public class UserMenuController implements Initializable{
         MenuButton buttonExited = (MenuButton) event.getSource();
         buttonExited.setBlendMode(BlendMode.SRC_OVER);
     }
-        
+    
 
 }

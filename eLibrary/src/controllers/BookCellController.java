@@ -9,23 +9,21 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.VBox;
 import models.Book;
 
-public class BookCellController extends ListCell<Book>{
+public class BookCellController extends ListCell<Book> {
     private FXMLLoader loader;
 
     @FXML
-    private Label bookcell_author;
-
-    @FXML
-    private Label bookcell_isbn;
-
-    @FXML
-    private Label bookcell_rating;
+    private VBox vbox;
 
     @FXML
     private Label bookcell_title;
-
     @FXML
-    private VBox vbox;
+    private Label bookcell_author;
+    @FXML
+    private Label bookcell_isbn;
+    @FXML
+    private Label bookcell_rating;
+
 
     @Override
     protected void updateItem(Book book, boolean empty) {
@@ -52,11 +50,13 @@ public class BookCellController extends ListCell<Book>{
             bookcell_title.setText(book.getTitle());
             bookcell_author.setText("by " + book.getAuthor());
             bookcell_isbn.setText("ISBN: " + book.getISBN());;
-            bookcell_rating.setText(book.getAvgRating() + "  (" + String.valueOf(book.getCopiesAvailable()) + " reviews)");;
+            bookcell_rating.setText(book.getAvgRating() + "  (" + String.valueOf(book.getCopiesAvailable()) + " reviews)");
 
             setText(null);
             setGraphic(vbox);
         }
 
     }
+
+
 }

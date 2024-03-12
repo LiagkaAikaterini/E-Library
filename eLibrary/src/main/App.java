@@ -1,19 +1,20 @@
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
+package main;
 
 import controllers.NavigationController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import models.*;
 
 public class App extends Application  {
-    public Library libraryInstance;
+    private static Library libraryInstance;
 
+    public static Library getLibraryInstance() {
+        return libraryInstance;
+    }
+    public static void setLibraryInstance(Library libraryInstance) {
+        App.libraryInstance = libraryInstance;
+    }
     // MAYBE NOT IN INIT BUT IN START!!!!
     @Override
     public void init() {
@@ -77,7 +78,7 @@ public class App extends Application  {
 
         
         NavigationController.setStage(primaryStage);
-        NavigationController.loadPage("/views/user_template.fxml");
+        NavigationController.loadPage("/views/home.fxml");
 
         
         

@@ -6,13 +6,13 @@
 
 <VBox fx:id="vbox" blendMode="MULTIPLY" prefHeight="81.0" prefWidth="480.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="bookcell_title" prefHeight="20.0" prefWidth="433.0" text="booktitle">
+      <Label fx:id="bookcell_title" prefHeight="20.0" prefWidth="533.0" text="booktitle">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label fx:id="bookcell_author" prefHeight="18.0" prefWidth="517.0" text="author" />
-      <Label fx:id="bookcell_isbn" prefHeight="18.0" prefWidth="410.0" text="isbn" />
-      <Label fx:id="bookcell_rating" prefHeight="18.0" prefWidth="423.0" text="rating" />
+      <Label fx:id="bookcell_isbn" prefHeight="18.0" prefWidth="586.0" text="isbn" />
+      <Label fx:id="bookcell_rating" prefHeight="18.0" prefWidth="637.0" text="rating" />
    </children>
 </VBox>
