@@ -36,7 +36,8 @@ public class HomeController implements Initializable {
 
         // show top 5 books
         topBooklist.setItems(studentObservableList);
-        topBooklist.setCellFactory(studentListView -> new BookCellController());
+        topBooklist.setCellFactory(booklist -> new ListCellBorrow());
+        
 
         // button usability
         signupForm_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {

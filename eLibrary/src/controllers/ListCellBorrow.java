@@ -12,15 +12,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 import models.Book;
 
-public class ReviewCellController extends ListCell<Book> implements Initializable {
+public class ListCellBorrow extends ListCell<Book> implements Initializable {
     private FXMLLoader loader;
 
     @FXML
-    private VBox vbox;
+    private HBox hbox;
 
     @FXML
     private Label bookcell_title;
@@ -32,10 +32,11 @@ public class ReviewCellController extends ListCell<Book> implements Initializabl
     private Label bookcell_rating;
 
     @FXML
-    private Button details_btn;
+    private Button borrow_btn;
     @FXML
-    private Button review_btn;
+    private Button details_btn;
 
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,7 +52,7 @@ public class ReviewCellController extends ListCell<Book> implements Initializabl
             }
         });
 
-        review_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        borrow_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 Book currBook = getItem();
@@ -62,7 +63,6 @@ public class ReviewCellController extends ListCell<Book> implements Initializabl
                 }
             }
         });
-
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ReviewCellController extends ListCell<Book> implements Initializabl
 
         } else {
             if (loader == null) {
-                loader = new FXMLLoader(getClass().getResource("/views/listcell_review.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/views/listcell_borrow.fxml"));
                 loader.setController(this);
 
                 try {
@@ -87,16 +87,17 @@ public class ReviewCellController extends ListCell<Book> implements Initializabl
 
             }
 
+            hbox.prefWidthProperty().bind(getListView().widthProperty());
+
             bookcell_title.setText(book.getTitle());
             bookcell_author.setText("by " + book.getAuthor());
             bookcell_isbn.setText("ISBN: " + book.getISBN());;
             bookcell_rating.setText(book.getAvgRating() + "  (" + String.valueOf(book.getCopiesAvailable()) + " reviews)");
 
             setText(null);
-            setGraphic(vbox);
+            setGraphic(hbox);
         }
 
     }
-
 
 }
