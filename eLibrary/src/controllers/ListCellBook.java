@@ -10,8 +10,7 @@ import javafx.scene.layout.VBox;
 import models.Book;
 
 public class ListCellBook extends ListCell<Book> {
-    private FXMLLoader loader;
-
+    
     @FXML
     private VBox vbox;
 
@@ -29,22 +28,19 @@ public class ListCellBook extends ListCell<Book> {
     protected void updateItem(Book book, boolean empty) {
         super.updateItem(book, empty);
 
-        if(empty || book == null) {
-
+        if (empty || book == null) {
             setText(null);
             setGraphic(null);
+        } 
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_book.fxml"));
+            loader.setController(this);
 
-        } else {
-            if (loader == null) {
-                loader = new FXMLLoader(getClass().getResource("/views/listcell_book.fxml"));
-                loader.setController(this);
-
-                try {
-                    loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            try {
+                loader.load();
+            } 
+            catch (IOException e) {
+                e.printStackTrace();
             }
 
             vbox.prefWidthProperty().bind(getListView().widthProperty());
@@ -57,8 +53,6 @@ public class ListCellBook extends ListCell<Book> {
             setText(null);
             setGraphic(vbox);
         }
-
     }
-
 
 }

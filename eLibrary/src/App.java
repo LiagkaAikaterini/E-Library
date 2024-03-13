@@ -1,10 +1,12 @@
-package main;
+import java.util.ArrayList;
 
 import controllers.NavigationController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import models.Library;
+import models.*;
 
 public class App extends Application  {
 
@@ -23,17 +25,25 @@ public class App extends Application  {
         Library.setAllBooks(new ArrayList<>());
         Library.setAllCategories(new ArrayList<>());
         
+        
+        
         Admin a = new Admin("admin1", "STYLESHEET_CASPIAN");
-        Book b1 = new Book("book1", "author1", "publisher1", "sumaryy", "111", java.time.LocalDate.now(), 3);
-        Book b2 = new Book("book2", "author2", "publisher2", "sumaryy", "222", java.time.LocalDate.now(), 5);
+        Book b1 = new Book("book1", "author1", "publisher1",  "111", java.time.LocalDate.now(), 3);
+        Book b2 = new Book("book2", "author2", "publisher2", "222", java.time.LocalDate.now(), 5);
+        Category c1 = new Category("category1");
+        Category c2 = new Category("category2");
+        c1.addToCategoryBooks(b1.getISBN());
+        c2.addToCategoryBooks(b2.getISBN());
         User user = new User("username", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_MODENA", "STYLESHEET_CASPIAN", java.time.LocalDate.now());
         Library.addAdmins(a);
         Library.addUsers(user);
         Library.addBook(b2);
         Library.addBook(b1);
+        Library.addCategory(c2);
+        Library.addCategory(c1);
 
         user.borrowBook(b2);
-         */
+        */
 
         
         /*
@@ -67,6 +77,19 @@ public class App extends Application  {
                 System.out.println(r.getComment());
             }
         }
+         
+
+
+         System.out.println();
+         System.out.println("Books");
+         System.out.println();
+         for (Category b : Library.getAllCategories()) {
+             System.out.println(b.getName());
+             for (String r : b.getBooksISBN()) {
+                 System.out.println(r);
+             }
+         }
+
          */
 
         NavigationController.setStage(primaryStage);

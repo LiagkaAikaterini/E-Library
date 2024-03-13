@@ -99,7 +99,7 @@ public class UserTemplateController implements Initializable {
         logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                NavigationController.setBook(null);
+                NavigationController.setCurrBook(null);
                 NavigationController.setMainLayout(null);
                 NavigationController.setLoggedPerson(null);
 

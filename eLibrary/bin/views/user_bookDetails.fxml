@@ -7,13 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserBookDetailsController">
    <effect>
       <ColorAdjust saturation="-0.6" />
    </effect>
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Book Title" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Label fx:id="title" layoutX="14.0" layoutY="14.0" text="Book Title" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -53,20 +52,19 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="51.2" prefHeight="18.0" prefWidth="30.0" text="5.85" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0" />
-      <Label layoutX="52.0" layoutY="52.0" prefHeight="18.0" prefWidth="180.0" text="(1450 users ratings)" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
-      <Label layoutX="108.0" layoutY="81.0" text="getCategoryName" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
-      <Label layoutX="130.0" layoutY="111.0" text="getAuthor" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="110.0" />
-      <Label layoutX="130.0" layoutY="131.0" text="getPublisher" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="130.0" />
-      <Label layoutX="130.0" layoutY="151.0" text="getYear" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="150.0" />
-      <Label layoutX="130.0" layoutY="171.0" text="getISBN" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="170.0" />
-      <Label layoutX="130.0" layoutY="200.0" text="get copies" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="200.0" />
-      <ListView blendMode="MULTIPLY" fixedCellSize="40.0" layoutX="8.0" layoutY="249.0" prefHeight="120.0" prefWidth="429.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="250.0">
+      <Label fx:id="avgRating" layoutX="14.0" layoutY="51.2" prefHeight="18.0" prefWidth="30.0" text="null" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0" />
+      <Label fx:id="numUsersRated" layoutX="52.0" layoutY="52.0" prefHeight="18.0" prefWidth="180.0" text="(null user reviews)" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
+      <Label fx:id="category" layoutX="108.0" layoutY="81.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
+      <Label fx:id="author" layoutX="130.0" layoutY="111.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="110.0" />
+      <Label fx:id="publisher" layoutX="130.0" layoutY="131.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="130.0" />
+      <Label fx:id="year" layoutX="130.0" layoutY="151.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="150.0" />
+      <Label fx:id="isbn" layoutX="130.0" layoutY="171.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="170.0" />
+      <Label fx:id="copies" layoutX="130.0" layoutY="200.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="200.0" />
+      <ListView fx:id="reviewList" blendMode="MULTIPLY" layoutX="8.0" layoutY="249.0" prefHeight="120.0" prefWidth="429.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="250.0">
          <effect>
             <ColorAdjust brightness="-0.02" />
          </effect>
       </ListView>
-      <Button blendMode="MULTIPLY" layoutX="11.0" layoutY="310.0" maxHeight="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: #B69E7A;" text="Borrow this Book" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-      <Label layoutX="61.0" layoutY="230.0" prefHeight="18.0" prefWidth="180.0" text="(1450 users reviews)" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="230.0" />
+      <Button fx:id="borrow_btn" blendMode="MULTIPLY" layoutX="11.0" layoutY="310.0" maxHeight="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: #B69E7A;" text="Borrow this Book" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
    </children>
 </AnchorPane>

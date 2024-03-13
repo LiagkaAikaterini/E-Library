@@ -14,7 +14,7 @@
             "type": "java",
             "name": "App",
             "request": "launch",
-            "mainClass": "main.App",
+            "mainClass": "App",
             "projectName": "eLibrary_5f7ad288",
             "vmArgs": "--module-path C:/Users/kater/openjfx-21.0.2_windows-x64_bin-sdk/javafx-sdk-21.0.2/lib --add-modules javafx.controls,javafx.fxml"
         }

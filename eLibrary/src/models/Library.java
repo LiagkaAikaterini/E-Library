@@ -125,6 +125,17 @@ public class Library {
 
         return true;
     }
+
+    public static String categoryOfBook(String isbn) {
+        for (Category category : allCategories) {
+            List<String> categoryBooks = category.getBooksISBN();
+            if ( categoryBooks.contains(isbn) ) {
+                return category.getName();
+            }
+        }
+
+        return null;
+    }
     
 
     /*

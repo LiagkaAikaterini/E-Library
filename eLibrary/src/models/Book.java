@@ -10,7 +10,6 @@ public class Book implements Serializable{
     private String title;
     private String author;
     private String publisher;
-    private String summary;
     private String ISBN;
     private LocalDate datePublished;
     private int copiesAvailable;
@@ -62,11 +61,10 @@ public class Book implements Serializable{
     }
 
 
-    public Book(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable) {
+    public Book(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
-        this.summary = summary;
         this.ISBN = ISBN;
         this.datePublished = datePublished;
         this.copiesAvailable = copiesAvailable;
@@ -237,13 +235,6 @@ public class Book implements Serializable{
     }
     public void setPublisher(String publisher) {
         this.publisher = publisher;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-    public void setSummary(String summary) {
-        this.summary = summary;
     }
 
     public String getISBN() {

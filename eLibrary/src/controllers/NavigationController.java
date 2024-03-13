@@ -18,7 +18,7 @@ public class NavigationController {
     private static UserBase loggedPerson = Library.getAllUsers().get(0);
     private static Stage stage;
     private static BorderPane mainLayout;
-    private static Book book;
+    private static Book currBook;
     
 
     public static void loadPage(String fxmlFile) {
@@ -54,11 +54,11 @@ public class NavigationController {
     public static void setMainLayout(BorderPane mainLayout) {
         NavigationController.mainLayout = mainLayout;
     }
-    public static Book getBook() {
-        return book;
+    public static Book getCurrBook() {
+        return currBook;
     }
-    public static void setBook(Book book) {
-        NavigationController.book = book;
+    public static void setCurrBook(Book currBook) {
+        NavigationController.currBook = currBook;
     }
     public static UserBase getLoggedPerson() {
         return loggedPerson;

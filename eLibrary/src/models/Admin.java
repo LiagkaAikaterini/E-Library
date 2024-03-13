@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public class Admin extends UserBase{
+public class Admin extends UserBase {
 
     public Admin(String username, String password) {
         super(username, password, true);
@@ -12,7 +12,7 @@ public class Admin extends UserBase{
 
 
     public void createBook(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) {
-        Book newBook = new Book(title, author, publisher, summary, ISBN, datePublished, copiesAvailable);   
+        Book newBook = new Book(title, author, publisher, ISBN, datePublished, copiesAvailable);   
         Library.addBook(newBook);
 
         // all books must be in some category
@@ -156,10 +156,6 @@ public class Admin extends UserBase{
 
     public void changeBookPublisher(Book book, String publisher) {
         book.setPublisher(publisher);
-    }
-
-    public void changeBookSummary(Book book, String summary) {
-        book.setSummary(summary);
     }
 
     public void changeBookISBN(Book book, String newISBN) throws Exception {
