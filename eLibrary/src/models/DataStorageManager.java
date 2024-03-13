@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DataManagement {
+public class DataStorageManager {
     /*
      * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      * i have not handle if the file does NOT exist - it just throws an exception 
@@ -40,6 +40,7 @@ public class DataManagement {
     }
 
     // deserialize whole list of any type
+    @SuppressWarnings("unchecked")
     public static <T> List<T> deserialize(String filePath) {
         List<T> dataList = null;
         try {

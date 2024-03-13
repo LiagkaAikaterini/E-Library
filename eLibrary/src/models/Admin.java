@@ -3,8 +3,6 @@ package models;
 import java.time.LocalDate;
 import java.util.List;
 
-import models.Book.Review;
-
 
 public class Admin extends UserBase{
 
@@ -24,7 +22,7 @@ public class Admin extends UserBase{
 
     public void addBookToCategory(Book book, String categoryName) {
         try {
-            Category targetCategory = Query.findCategory(categoryName);
+            Category targetCategory = Library.findCategory(categoryName);
 
             targetCategory.addToCategoryBooks(book.getISBN());
         }        
@@ -37,7 +35,7 @@ public class Admin extends UserBase{
 
     public void createCategory(String categoryName) {
             // if category does not already exists
-            if ( Query.findCategory(categoryName) == null ) {
+            if ( Library.findCategory(categoryName) == null ) {
                 Category newCat = new Category(categoryName);
                 Library.addCategory(newCat);
             }
@@ -45,10 +43,10 @@ public class Admin extends UserBase{
 
     public void deleteCategory(String categoryName) {
         try{
-            Category category = Query.findCategory(categoryName);
+            Category category = Library.findCategory(categoryName);
             
             for (String isbn : category.getBooksISBN()) {
-                Book book = Query.findBook(isbn);
+                Book book = Library.findBook(isbn);
                 deleteBook(book);
             }
 
@@ -62,7 +60,7 @@ public class Admin extends UserBase{
     // I assume the category given actually exists !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public void changeCategoryName(String categoryName, String newCategoryName) {
         try{
-            Category category = Query.findCategory(categoryName);
+            Category category = Library.findCategory(categoryName);
             
             category.setName(newCategoryName);        
         }
@@ -128,7 +126,7 @@ public class Admin extends UserBase{
     }
 
     public void terminateBorrow(Borrowed borrow) {
-        Book book = Query.findBook( borrow.getBookISBN() );
+        Book book = Library.findBook( borrow.getBookISBN() );
 
         //remove from app's active borrows
         Library.removeActiveBorrow(borrow);

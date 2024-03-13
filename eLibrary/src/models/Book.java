@@ -254,7 +254,7 @@ public class Book implements Serializable{
             return;
         }
 
-        if ( !Query.isIsbnAvailable(iSBN) ) {
+        if ( !Library.isIsbnAvailable(iSBN) ) {
             throw new Exception("This isbn is not available. Please enter unique isbn.");
         }
 

@@ -101,7 +101,7 @@ public class UserBase implements Serializable {
         }
 
         // check if username already exists - Usernames Must be unique
-        if ( !Query.isUsernameAvailable(username) ) {
+        if ( !Library.isUsernameAvailable(username) ) {
             throw new Exception("This username is not available. Please try a different username.");
         }
         

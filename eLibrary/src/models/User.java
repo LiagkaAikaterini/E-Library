@@ -28,7 +28,7 @@ public class User extends UserBase{
 
     public boolean canBorrow() {
         // check if you can borrow anymore books
-        List<Borrowed> myActiveBorrows = Query.findUsersActiveBorrows(this.getUsername());
+        List<Borrowed> myActiveBorrows = Library.findUsersActiveBorrows(this.getUsername());
         
         return (myActiveBorrows.size() < 2);
     }

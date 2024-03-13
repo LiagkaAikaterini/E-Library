@@ -1,6 +1,7 @@
 package models;
 
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class Library {
@@ -9,74 +10,122 @@ public class Library {
     private static List<Book> allBooks;
     private static List<Category> allCategories;
     private static List<Borrowed> allActiveBorrows;
-    private UserBase loggedUser;
-    /*
-    private User currUser;
-    private Admin currAdmin;
-    
-    public Library(User logUser){
-        this.loggedUser = logUser;
-        this.currUser = logUser;
-        this.currAdmin = null;
+
+    public static void initializeData() {
+        Library.allAdmins = DataStorageManager.deserialize("src/medialab/admins.ser");
+        Library.allUsers = DataStorageManager.deserialize("src/medialab/users.ser");
+        Library.allBooks = DataStorageManager.deserialize("src/medialab/books.ser");
+        Library.allCategories = DataStorageManager.deserialize("src/medialab/categories.ser");
+        Library.allActiveBorrows = DataStorageManager.deserialize("src/medialab/borrows.ser");
     }
 
-    public Library(Admin logUser){
-        this.loggedUser = logUser;
-        this.currUser = null;
-        this.currAdmin = logUser;
-    }
-     */
-
-    public Library() {
-        Library.allAdmins = DataManagement.deserialize("src/medialab/admins.ser");
-        Library.allUsers = DataManagement.deserialize("src/medialab/users.ser");
-        Library.allBooks = DataManagement.deserialize("src/medialab/books.ser");
-        Library.allCategories = DataManagement.deserialize("src/medialab/categories.ser");
-        Library.allActiveBorrows = DataManagement.deserialize("src/medialab/borrows.ser");
-        this.loggedUser = null;
-    }
-    
-    public Library(UserBase userLoggedIn) {
-        this.loggedUser = userLoggedIn;
-    }
-
-    public void saveData() {
+    public static void saveData() {
         // serialize data from each data file and populate the corresponding list
-        DataManagement.serialize("src/medialab/admins.ser", allAdmins);
-        DataManagement.serialize("src/medialab/users.ser", allUsers);
-        DataManagement.serialize("src/medialab/books.ser", allBooks);
-        DataManagement.serialize("src/medialab/categories.ser", allCategories);
-        DataManagement.serialize("src/medialab/borrows.ser", allActiveBorrows);
+        DataStorageManager.serialize("src/medialab/admins.ser", allAdmins);
+        DataStorageManager.serialize("src/medialab/users.ser", allUsers);
+        DataStorageManager.serialize("src/medialab/books.ser", allBooks);
+        DataStorageManager.serialize("src/medialab/categories.ser", allCategories);
+        DataStorageManager.serialize("src/medialab/borrows.ser", allActiveBorrows);
     }
 
 
     // Retrieve User or Admin seperately
     // check in frontend
     // Exception not logged in yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public User getCurrUser() {
-        for (User user : Library.allUsers) {
-            if ( (user.getUsername()).equals(this.loggedUser.getUsername()) ) {
+    public static User getCurrUser(UserBase loggedUser) {
+        for (User user : allUsers) {
+            if ( (user.getUsername()).equals(loggedUser.getUsername()) ) {
                 return user;
             }
         }
         return null;
     }
 
-    public Admin getCurrAdmin() {
-        for (Admin admin : Library.allAdmins) {
-            if ( (admin.getUsername()).equals(this.loggedUser.getUsername()) ) {
+    public static Admin getCurrAdmin(UserBase loggedUser) {
+        for (Admin admin : allAdmins) {
+            if ( (admin.getUsername()).equals(loggedUser.getUsername()) ) {
                 return admin;
             }
         }
         return null;
     }
 
-    public UserBase getLoggedUser() {
-        return loggedUser;
+
+    public static Book findBook(String isbn) {
+        List<Book> books = getAllBooks();
+
+        for (Book book : books) {
+            if ( (book.getISBN()).equals(isbn)) {
+                return book;
+            }
+        }
+
+        return null;
     }
-    public void setLoggedUser(UserBase loggedUser) {
-        this.loggedUser = loggedUser;
+
+    public static Category findCategory(String name) {
+        for (Category category : allCategories) {
+            if ( (category.getName()).equals(name) ) {
+                return category;
+            }
+        }
+
+        return null;
     }
+
+    public static User findUser(String username) {
+        for (User user : allUsers) {
+            if ( (user.getUsername()).equals(username)) {
+                return user;
+            }
+        }
+
+        return null;
+    }
+
+    public static Admin findAdmin(String username) {
+        for (Admin admin : allAdmins) {
+            if ( (admin.getUsername()).equals(username)) {
+                return admin;
+            }
+        }
+
+        return null;
+    }
+
+
+    public static List<Borrowed> findUsersActiveBorrows(String username) {
+        List<Borrowed> result = new ArrayList<Borrowed>();
+
+        for (Borrowed borrow : allActiveBorrows) {
+            if ( (borrow.getUsername()).equals(username)) {
+                result.add(borrow);
+            }
+        }
+
+        return result;
+    }
+
+    public static boolean isUsernameAvailable(String username) {
+        for (User user : allUsers) {
+            if ( username.equals(user.getUsername()) ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean isIsbnAvailable(String isbn) {
+        for (Book book : allBooks) {
+            if ( isbn.equals(book.getISBN()) ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
 
     /*
     public Admin getCurrAdmin() {
