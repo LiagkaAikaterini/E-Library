@@ -12,20 +12,31 @@ import javafx.scene.control.ListView;
 import models.Book;
 import models.Library;
 
-public class UserHomepageController implements Initializable{
+public class HomepageController implements Initializable{
 
     @FXML
     private ListView<Book> list;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         ObservableList<Book> observableBooklist = FXCollections.observableArrayList();
         List<Book> books = Library.getAllBooks();
 
         observableBooklist.addAll(books);
-
+        
         list.setItems(observableBooklist);
-        list.setCellFactory(booklist -> new ListCellBorrow());
+
+        // set the suitable cell type based on whether we are in User or Admin mode
+        if (NavigationController.getLoggedPerson().getIsAdmin()) {
+            // An Admin logged in
+        }
+        else {
+            // A simple User logged in
+            list.setCellFactory(booklist -> new ListCellBorrow());
+        }
+        
     }
 
 }

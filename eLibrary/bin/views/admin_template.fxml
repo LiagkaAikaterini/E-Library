@@ -41,7 +41,6 @@
             <TextField layoutX="160.0" layoutY="12.0" prefHeight="26.0" prefWidth="279.0" promptText="Search Book by Title" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.79999999999995" AnchorPane.topAnchor="12.0" />
             <MenuButton alignment="CENTER" layoutX="487.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #EEDDC2;" text="Username" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
               <items>
-                <MenuItem mnemonicParsing="false" text="View Profile" />
                 <MenuItem mnemonicParsing="false" text="Log Out" />
               </items>
                <effect>
