@@ -47,7 +47,7 @@ public class ListCellBorrow extends ListCell<Book> implements Initializable {
 
                 if (currBook != null) {
                     NavigationController.setBook(currBook);
-                    NavigationController.loadCenter("/views/user_viewBookPage.fxml");
+                    NavigationController.loadCenter("/views/user_bookDetails.fxml");
                 }
             }
         });

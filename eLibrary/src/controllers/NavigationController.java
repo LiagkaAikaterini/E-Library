@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
 import models.Book;
 
 // this class loads the pages and keeps the current stage
@@ -36,6 +37,7 @@ public class NavigationController {
             e.printStackTrace();
         }
     }
+
 
     public static Stage getStage() {
         return stage;

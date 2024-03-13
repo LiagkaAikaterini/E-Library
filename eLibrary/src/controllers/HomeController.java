@@ -36,7 +36,7 @@ public class HomeController implements Initializable {
 
         // show top 5 books
         topBooklist.setItems(studentObservableList);
-        topBooklist.setCellFactory(booklist -> new ListCellBorrow());
+        topBooklist.setCellFactory(booklist -> new ListCellBook());
         
 
         // button usability

@@ -78,7 +78,8 @@ public class App extends Application  {
 
         
         NavigationController.setStage(primaryStage);
-        NavigationController.loadPage("/views/home.fxml");
+        //NavigationController.loadPage("/views/home.fxml");
+        NavigationController.loadPage("/views/user_template.fxml");
 
         
         

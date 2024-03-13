@@ -46,7 +46,7 @@ public class ListCellReview extends ListCell<Book> implements Initializable {
 
                 if (currBook != null) {
                     NavigationController.setBook(currBook);
-                    NavigationController.loadCenter("/views/user_viewBookPage.fxml");
+                    NavigationController.loadCenter("/views/user_user_bookDetails.fxml");
                 }
             }
         });

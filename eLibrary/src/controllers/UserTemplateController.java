@@ -1,5 +1,7 @@
 package controllers;
 
+import main.App;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,9 +15,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import main.App;
 
-public class UserMenuController implements Initializable {
+
+public class UserTemplateController implements Initializable {
     
     @FXML
     private BorderPane mainLayout;
@@ -24,8 +26,6 @@ public class UserMenuController implements Initializable {
     private Button homepage_btn;
     @FXML
     private Button search_btn;
-    @FXML
-    private MenuButton categories_dropdown;
     @FXML
     private Button history_btn;
     @FXML
@@ -50,14 +50,12 @@ public class UserMenuController implements Initializable {
         search_btn.setOnMouseEntered(this::hoverActivated);
         history_btn.setOnMouseEntered(this::hoverActivated);
         help_btn.setOnMouseEntered(this::hoverActivated);
-        categories_dropdown.setOnMouseEntered(this::hoverMenuActivated);
         profile_dropdown.setOnMouseEntered(this::hoverMenuActivated);
 
         homepage_btn.setOnMouseExited(this::hoverDeactivated);
         search_btn.setOnMouseExited(this::hoverDeactivated);
         history_btn.setOnMouseExited(this::hoverDeactivated);
         help_btn.setOnMouseExited(this::hoverDeactivated);
-        categories_dropdown.setOnMouseExited(this::hoverMenuDeactivated);
         profile_dropdown.setOnMouseExited(this::hoverMenuDeactivated);
 
 
@@ -65,7 +63,7 @@ public class UserMenuController implements Initializable {
         homepage_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                NavigationController.loadCenter("/views/titledBookList.fxml");
+                NavigationController.loadCenter("/views/user_homepage.fxml");
             }
         });
 
@@ -73,17 +71,6 @@ public class UserMenuController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 NavigationController.loadCenter("/views/user_searchForm.fxml");
-            }
-        });
-
-        // Prosoxhhhhh vres pws na fotvneis tis categories
-        categories_dropdown.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-
-
-
-
             }
         });
 

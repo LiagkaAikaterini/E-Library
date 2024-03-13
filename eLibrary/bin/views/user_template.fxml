@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainLayout" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserMenuController">
+<BorderPane fx:id="mainLayout" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserTemplateController">
    <left>
       <AnchorPane prefHeight="350.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" BorderPane.alignment="CENTER">
          <children>
@@ -19,8 +19,7 @@
             <Button fx:id="homepage_btn" contentDisplay="CENTER" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Homepage" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
             <Button fx:id="help_btn" alignment="CENTER" layoutX="2.0" layoutY="290.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Help" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <Button fx:id="search_btn" alignment="CENTER" layoutX="2.0" layoutY="126.6" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Advanced Book Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
-            <MenuButton fx:id="categories_dropdown" alignment="CENTER" layoutX="7.0" layoutY="61.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="126.0" style="-fx-background-color: #B69E7A;" text="Book Categories" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="115.0" />
-            <Button fx:id="history_btn" alignment="CENTER" layoutX="7.0" layoutY="152.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Borrow History" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
+            <Button fx:id="history_btn" alignment="CENTER" layoutX="7.0" layoutY="152.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Borrow History" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0" />
          </children>
          <effect>
             <ColorAdjust brightness="0.2" />
