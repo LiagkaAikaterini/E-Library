@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -35,13 +34,14 @@ public class ListCellBorrow extends ListCell<Book> {
     // button hover effect
     @FXML
     void hoverActivated(MouseEvent event) {
+        // #8C7460
         Button buttonEntered = (Button) event.getSource();
-        buttonEntered.setBlendMode(BlendMode.MULTIPLY);
+        buttonEntered.setStyle("-fx-background-color: #8C7460");
     }
     @FXML
     void hoverDeactivated(MouseEvent event) {
         Button buttonEntered = (Button) event.getSource();
-        buttonEntered.setBlendMode(BlendMode.SRC_OVER);
+        buttonEntered.setStyle("-fx-background-color: #B69E7A");
     }
 
     

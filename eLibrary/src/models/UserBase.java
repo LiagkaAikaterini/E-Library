@@ -16,7 +16,13 @@ public class UserBase implements Serializable {
         this.isAdmin = isAdmin;
     }
 
-    public static List<Book> searchByYear(int year) {
+    
+    public static List<Book> searchByYear(Integer year) {
+        // if no input null will be returned - if no matches empty ArrayList will be returned
+        if (year == null) {
+            return null;
+        }
+
         List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
@@ -30,6 +36,11 @@ public class UserBase implements Serializable {
     }
 
     public static List<Book> searchByTitle(String title) {
+        // if no input null will be returned - if no matches empty ArrayList will be returned
+        if (title.isEmpty()) {
+            return null;
+        }
+
         List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
@@ -43,6 +54,11 @@ public class UserBase implements Serializable {
     }
 
     public static List<Book> searchByAuthor(String author) {
+        // if no input null will be returned - if no matches empty ArrayList will be returned
+        if (author.isEmpty()) {
+            return null;
+        }
+
         List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
@@ -55,22 +71,14 @@ public class UserBase implements Serializable {
         return searchResult;
     }
 
-    public static List<Book> searchByPublisher(String publisher) {
-        List<Book> books = Library.getAllBooks();
-        List<Book> searchResult = new ArrayList<Book>();
-        
-        for (Book book : books) {
-            if ( (book.getPublisher()).contains(publisher) ) {
-                searchResult.add(book);
-            }
-        }
-        
-        return searchResult;
+    public static List<Book> search(List<Book> res1, List<Book> res2, List<Book> res3) {
+        return combineSearches(res1, combineSearches(res2, res3));
     }
 
     
     public static List<Book> combineSearches(List<Book> booksRes1, List<Book> booksRes2) {
         try {
+            // if any of the 2 lists empty an empty list will be returned
             List<Book> searchResult = new ArrayList<Book>();
 
             searchResult = booksRes1;
@@ -79,8 +87,19 @@ public class UserBase implements Serializable {
             return searchResult;
         }
         catch (NullPointerException n) {
-            // if any of the lists is null return empty list
-            return new ArrayList<Book>();
+            // if any of the lists is null return the list that is not null
+            // if both null return null
+            if (booksRes1 == null) {
+                if (booksRes2 == null) {
+                    return null;
+                }
+                else {
+                    return booksRes2;
+                }
+            }
+            else {
+                return booksRes1;
+            }
         }
         
     }

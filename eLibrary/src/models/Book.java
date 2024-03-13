@@ -212,7 +212,7 @@ public class Book implements Serializable{
         }
     }
 
-    public int getPublicationYear() {
+    public Integer getPublicationYear() {
         return this.datePublished.getYear();
     }
 

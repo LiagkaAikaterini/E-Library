@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -41,13 +40,14 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
     // button hover effect
     @FXML
     void hoverActivated(MouseEvent event) {
+        // #8C7460
         Button buttonEntered = (Button) event.getSource();
-        buttonEntered.setBlendMode(BlendMode.MULTIPLY);
+        buttonEntered.setStyle("-fx-background-color: #8C7460");
     }
     @FXML
     void hoverDeactivated(MouseEvent event) {
         Button buttonEntered = (Button) event.getSource();
-        buttonEntered.setBlendMode(BlendMode.SRC_OVER);
+        buttonEntered.setStyle("-fx-background-color: #B69E7A");
     }
 
 
@@ -57,7 +57,7 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
         Book currBook = Library.findBook(borrow.getBookISBN());
         
         if (currBook != null) {
-            //NavigationController.setCurrBook(currBook);
+            //UserBookDetailsController.setCurrBook(currBook);
             NavigationController.loadCenter("/views/user_reviewBook.fxml");
         }
         else {
@@ -73,7 +73,7 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
 
         if (currBook != null) {
             UserBookDetailsController.setCurrBook(currBook);
-            NavigationController.loadCenter("/views/user_user_bookDetails.fxml");
+            NavigationController.loadCenter("/views/user_bookDetails.fxml");
         }
         else {
             // ?????????????????????????????????????????????
@@ -86,7 +86,6 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
         super.updateItem(borrow, empty);
 
         if (empty || borrow == null) {
-
             setText(null);
             setGraphic(null);
         } 
@@ -113,7 +112,6 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
             );
             bookcell_borrowDate.setText(String.valueOf(borrow.getBorrowingDate()));
             bookcell_returnDate.setText(String.valueOf(borrow.getReturnDate()));
-
 
             setText(null);
             setGraphic(hbox);

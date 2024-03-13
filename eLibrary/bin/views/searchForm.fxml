@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchFormController">
    <effect>
       <ColorAdjust saturation="-0.6" />
    </effect>
@@ -18,13 +17,22 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="69.0" promptText="Type the book title here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0" />
-      <TextField layoutX="14.0" layoutY="141.0" promptText="Type the book author here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="180.0" />
-      <TextField layoutX="14.0" layoutY="215.0" promptText="Type the year the book was published here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="240.0" />
-      <Label layoutX="14.0" layoutY="52.0" text="Search by Title" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
-      <Label layoutX="21.0" layoutY="123.0" text="Search by Author" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="160.0" />
-      <Label layoutX="33.0" layoutY="197.0" text="Search by Publishing Year" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="220.0" />
-      <Button blendMode="MULTIPLY" layoutX="11.0" layoutY="255.0" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-color: #B69E7A;" text="Search" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="300.0" />
+      <TextField fx:id="title_input" layoutX="14.0" layoutY="69.0" promptText="Type the book title here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0" />
+      <TextField fx:id="author_input" layoutX="14.0" layoutY="141.0" promptText="Type the book author here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="180.0" />
+      <TextField fx:id="year_input" layoutX="14.0" layoutY="215.0" promptText="Type the year the book was published here" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="240.0" />
+      <Label layoutX="14.0" layoutY="52.0" text="Search by Title" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="21.0" layoutY="123.0" text="Search by Author" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="160.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="33.0" layoutY="197.0" text="Search by Publishing Year" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="220.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="search_btn" layoutX="11.0" layoutY="255.0" mnemonicParsing="false" onMouseClicked="#search" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefWidth="200.0" style="-fx-background-color: #B69E7A;" text="Search" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="300.0" />
       <Label layoutX="14.0" layoutY="29.0" minWidth="429.0" prefWidth="429.0" text="Here you can search for books based on the author, title, or/and release year. You can also combine these criteria to refine your search further. Simply fill in any of the following text areas you want with your desired criteria." wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
    </children>
 </AnchorPane>

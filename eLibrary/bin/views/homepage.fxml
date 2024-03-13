@@ -16,7 +16,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ListView id="listView_searchResult" fx:id="list" blendMode="MULTIPLY" layoutX="14.0" layoutY="39.2" prefHeight="311.0" prefWidth="450.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+      <ListView id="listView_searchResult" fx:id="list" blendMode="MULTIPLY" focusTraversable="false" layoutX="14.0" layoutY="39.2" prefHeight="311.0" prefWidth="450.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
          <effect>
             <ColorAdjust brightness="-0.02" />
          </effect>

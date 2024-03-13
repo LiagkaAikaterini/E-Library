@@ -60,7 +60,7 @@
       <Label fx:id="year" layoutX="130.0" layoutY="151.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="150.0" />
       <Label fx:id="isbn" layoutX="130.0" layoutY="171.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="170.0" />
       <Label fx:id="copies" layoutX="130.0" layoutY="200.0" text="null" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="200.0" />
-      <ListView fx:id="reviewList" blendMode="MULTIPLY" layoutX="8.0" layoutY="249.0" prefHeight="120.0" prefWidth="429.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="250.0">
+      <ListView fx:id="reviewList" blendMode="MULTIPLY" focusTraversable="false" layoutX="8.0" layoutY="249.0" prefHeight="120.0" prefWidth="429.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="250.0">
          <effect>
             <ColorAdjust brightness="-0.02" />
          </effect>

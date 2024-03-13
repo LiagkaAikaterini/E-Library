@@ -2,34 +2,40 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <effect>
-      <ColorAdjust saturation="-0.6" />
-   </effect>
-   <children>
-      <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <ListView fx:id="activeBorrowsList" blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="14.0" layoutY="39.2" prefHeight="122.0" prefWidth="440.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserBorrowHistoryController">
+   <content>
+      <AnchorPane minWidth="450.0" prefHeight="333.0" prefWidth="450.0" style="-fx-background-color: #EEDDC2;">
          <effect>
-            <ColorAdjust brightness="-0.02" />
+            <ColorAdjust saturation="-0.6" />
          </effect>
-      </ListView>
-      <Label layoutX="10.0" layoutY="175.0" prefHeight="28.0" prefWidth="450.0" text="Borrow History" AnchorPane.topAnchor="170.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <ListView fx:id="historyList" blendMode="MULTIPLY" fixedCellSize="60.0" layoutX="15.0" layoutY="203.0" prefHeight="121.0" prefWidth="429.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="195.0">
-         <effect>
-            <ColorAdjust brightness="-0.02" />
-         </effect>
-      </ListView>
-   </children>
-</AnchorPane>
+         <children>
+            <Label layoutX="197.0" layoutY="6.4" prefHeight="28.0" prefWidth="450.0" text="Currently Borrowing" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ListView fx:id="activeBorrowsList" blendMode="MULTIPLY" focusTraversable="false" layoutX="14.0" layoutY="39.2" maxHeight="258.0" minWidth="-Infinity" prefHeight="258.0" prefWidth="430.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
+               <effect>
+                  <ColorAdjust brightness="-0.02" />
+               </effect>
+            </ListView>
+            <Label layoutX="10.0" layoutY="175.0" prefHeight="28.0" prefWidth="450.0" text="Borrow History" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ListView fx:id="historyList" blendMode="MULTIPLY" focusTraversable="false" layoutX="15.0" layoutY="203.0" minWidth="-Infinity" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="325.0">
+               <effect>
+                  <ColorAdjust brightness="-0.02" />
+               </effect>
+            </ListView>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
