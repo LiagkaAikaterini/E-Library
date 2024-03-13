@@ -23,7 +23,7 @@
                </font>
             </Label>
             <PasswordField fx:id="password_input" layoutX="225.0" layoutY="184.0" prefWidth="150.0" promptText="Enter your password" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="160.0" />
-            <Button fx:id="login_btn" alignment="CENTER" layoutX="225.0" layoutY="221.0" minWidth="150.0" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Log In" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="220.0">
+            <Button fx:id="login_btn" alignment="CENTER" layoutX="225.0" layoutY="221.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#login" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Log In" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="220.0">
                <effect>
                   <ColorAdjust />
                </effect>
@@ -31,7 +31,7 @@
             <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="75.0" />
             <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="140.0" />
             <TextField fx:id="username_input" layoutX="225.0" layoutY="98.0" prefWidth="150.0" promptText="Enter your username" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="95.0" />
-            <Label alignment="CENTER" contentDisplay="TOP" layoutY="255.8" prefHeight="23.0" prefWidth="600.0" text="You don't have an account? Sign Up" textAlignment="CENTER" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+            <Label alignment="CENTER" contentDisplay="TOP" layoutY="255.8" prefHeight="23.0" prefWidth="600.0" text="You don't have an account? Sign Up" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="245.0">
                <font>
                   <Font size="10.0" />
                </font>
@@ -53,12 +53,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="340.0" prefHeight="100.0" prefWidth="340.0" style="-fx-background-color: #EEDDC2;">
                <children>
-                  <Button fx:id="signupForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Sign Up" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="signupForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#goToRegister" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Sign Up" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>
                   </Button>
-                  <Button fx:id="home_btn" alignment="CENTER" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Back to Homepage" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="home_btn" alignment="CENTER" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#goToHome" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Home" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>

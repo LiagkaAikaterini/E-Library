@@ -27,12 +27,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="340.0" prefHeight="100.0" prefWidth="340.0" style="-fx-background-color: #EEDDC2;">
                <children>
-                  <Button fx:id="loginForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Log In" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="loginForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#goToLogin" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Log In" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>
                   </Button>
-                  <Button fx:id="home_btn" alignment="CENTER" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Back to Homepage" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="home_btn" alignment="CENTER" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#goToHome" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Home" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>
@@ -43,7 +43,7 @@
       </SplitPane>
    </top>
    <center>
-      <ScrollPane fx:id="scrollpane" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="scrollpane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
             <AnchorPane fx:id="anchorpane" prefHeight="626.0" prefWidth="584.0" style="-fx-background-color: #EEDDC2;">
                <effect>
@@ -56,7 +56,7 @@
                      </font>
                   </Label>
                   <PasswordField fx:id="password_input" layoutX="225.0" layoutY="184.0" prefWidth="240.0" promptText="Create password" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="135.0" />
-                  <Button fx:id="signup_btn" alignment="CENTER" layoutX="225.0" layoutY="545.0" minWidth="150.0" mnemonicParsing="false" prefWidth="240.0" style="-fx-background-color: #B69E7A;" text="Sign Up" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="575.0">
+                  <Button fx:id="signup_btn" alignment="CENTER" layoutX="225.0" layoutY="545.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#signup" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefWidth="240.0" style="-fx-background-color: #B69E7A;" text="Sign Up" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="575.0">
                      <effect>
                         <ColorAdjust />
                      </effect>
@@ -64,7 +64,7 @@
                   <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="60.0" />
                   <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="115.0" />
                   <TextField fx:id="username_input" layoutX="218.0" layoutY="84.0" prefWidth="240.0" promptText="Create unique username" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="80.0" />
-                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="-3.0" layoutY="570.0" prefHeight="36.0" prefWidth="602.0" text="You already have an account? Log In" textAlignment="CENTER" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="590.0">
+                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="-3.0" layoutY="570.0" prefHeight="36.0" prefWidth="602.0" text="You already have an account? Log In" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="590.0">
                      <font>
                         <Font size="10.0" />
                      </font>

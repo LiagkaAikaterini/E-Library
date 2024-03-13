@@ -45,12 +45,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="340.0" prefHeight="100.0" prefWidth="340.0" style="-fx-background-color: #EEDDC2;">
                <children>
-                  <Button fx:id="signupForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Sign Up" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="signupForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#goToRegister" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Sign Up" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>
                   </Button>
-                  <Button fx:id="loginForm_btn" alignment="CENTER" layoutX="31.0" layoutY="25.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Log In" AnchorPane.bottomAnchor="24.599999999999994" AnchorPane.rightAnchor="183.4" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="loginForm_btn" alignment="CENTER" layoutX="31.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#goToLogin" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Log In" AnchorPane.bottomAnchor="24.599999999999994" AnchorPane.rightAnchor="183.4" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>

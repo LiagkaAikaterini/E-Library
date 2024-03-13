@@ -1,15 +1,11 @@
 package controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 
-public class RegisterController implements Initializable {
+public class RegisterController {
     
     @FXML
     private Button home_btn;
@@ -22,35 +18,37 @@ public class RegisterController implements Initializable {
     private Button user_btn;
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        home_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                NavigationController.loadPage("/views/home.fxml");
-            }
-        });
+    // hover effect for buttons
+    @FXML
+    void hoverActivated(MouseEvent event) {
+        Button buttonEntered = (Button) event.getSource();
+        buttonEntered.setBlendMode(BlendMode.MULTIPLY);
+    }
+    @FXML
+    void hoverDeactivated(MouseEvent event) {
+        Button buttonEntered = (Button) event.getSource();
+        buttonEntered.setBlendMode(BlendMode.SRC_OVER);
+    }
 
-        loginForm_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                NavigationController.loadPage("/views/login.fxml");
-            }
-        });
+    
+    @FXML
+    void goToHome(MouseEvent event) {
+        NavigationController.loadPage("/views/home.fxml");
+    }
 
-        admin_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                NavigationController.loadPage("/views/register_admin.fxml");
-            }
-        });
+    @FXML
+    void goToLogin(MouseEvent event) {
+        NavigationController.loadPage("/views/login.fxml");
+    }
 
-        user_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                NavigationController.loadPage("/views/register_user.fxml");
-            }
-        });
+    @FXML
+    void goToAdminRegister(MouseEvent event) {
+        NavigationController.loadPage("/views/register_admin.fxml");
+    }
+
+    @FXML
+    void goToUserRegister(MouseEvent event) {
+        NavigationController.loadPage("/views/register_user.fxml");
     }
 
 }

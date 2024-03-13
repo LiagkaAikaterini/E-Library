@@ -16,10 +16,10 @@
       <AnchorPane prefHeight="350.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" BorderPane.alignment="CENTER">
          <children>
             <Separator layoutX="15.0" layoutY="13.0" prefHeight="3.2" prefWidth="215.2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button fx:id="homepage_btn" contentDisplay="CENTER" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Homepage" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
-            <Button fx:id="help_btn" alignment="CENTER" layoutX="2.0" layoutY="290.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Help" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Button fx:id="search_btn" alignment="CENTER" layoutX="2.0" layoutY="126.6" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Advanced Book Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
-            <Button fx:id="history_btn" alignment="CENTER" layoutX="7.0" layoutY="152.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Borrow History" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0" />
+            <Button fx:id="homepage_btn" contentDisplay="CENTER" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goToHomepage" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Homepage" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+            <Button fx:id="help_btn" alignment="CENTER" layoutX="2.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#goToHelpPage" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Help" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button fx:id="search_btn" alignment="CENTER" layoutX="2.0" layoutY="126.6" mnemonicParsing="false" onMouseClicked="#goToSearchForm" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Advanced Book Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
+            <Button fx:id="history_btn" alignment="CENTER" layoutX="7.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#goToBorrowHistory" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #B69E7A;" text="Borrow History" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0" />
          </children>
          <effect>
             <ColorAdjust brightness="0.2" />
@@ -36,10 +36,10 @@
             </Label>
             <Separator layoutX="142.0" orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="0.0" />
             <TextField layoutX="160.0" layoutY="12.0" prefHeight="26.0" prefWidth="279.0" promptText="Search Book by Title" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.79999999999995" AnchorPane.topAnchor="12.0" />
-            <MenuButton fx:id="profile_dropdown" alignment="CENTER" layoutX="487.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #EEDDC2;" text="Username" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
+            <MenuButton fx:id="profile_dropdown" alignment="CENTER" layoutX="487.0" layoutY="12.0" mnemonicParsing="false" onMouseEntered="#hoverActivatedMenu" onMouseExited="#hoverDeactivatedMenu" style="-fx-background-color: #EEDDC2;" text="Username" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
               <items>
-                <MenuItem fx:id="profile" mnemonicParsing="false" text="View Profile" />
-                <MenuItem fx:id="logout" mnemonicParsing="false" text="Log Out" />
+                <MenuItem fx:id="profile" mnemonicParsing="false" onAction="#goToProfile" text="View Profile" />
+                <MenuItem fx:id="logout" mnemonicParsing="false" onAction="#logout" text="Log Out" />
               </items>
                <effect>
                   <ColorAdjust brightness="-0.05" />

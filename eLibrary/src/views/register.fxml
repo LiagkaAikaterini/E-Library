@@ -25,12 +25,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="340.0" prefHeight="100.0" prefWidth="340.0" style="-fx-background-color: #EEDDC2;">
                <children>
-                  <Button fx:id="loginForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Log In" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="loginForm_btn" alignment="CENTER" layoutX="163.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#goToLogin" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Log In" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>
                   </Button>
-                  <Button fx:id="home_btn" alignment="CENTER" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Back to Homepage" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="25.0">
+                  <Button fx:id="home_btn" alignment="CENTER" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#goToHome" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #EEDDC2;" text="Home" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="25.0">
                      <effect>
                         <ColorAdjust brightness="-0.05" />
                      </effect>
@@ -49,7 +49,7 @@
                   <Circle fill="WHITE" radius="25.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="67.0" />
                   <QuadCurve controlX="-1.52587890625E-5" controlY="49.0" endX="41.0" endY="22.0" fill="WHITE" startX="-41.0" startY="22.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="124.0" AnchorPane.topAnchor="179.0" />
                   <QuadCurve controlX="-1.79998779296875" controlY="-113.40000915527344" endX="40.0" fill="WHITE" startX="-40.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="123.0" />
-                  <Button fx:id="admin_btn" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #B69E7A;" text="Create Admin Account" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="228.0">
+                  <Button fx:id="admin_btn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#goToAdminRegister" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #B69E7A;" text="Create Admin Account" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="228.0">
                      <effect>
                         <ColorAdjust />
                      </effect>
@@ -62,7 +62,7 @@
                   <Circle fill="WHITE" radius="25.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="67.0" />
                   <QuadCurve controlX="-1.52587890625E-5" controlY="49.0" endX="41.0" endY="22.0" fill="WHITE" layoutX="132.0" layoutY="154.0" startX="-41.0" startY="22.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="179.0" />
                   <QuadCurve controlX="-1.79998779296875" controlY="-113.40000915527344" endX="40.0" fill="WHITE" layoutX="132.0" layoutY="185.0" startX="-40.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="123.0" />
-                  <Button fx:id="user_btn" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #B69E7A;" text="Create User Account" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="228.0" />
+                  <Button fx:id="user_btn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#goToUserRegister" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #B69E7A;" text="Create User Account" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="228.0" />
                </children>
             </AnchorPane>
         </items>

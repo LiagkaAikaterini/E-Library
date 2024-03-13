@@ -20,12 +20,11 @@ public class HomepageController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // populate listView with all the books of the library
         ObservableList<Book> observableBooklist = FXCollections.observableArrayList();
         List<Book> books = Library.getAllBooks();
 
         observableBooklist.addAll(books);
-        
         list.setItems(observableBooklist);
 
         // set the suitable cell type based on whether we are in User or Admin mode

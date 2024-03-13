@@ -1,22 +1,19 @@
 package controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.io.IOException;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 import models.Book;
 
-public class ListCellBorrow extends ListCell<Book> implements Initializable {
+public class ListCellBorrow extends ListCell<Book> {
 
     @FXML
     private HBox hbox;
@@ -35,34 +32,46 @@ public class ListCellBorrow extends ListCell<Book> implements Initializable {
     @FXML
     private Button details_btn;
 
-    
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        details_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Book currBook = getItem();
-
-                if (currBook != null) {
-                    NavigationController.setCurrBook(currBook);
-                    NavigationController.loadCenter("/views/user_bookDetails.fxml");
-                }
-            }
-        });
-
-        borrow_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Book currBook = getItem();
-
-                if (currBook != null) {
-                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    
-                }
-            }
-        });
+    // button hover effect
+    @FXML
+    void hoverActivated(MouseEvent event) {
+        Button buttonEntered = (Button) event.getSource();
+        buttonEntered.setBlendMode(BlendMode.MULTIPLY);
     }
+    @FXML
+    void hoverDeactivated(MouseEvent event) {
+        Button buttonEntered = (Button) event.getSource();
+        buttonEntered.setBlendMode(BlendMode.SRC_OVER);
+    }
+
+    
+    @FXML
+    void goToBookDetails(MouseEvent event) {
+        Book currBook = getItem();
+
+        if (currBook != null) {
+            UserBookDetailsController.setCurrBook(currBook);
+            NavigationController.loadCenter("/views/user_bookDetails.fxml");
+        }
+        else {
+            // ?????????????????????????????????????????????
+        }
+    }
+
+    @FXML
+    void borrowBookRequest(MouseEvent event) {
+        // maybe show alert to verify borrow 
+        Book currBook = getItem();
+
+        if (currBook != null) {
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            
+        }
+        else {
+            // ?????????????????????????????????????????????
+        }
+    }
+
 
     @Override
     protected void updateItem(Book book, boolean empty) {

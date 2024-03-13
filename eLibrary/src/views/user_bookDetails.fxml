@@ -65,6 +65,6 @@
             <ColorAdjust brightness="-0.02" />
          </effect>
       </ListView>
-      <Button fx:id="borrow_btn" blendMode="MULTIPLY" layoutX="11.0" layoutY="310.0" maxHeight="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: #B69E7A;" text="Borrow this Book" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+      <Button fx:id="borrow_btn" layoutX="11.0" layoutY="310.0" maxHeight="25.0" mnemonicParsing="false" onMouseClicked="#borrowBook" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: #B69E7A;" text="Borrow this Book" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
    </children>
 </AnchorPane>

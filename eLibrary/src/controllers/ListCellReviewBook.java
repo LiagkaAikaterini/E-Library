@@ -1,16 +1,13 @@
 package controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.io.IOException;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
@@ -18,7 +15,7 @@ import models.Book;
 import models.Borrowed;
 import models.Library;
 
-public class ListCellReviewBook extends ListCell<Borrowed> implements Initializable {
+public class ListCellReviewBook extends ListCell<Borrowed> {
     
     @FXML
     private HBox hbox;
@@ -41,36 +38,48 @@ public class ListCellReviewBook extends ListCell<Borrowed> implements Initializa
     @FXML
     private Button review_btn;
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        details_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Borrowed borrow = getItem();
-                Book currBook = Library.findBook(borrow.getBookISBN());
-
-                if (currBook != null) {
-                    NavigationController.setCurrBook(currBook);
-                    NavigationController.loadCenter("/views/user_user_bookDetails.fxml");
-                }
-            }
-        });
-
-        review_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Borrowed borrow = getItem();
-                Book currBook = Library.findBook(borrow.getBookISBN());
-                
-                if (currBook != null) {
-                    NavigationController.setCurrBook(currBook);
-                    NavigationController.loadCenter("/views/user_reviewBook.fxml");
-                }
-            }
-        });
-
+    // button hover effect
+    @FXML
+    void hoverActivated(MouseEvent event) {
+        Button buttonEntered = (Button) event.getSource();
+        buttonEntered.setBlendMode(BlendMode.MULTIPLY);
     }
+    @FXML
+    void hoverDeactivated(MouseEvent event) {
+        Button buttonEntered = (Button) event.getSource();
+        buttonEntered.setBlendMode(BlendMode.SRC_OVER);
+    }
+
+
+    @FXML
+    void goToReviewBook(MouseEvent event) {
+        Borrowed borrow = getItem();
+        Book currBook = Library.findBook(borrow.getBookISBN());
+        
+        if (currBook != null) {
+            //NavigationController.setCurrBook(currBook);
+            NavigationController.loadCenter("/views/user_reviewBook.fxml");
+        }
+        else {
+            // ?????????????????????????????????????????????
+        }
+    }
+    
+
+    @FXML
+    void goToBookDetails(MouseEvent event) {
+        Borrowed borrow = getItem();
+        Book currBook = Library.findBook(borrow.getBookISBN());
+
+        if (currBook != null) {
+            UserBookDetailsController.setCurrBook(currBook);
+            NavigationController.loadCenter("/views/user_user_bookDetails.fxml");
+        }
+        else {
+            // ?????????????????????????????????????????????
+        }
+    }
+
 
     @Override
     protected void updateItem(Borrowed borrow, boolean empty) {

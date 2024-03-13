@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import models.Book;
 import models.Library;
 import models.UserBase;
 
@@ -18,7 +17,6 @@ public class NavigationController {
     private static UserBase loggedPerson = Library.getAllUsers().get(0);
     private static Stage stage;
     private static BorderPane mainLayout;
-    private static Book currBook;
     
 
     public static void loadPage(String fxmlFile) {
@@ -53,12 +51,6 @@ public class NavigationController {
     }
     public static void setMainLayout(BorderPane mainLayout) {
         NavigationController.mainLayout = mainLayout;
-    }
-    public static Book getCurrBook() {
-        return currBook;
-    }
-    public static void setCurrBook(Book currBook) {
-        NavigationController.currBook = currBook;
     }
     public static UserBase getLoggedPerson() {
         return loggedPerson;
