@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserProfileController">
    <effect>
       <ColorAdjust saturation="-0.6" />
    </effect>
@@ -21,14 +20,14 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="-175.0" layoutY="38.0" text="getusername" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0" />
+                  <Label fx:id="username" layoutX="-175.0" layoutY="38.0" text="getusername" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0" />
                   <Label layoutX="31.0" layoutY="43.0" text="Username" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="-77.0" layoutY="77.0" prefHeight="18.0" prefWidth="200.0" text="getfirstname" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="90.0" />
-                  <Label layoutX="-72.0" layoutY="125.0" prefHeight="18.0" prefWidth="200.0" text="getlastname" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
+                  <Label fx:id="firstname" layoutX="-77.0" layoutY="77.0" prefHeight="18.0" prefWidth="200.0" text="getfirstname" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="90.0" />
+                  <Label fx:id="lastname" layoutX="-72.0" layoutY="125.0" prefHeight="18.0" prefWidth="200.0" text="getlastname" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
                   <Label layoutX="30.0" layoutY="120.0" text="Last Name " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -39,7 +38,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="49.0" layoutY="236.0" prefHeight="18.0" prefWidth="200.0" text="getID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="210.0" />
+                  <Label fx:id="id" layoutX="49.0" layoutY="236.0" prefHeight="18.0" prefWidth="200.0" text="getID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="210.0" />
                </children>
                <effect>
                   <ColorAdjust saturation="-0.6" />
@@ -60,9 +59,9 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="-53.0" layoutY="236.0" prefHeight="18.0" prefWidth="200.0" text="address" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="90.0" />
-                  <Label layoutX="-30.0" layoutY="147.0" prefHeight="18.0" prefWidth="200.0" text="getemail" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0" />
-                  <Label layoutX="20.0" layoutY="167.0" prefHeight="18.0" prefWidth="200.0" text="getbirthday" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
+                  <Label fx:id="address" layoutX="-53.0" layoutY="236.0" prefHeight="18.0" prefWidth="200.0" text="address" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="90.0" />
+                  <Label fx:id="email" layoutX="-30.0" layoutY="147.0" prefHeight="18.0" prefWidth="200.0" text="getemail" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0" />
+                  <Label fx:id="birthday" layoutX="20.0" layoutY="167.0" prefHeight="18.0" prefWidth="200.0" text="getbirthday" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
                   <Label layoutX="41.0" layoutY="188.0" text="E-mail" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="System Bold" size="12.0" />

@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import models.Book;
 
 public class ListCellReview extends ListCell<Book> implements Initializable {
+    
     private FXMLLoader loader;
 
     @FXML
@@ -30,6 +31,10 @@ public class ListCellReview extends ListCell<Book> implements Initializable {
     private Label bookcell_isbn;
     @FXML
     private Label bookcell_rating;
+    @FXML
+    private Label bookcell_borrowDate;
+    @FXML
+    private Label bookcell_returnDate;
 
     @FXML
     private Button details_btn;

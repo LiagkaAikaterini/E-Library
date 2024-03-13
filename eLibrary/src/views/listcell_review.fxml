@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <effect>
       <ColorAdjust saturation="-0.6" />
    </effect>
@@ -23,16 +23,36 @@
             <Label fx:id="bookcell_author" prefHeight="18.0" prefWidth="517.0" text="author" />
             <Label fx:id="bookcell_isbn" prefHeight="18.0" prefWidth="410.0" text="isbn" />
             <Label fx:id="bookcell_rating" prefHeight="18.0" prefWidth="423.0" text="rating" />
+            <HBox prefHeight="20.0" prefWidth="200.0">
+               <children>
+                  <Label minWidth="115.0" prefHeight="19.0" prefWidth="115.0" text="Borrowed On :">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="bookcell_borrowDate" prefHeight="18.0" prefWidth="278.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="200.0">
+               <children>
+                  <Label minWidth="115.0" prefWidth="115.0" text="Return By :">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="bookcell_returnDate" prefHeight="20.0" prefWidth="327.0" text="Label" />
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <Button fx:id="details_btn" blendMode="MULTIPLY" minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Details">
+      <Button fx:id="details_btn" blendMode="MULTIPLY" minWidth="80.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Details">
          <HBox.margin>
-            <Insets left="15.0" right="15.0" top="25.0" />
+            <Insets left="15.0" right="15.0" top="45.0" />
          </HBox.margin>
       </Button>
-      <Button fx:id="review_btn" blendMode="MULTIPLY" layoutX="264.0" layoutY="10.0" minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Review">
+      <Button fx:id="review_btn" blendMode="MULTIPLY" layoutX="264.0" layoutY="10.0" minWidth="80.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Review">
          <HBox.margin>
-            <Insets left="15.0" right="15.0" top="25.0" />
+            <Insets left="15.0" right="15.0" top="45.0" />
          </HBox.margin>
       </Button>
    </children>

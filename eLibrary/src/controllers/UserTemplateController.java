@@ -1,7 +1,5 @@
 package controllers;
 
-import main.App;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -42,8 +40,8 @@ public class UserTemplateController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Load default content when the application starts
-
         NavigationController.setMainLayout(mainLayout);
+        NavigationController.loadCenter("/views/user_homepage.fxml");
 
         // hover effect for menu items
         homepage_btn.setOnMouseEntered(this::hoverActivated);
@@ -60,6 +58,9 @@ public class UserTemplateController implements Initializable {
 
 
         // When each button of the Menu gets clicked the correct page the correct page appears
+       
+        profile_dropdown.setText(NavigationController.getLoggedPerson().getUsername());
+
         homepage_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -100,8 +101,7 @@ public class UserTemplateController implements Initializable {
             public void handle(ActionEvent event) {
                 NavigationController.setBook(null);
                 NavigationController.setMainLayout(null);
-                
-                App.getLibraryInstance().setLoggedUser(null);
+                NavigationController.setLoggedPerson(null);
 
                 NavigationController.loadPage("/views/home.fxml");
             }

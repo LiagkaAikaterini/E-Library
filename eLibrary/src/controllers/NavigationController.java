@@ -9,10 +9,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import models.Book;
+import models.Library;
+import models.UserBase;
 
 // this class loads the pages and keeps the current stage
 public class NavigationController {
-    
+
+    private static UserBase loggedPerson = Library.getAllUsers().get(0);
     private static Stage stage;
     private static BorderPane mainLayout;
     private static Book book;
@@ -56,5 +59,11 @@ public class NavigationController {
     }
     public static void setBook(Book book) {
         NavigationController.book = book;
+    }
+    public static UserBase getLoggedPerson() {
+        return loggedPerson;
+    }
+    public static void setLoggedPerson(UserBase loggedPerson) {
+        NavigationController.loggedPerson = loggedPerson;
     }
 }

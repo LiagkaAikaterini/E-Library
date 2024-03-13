@@ -4,21 +4,14 @@ import controllers.NavigationController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import models.*;
+import models.Library;
 
 public class App extends Application  {
-    private static Library libraryInstance;
 
-    public static Library getLibraryInstance() {
-        return libraryInstance;
-    }
-    public static void setLibraryInstance(Library libraryInstance) {
-        App.libraryInstance = libraryInstance;
-    }
     // MAYBE NOT IN INIT BUT IN START!!!!
     @Override
     public void init() {
-        libraryInstance = new Library();
+        Library.initializeData();
     }
 
     @Override
@@ -76,7 +69,6 @@ public class App extends Application  {
         }
          */
 
-        
         NavigationController.setStage(primaryStage);
         //NavigationController.loadPage("/views/home.fxml");
         NavigationController.loadPage("/views/user_template.fxml");
@@ -88,7 +80,7 @@ public class App extends Application  {
 
     @Override
     public void stop() {
-        libraryInstance.saveData();
+        Library.saveData();
     }
 
     public static void main(String[] args) {
