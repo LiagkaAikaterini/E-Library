@@ -48,7 +48,9 @@ public class ListCellBook extends ListCell<Book> {
             bookcell_title.setText(book.getTitle());
             bookcell_author.setText("by " + book.getAuthor());
             bookcell_isbn.setText("ISBN: " + book.getISBN());;
-            bookcell_rating.setText(book.getAvgRating() + "  (" + String.valueOf(book.getCopiesAvailable()) + " reviews)");;
+            bookcell_rating.setText(
+                book.getAvgRating() + "  (" + String.valueOf(book.getCopiesAvailable()) + " reviews)"
+            );
 
             setText(null);
             setGraphic(vbox);

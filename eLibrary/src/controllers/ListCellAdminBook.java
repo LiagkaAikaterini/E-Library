@@ -12,59 +12,55 @@ import javafx.scene.layout.HBox;
 
 import models.Book;
 
-public class ListCellBorrow extends ListCell<Book> {
+
+public class ListCellAdminBook extends ListCell<Book> {
 
     @FXML
     private HBox hbox;
 
     @FXML
-    private Label bookcell_title;
+    private Label title;
     @FXML
-    private Label bookcell_author;
+    private Label author;
     @FXML
-    private Label bookcell_isbn;
+    private Label isbn;
     @FXML
-    private Label bookcell_rating;
+    private Label rating;
 
     @FXML
-    private Button borrow_btn;
+    private Button modifyBook_btn;
     @FXML
-    private Button details_btn;
+    private Button deleteBook_btn;
+
 
     // button hover effect
     @FXML
     void hoverActivated(MouseEvent event) {
-        Button buttonEntered = (Button) event.getSource();
-        buttonEntered.setStyle("-fx-background-color: #8C7460");
+        modifyBook_btn.setStyle("-fx-background-color: #8C7460");
+        deleteBook_btn.setStyle("-fx-background-color: #CC0000");
     }
     @FXML
     void hoverDeactivated(MouseEvent event) {
-        Button buttonEntered = (Button) event.getSource();
-        buttonEntered.setStyle("-fx-background-color: #B69E7A");
+        modifyBook_btn.setStyle("-fx-background-color: #B69E7A");
+        deleteBook_btn.setStyle("-fx-background-color: #E74C3C");
     }
 
-    
+
     @FXML
-    void goToBookDetails(MouseEvent event) {
+    void goToModifyBook(MouseEvent event) {
         Book currBook = getItem();
 
         if (currBook != null) {
-            UserBookDetailsController.setCurrBook(currBook);
-            NavigationController.loadCenter("/views/user_bookDetails.fxml");
+            //AdminModifyBookController.setCurrBook(currBook);
+            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
         }
     }
 
     @FXML
-    void borrowBookRequest(MouseEvent event) {
-        // maybe show alert to verify borrow 
-        Book currBook = getItem();
+    void deleteBook(MouseEvent event) {
 
-        if (currBook != null) {
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
-        }
     }
-
+   
 
     @Override
     protected void updateItem(Book book, boolean empty) {
@@ -75,7 +71,7 @@ public class ListCellBorrow extends ListCell<Book> {
             setGraphic(null);
         } 
         else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_borrow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_adminUser.fxml"));
             loader.setController(this);
 
             try {
@@ -87,10 +83,10 @@ public class ListCellBorrow extends ListCell<Book> {
         
             hbox.prefWidthProperty().bind(getListView().widthProperty());
 
-            bookcell_title.setText(book.getTitle());
-            bookcell_author.setText("by " + book.getAuthor());
-            bookcell_isbn.setText("ISBN: " + book.getISBN());;
-            bookcell_rating.setText(
+            title.setText(book.getTitle());
+            author.setText("by " + book.getAuthor());
+            isbn.setText("ISBN: " + book.getISBN());;
+            rating.setText(
                 book.getAvgRating() + "  (" + String.valueOf(book.getCopiesAvailable()) + " reviews)"
             );
 
@@ -98,5 +94,4 @@ public class ListCellBorrow extends ListCell<Book> {
             setGraphic(hbox);
         }
     }
-    
 }

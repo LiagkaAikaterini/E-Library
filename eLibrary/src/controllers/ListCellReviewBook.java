@@ -40,7 +40,6 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
     // button hover effect
     @FXML
     void hoverActivated(MouseEvent event) {
-        // #8C7460
         Button buttonEntered = (Button) event.getSource();
         buttonEntered.setStyle("-fx-background-color: #8C7460");
     }
@@ -60,9 +59,6 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
             //UserBookDetailsController.setCurrBook(currBook);
             NavigationController.loadCenter("/views/user_reviewBook.fxml");
         }
-        else {
-            // ?????????????????????????????????????????????
-        }
     }
     
 
@@ -74,9 +70,6 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
         if (currBook != null) {
             UserBookDetailsController.setCurrBook(currBook);
             NavigationController.loadCenter("/views/user_bookDetails.fxml");
-        }
-        else {
-            // ?????????????????????????????????????????????
         }
     }
 
