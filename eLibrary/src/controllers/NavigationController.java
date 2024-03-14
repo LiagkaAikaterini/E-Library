@@ -14,7 +14,7 @@ import models.UserBase;
 // this class loads the pages and keeps the current stage
 public class NavigationController {
 
-    private static UserBase loggedPerson = Library.getAllUsers().get(0);
+    private static UserBase loggedPerson = Library.getAllAdmins().get(0);
     private static Stage stage;
     private static BorderPane mainLayout;
     

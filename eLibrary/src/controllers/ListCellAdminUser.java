@@ -35,11 +35,16 @@ public class ListCellAdminUser extends ListCell<User> {
     @FXML
     void hoverActivated(MouseEvent event) {
         modifyUser_btn.setStyle("-fx-background-color: #8C7460");
-        deleteUser_btn.setStyle("-fx-background-color: #CC0000");
     }
     @FXML
     void hoverDeactivated(MouseEvent event) {
         modifyUser_btn.setStyle("-fx-background-color: #B69E7A");
+    }
+    void hoverActivatedDelete(MouseEvent event) {
+        deleteUser_btn.setStyle("-fx-background-color: #CC0000");
+    }
+    @FXML
+    void hoverDeactivatedDelete(MouseEvent event) {
         deleteUser_btn.setStyle("-fx-background-color: #E74C3C");
     }
 
@@ -50,7 +55,7 @@ public class ListCellAdminUser extends ListCell<User> {
 
         if (currUser != null) {
             //AdminModifyUserController.setCurrUser(currUser);
-            NavigationController.loadCenter("/views/admin_modifyUser.fxml");
+            //NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
     }
 

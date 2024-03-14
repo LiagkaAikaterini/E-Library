@@ -30,6 +30,7 @@ public class HomepageController implements Initializable{
         // set the suitable cell type based on whether we are in User or Admin mode
         if (NavigationController.getLoggedPerson().getIsAdmin()) {
             // An Admin logged in
+            list.setCellFactory(booklist -> new ListCellAdminBook());
         }
         else {
             // A simple User logged in

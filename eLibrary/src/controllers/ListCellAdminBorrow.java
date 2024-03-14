@@ -60,7 +60,7 @@ public class ListCellAdminBorrow extends ListCell<Borrowed> {
             setGraphic(null);
         } 
         else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_adminUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_adminBorrow.fxml"));
             loader.setController(this);
 
             try {

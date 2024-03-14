@@ -35,14 +35,20 @@ public class ListCellAdminBook extends ListCell<Book> {
 
     // button hover effect
     @FXML
+    void hoverActivatedDelete(MouseEvent event) {
+        deleteBook_btn.setStyle("-fx-background-color: #CC0000");
+    }
+    @FXML
+    void hoverDeactivatedDelete(MouseEvent event) {
+        deleteBook_btn.setStyle("-fx-background-color: #E74C3C");
+    }
+    @FXML
     void hoverActivated(MouseEvent event) {
         modifyBook_btn.setStyle("-fx-background-color: #8C7460");
-        deleteBook_btn.setStyle("-fx-background-color: #CC0000");
     }
     @FXML
     void hoverDeactivated(MouseEvent event) {
         modifyBook_btn.setStyle("-fx-background-color: #B69E7A");
-        deleteBook_btn.setStyle("-fx-background-color: #E74C3C");
     }
 
 
@@ -52,7 +58,7 @@ public class ListCellAdminBook extends ListCell<Book> {
 
         if (currBook != null) {
             //AdminModifyBookController.setCurrBook(currBook);
-            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
+            //NavigationController.loadCenter("/views/admin_modifyBook.fxml");
         }
     }
 
@@ -71,7 +77,7 @@ public class ListCellAdminBook extends ListCell<Book> {
             setGraphic(null);
         } 
         else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_adminUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_adminBook.fxml"));
             loader.setController(this);
 
             try {

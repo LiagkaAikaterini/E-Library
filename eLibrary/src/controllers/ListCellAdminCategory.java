@@ -34,11 +34,17 @@ public class ListCellAdminCategory extends ListCell<Category> {
     @FXML
     void hoverActivated(MouseEvent event) {
         changeName_btn.setStyle("-fx-background-color: #8C7460");
-        deleteCategory_btn.setStyle("-fx-background-color: #CC0000");
     }
     @FXML
     void hoverDeactivated(MouseEvent event) {
         changeName_btn.setStyle("-fx-background-color: #B69E7A");
+    }
+    @FXML
+    void hoverActivatedDelete(MouseEvent event) {
+        deleteCategory_btn.setStyle("-fx-background-color: #CC0000");
+    }
+    @FXML
+    void hoverDeactivatedDelete(MouseEvent event) {
         deleteCategory_btn.setStyle("-fx-background-color: #E74C3C");
     }
 
@@ -63,7 +69,7 @@ public class ListCellAdminCategory extends ListCell<Category> {
             setGraphic(null);
         } 
         else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_adminUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/listcell_adminCategory.fxml"));
             loader.setController(this);
 
             try {

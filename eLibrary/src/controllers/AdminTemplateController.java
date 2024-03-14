@@ -14,8 +14,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 
-public class UserTemplateController implements Initializable {
-    
+public class AdminTemplateController implements Initializable {
+
     @FXML
     private BorderPane mainLayout;
 
@@ -24,16 +24,21 @@ public class UserTemplateController implements Initializable {
     @FXML
     private Button search_btn;
     @FXML
-    private Button history_btn;
+    private Button manageBooks_btn;
+    @FXML
+    private Button manageCategories_btn;
+    @FXML
+    private Button manageBorrows_btn;
+    @FXML
+    private Button manageUsers_btn;
     @FXML
     private Button help_btn;
+    
+    @FXML
+    private MenuButton username_dropdown;
+    @FXML
+    private MenuItem logout_btn;
 
-    @FXML
-    private MenuButton profile_dropdown;
-    @FXML
-    private MenuItem profile;
-    @FXML
-    private MenuItem logout;
 
     //hover effect for Buttons
     @FXML
@@ -46,15 +51,15 @@ public class UserTemplateController implements Initializable {
         Button buttonEntered = (Button) event.getSource();
         buttonEntered.setBlendMode(BlendMode.SRC_OVER);
     }
-    
+
     // hover effect for MenuButton
     @FXML
-    void hoverActivatedMenu(MouseEvent event) {
-        profile_dropdown.setBlendMode(BlendMode.MULTIPLY);
+    void hoverMenuActivated(MouseEvent event) {
+        username_dropdown.setBlendMode(BlendMode.MULTIPLY);
     }
     @FXML
-    void hoverDeactivatedMenu(MouseEvent event) {
-        profile_dropdown.setBlendMode(BlendMode.SRC_OVER);
+    void hoverMenuDeactivated(MouseEvent event) {
+        username_dropdown.setBlendMode(BlendMode.SRC_OVER);
     }
 
     // Navigation handling for buttons in the sidebar menu
@@ -67,19 +72,23 @@ public class UserTemplateController implements Initializable {
         NavigationController.loadCenter("/views/searchForm.fxml");
     }
     @FXML
-    void goToBorrowHistory(MouseEvent event) {
-        NavigationController.loadCenter("/views/user_borrowHistory.fxml");
+    void goToManageBooks(MouseEvent event) {
+        NavigationController.loadCenter("/views/admin_manageBooks.fxml");
     }
     @FXML
-    void goToHelpPage(MouseEvent event) {
-        NavigationController.loadCenter("/views/user_help.fxml");
+    void goToManageCategories(MouseEvent event) {
+        NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+    }
+    @FXML
+    void goToManageBorrows(MouseEvent event) {
+        NavigationController.loadCenter("/views/admin_manageBorrows.fxml");
+    }
+    @FXML
+    void goToManageUsers(MouseEvent event) {
+        NavigationController.loadCenter("/views/admin_manageUsers.fxml");
     }
 
-    // navigation handling for MenuItems of MenuButton - Logout handling
-    @FXML
-    void goToProfile(ActionEvent event) {
-        NavigationController.loadCenter("/views/user_profile.fxml");
-    }
+    // Logout MenuItem handling 
     @FXML
     void logout(ActionEvent event) {
         NavigationController.setMainLayout(null);
@@ -87,14 +96,13 @@ public class UserTemplateController implements Initializable {
 
         NavigationController.loadPage("/views/home.fxml");
     }
-   
 
-    // Loads default content when the application starts
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         NavigationController.setMainLayout(mainLayout);
         NavigationController.loadCenter("/views/homepage.fxml");
-        profile_dropdown.setText(NavigationController.getLoggedPerson().getUsername());
+        username_dropdown.setText(NavigationController.getLoggedPerson().getUsername());
     }
 
 }
