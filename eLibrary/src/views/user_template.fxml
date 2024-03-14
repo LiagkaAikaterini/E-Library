@@ -35,7 +35,7 @@
                </font>
             </Label>
             <Separator layoutX="142.0" orientation="VERTICAL" prefHeight="50.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="0.0" />
-            <TextField layoutX="160.0" layoutY="12.0" prefHeight="26.0" prefWidth="279.0" promptText="Search Book by Title" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.79999999999995" AnchorPane.topAnchor="12.0" />
+            <TextField fx:id="topSearchBar" layoutX="160.0" layoutY="12.0" onAction="#onEnterSearch" prefHeight="26.0" prefWidth="279.0" promptText="Search Book by Title" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.79999999999995" AnchorPane.topAnchor="12.0" />
             <MenuButton fx:id="profile_dropdown" alignment="CENTER" layoutX="487.0" layoutY="12.0" mnemonicParsing="false" onMouseEntered="#hoverActivatedMenu" onMouseExited="#hoverDeactivatedMenu" style="-fx-background-color: #EEDDC2;" text="Username" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
               <items>
                 <MenuItem fx:id="profile" mnemonicParsing="false" onAction="#goToProfile" text="View Profile" />
