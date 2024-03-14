@@ -15,42 +15,42 @@
    <children>
       <VBox prefHeight="75.0" prefWidth="480.0" HBox.hgrow="ALWAYS">
          <children>
-            <Label fx:id="bookcell_title" prefHeight="20.0" prefWidth="433.0" text="booktitle">
+            <Label fx:id="bookcell_title1" layoutX="10.0" layoutY="28.0" prefHeight="20.0" prefWidth="433.0" text="User" underline="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="bookcell_author" prefHeight="18.0" prefWidth="517.0" text="author" />
-            <Label fx:id="bookcell_isbn" prefHeight="18.0" prefWidth="410.0" text="isbn" />
-            <Label fx:id="bookcell_rating" prefHeight="18.0" prefWidth="423.0" text="rating" />
+            <Label fx:id="username" text="Username" />
+            <Label fx:id="bookcell_title" prefHeight="20.0" prefWidth="433.0" text="Borrowed Book" underline="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="booktitle" text="booktitle" />
+            <Label fx:id="isbn" prefHeight="18.0" text="isbn" />
             <HBox prefHeight="20.0" prefWidth="200.0">
                <children>
-                  <Label minWidth="115.0" prefHeight="19.0" prefWidth="115.0" text="Borrowed On :">
+                  <Label minWidth="115.0" prefHeight="19.0" prefWidth="115.0" text="Borrowed On :" underline="true">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="bookcell_borrowDate" prefHeight="18.0" prefWidth="278.0" text="Label" />
+                  <Label fx:id="borrowDate" prefHeight="18.0" prefWidth="278.0" text="Label" />
                </children>
             </HBox>
             <HBox prefHeight="20.0" prefWidth="200.0">
                <children>
-                  <Label minWidth="115.0" prefWidth="115.0" text="Return By :">
+                  <Label minWidth="115.0" prefWidth="115.0" text="Return By :" underline="true">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="bookcell_returnDate" prefHeight="20.0" prefWidth="327.0" text="Label" />
+                  <Label fx:id="returnDate" prefHeight="20.0" prefWidth="327.0" text="Label" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="details_btn" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#goToBookDetails" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Details">
-         <HBox.margin>
-            <Insets bottom="45.0" left="15.0" right="15.0" top="45.0" />
-         </HBox.margin>
-      </Button>
-      <Button fx:id="review_btn" layoutX="264.0" layoutY="10.0" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#goToReviewBook" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Review">
+      <Button fx:id="terminate_btn" layoutX="264.0" layoutY="10.0" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#terminateActiveBorrow" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #E74C3C;" text="Terminate">
          <HBox.margin>
             <Insets bottom="45.0" left="15.0" right="15.0" top="45.0" />
          </HBox.margin>

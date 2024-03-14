@@ -25,12 +25,12 @@
             <Label fx:id="bookcell_rating" prefHeight="18.0" prefWidth="423.0" text="rating" />
          </children>
       </VBox>
-      <Button fx:id="details_btn" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#goToBookDetails" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Details">
+      <Button fx:id="modifyBook_btn" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#goToModifyBook" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Modify Book">
          <HBox.margin>
             <Insets bottom="25.0" left="15.0" right="15.0" top="25.0" />
          </HBox.margin>
       </Button>
-      <Button fx:id="borrow_btn" blendMode="MULTIPLY" layoutX="264.0" layoutY="10.0" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#borrowBookRequest" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Borrow">
+      <Button fx:id="deleteBook_btn" layoutX="264.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#deleteBook" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E74C3C;" text="Delete Book">
          <HBox.margin>
             <Insets bottom="25.0" left="15.0" right="15.0" top="25.0" />
          </HBox.margin>

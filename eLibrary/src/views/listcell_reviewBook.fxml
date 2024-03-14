@@ -47,12 +47,12 @@
       </VBox>
       <Button fx:id="details_btn" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#goToBookDetails" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Details">
          <HBox.margin>
-            <Insets left="15.0" right="15.0" top="45.0" />
+            <Insets bottom="45.0" left="15.0" right="15.0" top="45.0" />
          </HBox.margin>
       </Button>
       <Button fx:id="review_btn" layoutX="264.0" layoutY="10.0" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#goToReviewBook" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #B69E7A;" text="Review">
          <HBox.margin>
-            <Insets left="15.0" right="15.0" top="45.0" />
+            <Insets bottom="45.0" left="15.0" right="15.0" top="45.0" />
          </HBox.margin>
       </Button>
    </children>

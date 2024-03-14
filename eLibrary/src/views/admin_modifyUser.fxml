@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserProfileController">
+   <content>
+      <AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;">
+         <effect>
+            <ColorAdjust saturation="-0.6" />
+         </effect>
+         <children>
+            <Label alignment="CENTER" layoutX="146.0" layoutY="518.0" text="First Name :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="username" alignment="CENTER" layoutX="277.0" layoutY="66.0" text="getusername" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+            <Label alignment="CENTER" layoutX="78.0" layoutY="548.0" text="Username :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="firstname" alignment="CENTER" layoutX="302.0" layoutY="527.0" prefHeight="18.0" text="getfirstname" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
+            <Label fx:id="lastname" alignment="CENTER" layoutX="289.0" layoutY="313.0" prefHeight="18.0" prefWidth="200.0" text="getlastname" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="270.0" />
+            <Label alignment="CENTER" layoutX="35.0" layoutY="290.0" text="Last Name  :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="255.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="100.0" layoutY="527.0" text="ID Number :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="360.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="id" alignment="CENTER" layoutX="-20.0" layoutY="456.0" prefHeight="18.0" prefWidth="200.0" text="getID" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="375.0" />
+            <Button fx:id="email_btn" layoutX="41.0" layoutY="428.0" minHeight="23.0" mnemonicParsing="false" onMouseClicked="#changeEmail" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" style="-fx-background-color: #B69E7A;" text="Change e-mail" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="530.0" />
+            <Button fx:id="id_btn" layoutX="216.0" layoutY="454.0" minHeight="23.0" mnemonicParsing="false" onMouseClicked="#changeID" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" style="-fx-background-color: #B69E7A;" text="Change ID" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="425.0" />
+            <Button fx:id="lastname_btn" layoutX="174.0" layoutY="367.0" minHeight="23.0" mnemonicParsing="false" onMouseClicked="#changeLastName" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" style="-fx-background-color: #B69E7A;" text="Change Last Name" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="320.0" />
+            <Button fx:id="firstname_btn" layoutX="115.0" layoutY="429.0" minHeight="15.0" mnemonicParsing="false" onMouseClicked="#changeFirstName" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" style="-fx-background-color: #B69E7A;" text="Change First Name" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="215.0" />
+            <Button fx:id="username_btn" layoutX="298.0" layoutY="242.0" maxHeight="40.0" minHeight="23.0" mnemonicParsing="false" onMouseClicked="#changeUsername" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" prefWidth="114.0" style="-fx-background-color: #B69E7A;" text="Change Username" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="110.0" />
+            <TextField fx:id="username_input" layoutX="209.0" layoutY="81.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new Username" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="80.0" />
+            <TextField fx:id="firstaname_input" layoutX="7.0" layoutY="176.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new first name" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="185.0" />
+            <Label alignment="CENTER" layoutX="28.0" layoutY="381.0" text="Birth Date :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="675.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="23.0" layoutY="598.0" text="Address :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="570.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="address" alignment="CENTER" layoutX="174.0" layoutY="557.0" prefHeight="18.0" prefWidth="200.0" text="address" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="585.0" />
+            <Label fx:id="email" alignment="CENTER" layoutX="34.0" layoutY="519.2" prefHeight="18.0" prefWidth="88.0" text="getemail" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="480.0" />
+            <Label fx:id="birthday" alignment="CENTER" layoutX="424.0" layoutY="358.0" prefHeight="18.0" prefWidth="200.0" text="getbirthday" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="690.0" />
+            <Label alignment="CENTER" layoutX="49.0" layoutY="527.0" text="E-mail :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="465.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="address_btn" layoutX="71.0" layoutY="575.0" minHeight="23.0" mnemonicParsing="false" onMouseClicked="#changeAddress" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" style="-fx-background-color: #B69E7A;" text="Change Address" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="635.0" />
+            <Button fx:id="birthday_btn" layoutX="23.0" layoutY="630.0" minHeight="23.0" mnemonicParsing="false" onMouseClicked="#changeBirthDate" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" style="-fx-background-color: #B69E7A;" text="Change Birth Date" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="740.0" />
+            <Button fx:id="deleteUser_btn" layoutX="206.0" layoutY="654.0" minHeight="40.0" mnemonicParsing="false" onMouseClicked="#deleteUser" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="40.0" prefWidth="114.0" style="-fx-background-color: #E74C3C;" text="DELETE USER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="790.0">
+               <effect>
+                  <ColorAdjust brightness="-0.45" contrast="0.6" />
+               </effect>
+            </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="3.0" prefHeight="34.0" prefWidth="624.0" text="Modify User Information" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="lastname_input" layoutX="17.0" layoutY="195.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new last name" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="290.0" />
+            <TextField fx:id="id_input" layoutX="17.0" layoutY="300.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new ID number" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="395.0" />
+            <TextField fx:id="email_input" layoutX="17.0" layoutY="405.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new e-mail" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="500.0" />
+            <TextField fx:id="address_input" layoutX="17.0" layoutY="510.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new home address" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="605.0" />
+            <DatePicker fx:id="birthday_input" layoutX="146.0" layoutY="705.0" prefHeight="26.0" prefWidth="165.0" promptText="Pick new birth date" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="710.0" />
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
