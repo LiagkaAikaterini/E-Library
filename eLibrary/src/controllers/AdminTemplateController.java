@@ -1,6 +1,7 @@
 package controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -9,9 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import models.Book;
+import models.UserBase;
 
 
 public class AdminTemplateController implements Initializable {
@@ -33,6 +37,9 @@ public class AdminTemplateController implements Initializable {
     private Button manageUsers_btn;
     @FXML
     private Button help_btn;
+    
+    @FXML
+    private TextField topSearchBar;
     
     @FXML
     private MenuButton username_dropdown;
@@ -86,6 +93,29 @@ public class AdminTemplateController implements Initializable {
     @FXML
     void goToManageUsers(MouseEvent event) {
         NavigationController.loadCenter("/views/admin_manageUsers.fxml");
+    }
+    @FXML
+    void goToHelpPage(MouseEvent event) {
+        NavigationController.loadCenter("/views/admin_help.fxml");
+    }
+
+
+    @FXML
+    void onEnterSearch(ActionEvent event) { 
+        String title = topSearchBar.getText().replaceAll("\\s+", " ");
+        List<Book> searchRes = UserBase.searchByTitle(title);
+
+        if (searchRes == null) {
+            // no input
+            System.out.println("NO INPUT");
+            //NavigationController.loadCenter("/views/homepage.fxml");
+        }
+        else {
+            System.out.println("DONE");
+            SearchResultController.setResult(searchRes);
+            NavigationController.loadPage("/views/admin_template.fxml");
+            NavigationController.loadCenter("/views/searchResult.fxml");
+        }
     }
 
     // Logout MenuItem handling 

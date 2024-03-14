@@ -77,6 +77,7 @@ public class SearchFormController {
         else {
             System.out.println("DONE");
             SearchResultController.setResult(searchRes);
+            NavigationController.loadCenter("/views/searchResult.fxml");
         }
         
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

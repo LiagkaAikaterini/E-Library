@@ -1,6 +1,7 @@
 package controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -9,9 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import models.Book;
+import models.UserBase;
 
 
 public class UserTemplateController implements Initializable {
@@ -27,6 +31,9 @@ public class UserTemplateController implements Initializable {
     private Button history_btn;
     @FXML
     private Button help_btn;
+
+    @FXML
+    private TextField topSearchBar;
 
     @FXML
     private MenuButton profile_dropdown;
@@ -73,6 +80,26 @@ public class UserTemplateController implements Initializable {
     @FXML
     void goToHelpPage(MouseEvent event) {
         NavigationController.loadCenter("/views/user_help.fxml");
+    }
+
+
+    // top search bar that is contained on the upper menu handled
+    @FXML
+    void onEnterSearch(ActionEvent event) { 
+        String title = topSearchBar.getText().replaceAll("\\s+", " ");
+        List<Book> searchRes = UserBase.searchByTitle(title);
+
+        if (searchRes == null) {
+            // no input
+            System.out.println("NO INPUT");
+            //NavigationController.loadCenter("/views/homepage.fxml");
+        }
+        else {
+            System.out.println("DONE");
+            SearchResultController.setResult(searchRes);
+            NavigationController.loadPage("/views/user_template.fxml");
+            NavigationController.loadCenter("/views/searchResult.fxml");
+        }
     }
 
     // navigation handling for MenuItems of MenuButton - Logout handling
