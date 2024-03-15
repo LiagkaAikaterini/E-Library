@@ -5,11 +5,14 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
+import models.Library;
+import models.UserBase;
 
 public class LoginController implements Initializable {
 
@@ -50,7 +53,24 @@ public class LoginController implements Initializable {
 
     @FXML
     void login(MouseEvent event) {
-        //????????????????????????????????????????????????????????????????
+        String username = username_input.getText();
+        String password = password_input.getText();
+
+        UserBase existingUser = Library.authenticateUser(username, password);
+
+        if (existingUser == null) {
+            NavigationController.showAlert(AlertType.ERROR, "User does not exist", "/views/login.fxml");
+        }
+        else {
+            NavigationController.setLoggedPerson(existingUser);
+            
+            if (existingUser.getIsAdmin()) {
+                NavigationController.loadPage("/views/admin_template.fxml");
+            }
+            else {
+                NavigationController.loadPage("/views/user_template.fxml");
+            }
+        }
     }
     
     

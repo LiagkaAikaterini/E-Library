@@ -50,6 +50,22 @@ public class Library {
         return null;
     }
 
+    public static UserBase authenticateUser(String username, String password) {
+        for (User user : allUsers) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+
+        for (Admin admin : allAdmins) {
+            if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
+                return admin;
+            }
+        }
+
+        return null;
+    }
+
 
     public static Book findBook(String isbn) {
         List<Book> books = getAllBooks();

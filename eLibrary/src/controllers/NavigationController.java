@@ -5,16 +5,16 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import models.Library;
 import models.UserBase;
 
 // this class loads the pages and keeps the current stage
 public class NavigationController {
 
-    private static UserBase loggedPerson = Library.getAllAdmins().get(0);
+    private static UserBase loggedPerson;
     private static Stage stage;
     private static BorderPane mainLayout;
     
@@ -37,6 +37,30 @@ public class NavigationController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static void showAlert(AlertType alertType, String message, String reloadPagePath) {
+        Alert customAlert = new Alert(alertType);
+        //customAlert.setAlertType(alertType);
+        //customAlert.setTitle(title);
+        customAlert.setHeaderText(null);
+        customAlert.setContentText(message);
+
+        if (loggedPerson == null) { 
+            // not logged in -> general pages
+            customAlert.setOnCloseRequest(e -> {
+                loadPage(reloadPagePath);
+            });
+        }
+        else {
+            // logged in -> i have a navigation menu template
+            customAlert.setOnCloseRequest(e -> {
+                loadCenter(reloadPagePath);
+            });
+        }
+
+        customAlert.show();
     }
 
 

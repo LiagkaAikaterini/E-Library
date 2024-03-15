@@ -91,12 +91,27 @@ public class App extends Application  {
          }
 
          */
+        System.out.println();
+        System.out.println("USERS");
+        System.out.println();
+        for (User user : Library.getAllUsers()) {
+            System.out.println(user.getUsername());
+            System.out.println(user.getPassword());
+        }
+
+        System.out.println();
+        System.out.println("ADMINS");
+        System.out.println();
+        for (Admin user : Library.getAllAdmins()) {
+            System.out.println(user.getUsername());
+            System.out.println(user.getPassword());
+        }
 
         NavigationController.setStage(primaryStage);
-        //NavigationController.loadPage("/views/home.fxml");
+        NavigationController.loadPage("/views/home.fxml");
 
         //NavigationController.loadPage("/views/user_template.fxml");
-        NavigationController.loadPage("/views/admin_template.fxml");
+        //NavigationController.loadPage("/views/admin_template.fxml");
 
         /*
         Book b1 = new Book("book21", "author1", "publisher1",  "hey", java.time.LocalDate.now(), 3);
