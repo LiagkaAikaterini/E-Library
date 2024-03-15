@@ -46,6 +46,7 @@ public class DataStorageManager {
         try {
             File file = new File(filePath);
             
+            /*
             // case if there is no data yet
             if (file.exists()) {
                 // if file is empty return empty array list
@@ -54,6 +55,7 @@ public class DataStorageManager {
                     return dataList;
                 }
             }
+            */
 
             FileInputStream fileIn = new FileInputStream(file);
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -73,7 +75,13 @@ public class DataStorageManager {
             System.out.println("Class not found");
             c.printStackTrace();
         }
-        return dataList;
+
+        if (dataList == null) {
+            return new ArrayList<>();
+        }
+        else {
+            return dataList;
+        }
     }
 
 }

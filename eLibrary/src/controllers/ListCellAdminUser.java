@@ -9,7 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-
+import models.Admin;
+import models.Library;
 import models.User;
 
 
@@ -40,6 +41,7 @@ public class ListCellAdminUser extends ListCell<User> {
     void hoverDeactivated(MouseEvent event) {
         modifyUser_btn.setStyle("-fx-background-color: #B69E7A");
     }
+    @FXML
     void hoverActivatedDelete(MouseEvent event) {
         deleteUser_btn.setStyle("-fx-background-color: #CC0000");
     }
@@ -54,14 +56,20 @@ public class ListCellAdminUser extends ListCell<User> {
         User currUser = getItem();
 
         if (currUser != null) {
-            //AdminModifyUserController.setCurrUser(currUser);
-            //NavigationController.loadCenter("/views/admin_modifyUser.fxml");
+            AdminModifyUserController.setCurrUser(currUser);
+            NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
     }
 
     @FXML
     void deleteUser(MouseEvent event) {
-        // ???????????????????????????????????????????????????????????????????????
+        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
+        User currCellUser = getItem();
+
+        if (admin != null){
+            admin.deleteUser(currCellUser);
+            NavigationController.loadCenter("/views/admin_manageUsers.fxml");
+        }
     }
 
 

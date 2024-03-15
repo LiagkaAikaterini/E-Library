@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminManageUsersController">
    <effect>
       <ColorAdjust saturation="-0.6" />
    </effect>

@@ -138,21 +138,22 @@ public class Library {
     }
     
 
-    /*
-    public Admin getCurrAdmin() {
-        return currAdmin;
-    }
-    public void setCurrAdmin(Admin currAdmin) {
-        this.currAdmin = currAdmin;
+    public static void createCategory(String newCategoryName) {
+        try {
+            for (Category category : allCategories) {
+                if (category.getName().equals(newCategoryName)) {
+                    throw new Exception("This category already exists, please enter a new unique category name");
+                }
+            }
+            Category cat = new Category(newCategoryName);
+            addCategory(cat);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public User getCurrUser() {
-        return currUser;
-    }
-    public void setCurrUser(User currUser) {
-        this.currUser = currUser;
-    }
- */
+
     // getters setters - add - remove
     public static List<Admin> getAllAdmins() {
         return allAdmins;

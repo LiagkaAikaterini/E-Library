@@ -10,8 +10,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-
+import models.Admin;
 import models.Category;
+import models.Library;
 
 
 public class ListCellAdminCategory extends ListCell<Category> {
@@ -51,12 +52,25 @@ public class ListCellAdminCategory extends ListCell<Category> {
 
     @FXML
     void changeCategoryName(MouseEvent event) {
-        //??????????????????????????????????????????????????????
+        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
+        String currCellCategoryName = getItem().getName();
+        String newCategoryName = newName_input.getText().replaceAll("\\s+", " ");
+
+        if (admin != null){
+            admin.changeCategoryName(currCellCategoryName, newCategoryName);
+            NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+        }
     }
 
     @FXML
     void deleteCategory(MouseEvent event) {
-        //??????????????????????????????????????????????????????????
+        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
+        Category currCellCategory = getItem();
+
+        if (admin != null){
+            admin.deleteCategory(currCellCategory);
+            NavigationController.loadCenter("/views/admin_manageBooks.fxml");
+        }
     }
 
     

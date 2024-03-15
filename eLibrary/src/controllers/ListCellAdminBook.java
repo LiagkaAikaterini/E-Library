@@ -9,8 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-
+import models.Admin;
 import models.Book;
+import models.Library;
 
 
 public class ListCellAdminBook extends ListCell<Book> {
@@ -57,14 +58,20 @@ public class ListCellAdminBook extends ListCell<Book> {
         Book currBook = getItem();
 
         if (currBook != null) {
-            //AdminModifyBookController.setCurrBook(currBook);
-            //NavigationController.loadCenter("/views/admin_modifyBook.fxml");
+            AdminModifyBookController.setCurrBook(currBook);
+            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
         }
     }
 
     @FXML
     void deleteBook(MouseEvent event) {
+        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
+        Book currCellBook = getItem();
 
+        if (admin != null){
+            admin.deleteBook(currCellBook);
+            NavigationController.loadCenter("/views/admin_manageBooks.fxml");
+        }
     }
    
 

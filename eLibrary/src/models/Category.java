@@ -9,8 +9,18 @@ public class Category implements Serializable {
     private List<String> booksISBN;
 
     public Category(String name) {
-        this.name  = name;
-        this.booksISBN  = new ArrayList<String>();
+        this.name = name;
+        this.booksISBN = new ArrayList<String>();
+    }
+
+    public List<Book> getAllCategoryBooks() {
+        List<Book> books = new ArrayList<Book>();
+
+        for (String isbn : booksISBN) {
+            books.add(Library.findBook(isbn));
+        }
+
+        return books;
     }
 
     public void addToCategoryBooks(String bookIsbn) {

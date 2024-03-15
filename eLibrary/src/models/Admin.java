@@ -41,10 +41,8 @@ public class Admin extends UserBase {
             }
     }
 
-    public void deleteCategory(String categoryName) {
+    public void deleteCategory(Category category) {
         try{
-            Category category = Library.findCategory(categoryName);
-            
             for (String isbn : category.getBooksISBN()) {
                 Book book = Library.findBook(isbn);
                 deleteBook(book);

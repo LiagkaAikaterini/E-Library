@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-
+import models.Admin;
 import models.Borrowed;
 import models.Library;
 
@@ -47,7 +47,13 @@ public class ListCellAdminBorrow extends ListCell<Borrowed> {
 
     @FXML
     void terminateActiveBorrow(MouseEvent event) {
-        // ?????????????????????????????????????????????????????????/
+        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
+        Borrowed currCellActiveBorrow = getItem();
+
+        if (admin != null){
+            admin.terminateBorrow(currCellActiveBorrow);
+            NavigationController.loadCenter("/views/admin_manageBorrows.fxml");
+        }
     }
 
 

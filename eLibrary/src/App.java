@@ -98,9 +98,19 @@ public class App extends Application  {
         //NavigationController.loadPage("/views/user_template.fxml");
         NavigationController.loadPage("/views/admin_template.fxml");
 
+        /*
+        Book b1 = new Book("book21", "author1", "publisher1",  "hey", java.time.LocalDate.now(), 3);
+        Book b2 = new Book("book2222", "author2", "publisher2", "bitch", java.time.LocalDate.now(), 5);
+
+        Library.getAllCategories().get(0).addToCategoryBooks(b1.getISBN());
+        Library.getAllCategories().get(0).addToCategoryBooks(b2.getISBN());
+        Library.addBook(b1);
+        Library.addBook(b2);
         
+        Platform.exit();
+        */
         
-        //Platform.exit();
+    
     }
 
     @Override

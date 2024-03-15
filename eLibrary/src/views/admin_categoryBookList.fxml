@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminCategoryBookListController">
+   <effect>
+      <ColorAdjust />
+   </effect>
+   <children>
+      <Label fx:id="categoryName" layoutX="197.0" layoutY="6.4" minWidth="230.0" prefHeight="28.0" prefWidth="230.0" text="CategoryName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ListView id="listView_searchResult" fx:id="bookList" blendMode="MULTIPLY" focusTraversable="false" layoutX="11.2" layoutY="71.2" minHeight="-Infinity" prefWidth="430.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
+         <effect>
+            <ColorAdjust brightness="-0.02" />
+         </effect>
+      </ListView>
+   </children>
+</AnchorPane>

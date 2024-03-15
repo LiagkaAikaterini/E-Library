@@ -1,43 +1,43 @@
 package controllers;
 
-import java.net.URL;
-import java.util.*;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import models.Book;
-import models.Library;
+
 
 public class AdminCategoryBookListController {
 
     @FXML
     private ListView<Book> bookList;
-
     @FXML
-    private Label category;
+    private Label categoryName;
 
 
-    public void setBookList(List<Book> bookList) {
-        ObservableList<Book> studentObservableList = FXCollections.observableArrayList();
+    public void setBookList(List<Book> allCatBooks) {
+        ObservableList<Book> observableBookList = FXCollections.observableArrayList();
 
-        for (Book book : Library.getAllBooks()) {
-            studentObservableList.add(book);
+        for (Book book : allCatBooks) {
+            observableBookList.add(book);
         }
 
+        // calculate listView height according to Listcell height so that all books can be shown whith no scrollbar
+        double height = observableBookList.size() * 80 + 30;
+        bookList.setPrefHeight(height);
+
         // show top 5 books
-        this.bookList.setItems(studentObservableList);
-        this.bookList.setCellFactory(booklist -> new ListCellBook());
+        bookList.setItems(observableBookList);
+        bookList.setCellFactory(booklist -> new ListCellAdminBook());
+        
     }
-    public void setCategory(String category) {
-        this.category.setText(category);
+
+    public void setCategoryName(String category) {
+        this.categoryName.setText(category);
     }
-    
-
-
 
 }
 
