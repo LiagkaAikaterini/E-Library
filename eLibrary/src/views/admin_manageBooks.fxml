@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="333.0" prefWidth="451.0" style="-fx-background-color: #EEDDC2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminManageBooksController">
    <effect>
@@ -23,5 +23,6 @@
             <VBox fx:id="vbox" style="-fx-background-color: #EEDDC2;" />
          </content>
       </ScrollPane>
+      <Button fx:id="addNewBook" layoutX="331.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goToCreateBook" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefWidth="118.0" style="-fx-background-color: #B69E7A;" text="Add new Book" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>

@@ -11,7 +11,7 @@ public class Admin extends UserBase {
     }
 
 
-    public void createBook(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) throws Exception {
+    public void createBook(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) throws Exception {
         Book newBook = new Book(title, author, publisher, ISBN, datePublished, copiesAvailable);   
         Library.addBook(newBook);
 
@@ -195,7 +195,7 @@ public class Admin extends UserBase {
     }
 
 
-    // modify User information
+    // modify User information - NOT PASSWORD
     // NOT BORROW HISTORY LISTS
     public void changeUserUsername(User user, String newUsername) {
         try {
@@ -221,10 +221,6 @@ public class Admin extends UserBase {
         catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void changeUserPassword(User user, String password) {
-        user.setPassword(password);
     }
 
     public void changeUserFirstname(User user, String firstname) {

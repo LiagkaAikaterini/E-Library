@@ -6,7 +6,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import models.Category;
@@ -19,6 +22,23 @@ public class AdminManageBooksController implements Initializable{
     private ScrollPane scrollpane;
     @FXML
     private VBox vbox;
+    @FXML
+    private Button addNewBook;
+
+    //hover effect for Buttons
+    @FXML
+    void hoverActivated(MouseEvent event) {
+        addNewBook.setBlendMode(BlendMode.MULTIPLY);
+    }
+    @FXML
+    void hoverDeactivated(MouseEvent event) {
+        addNewBook.setBlendMode(BlendMode.SRC_OVER);
+    }
+
+    @FXML
+    void goToCreateBook(MouseEvent event) {
+        NavigationController.loadCenter("/views/admin_createBook.fxml");
+    }
 
 
     @Override

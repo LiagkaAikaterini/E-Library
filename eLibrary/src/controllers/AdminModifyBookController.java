@@ -123,7 +123,12 @@ public class AdminModifyBookController implements Initializable {
     
     @FXML
     void changeCategory(MouseEvent event) {
-
+        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
+        if (admin != null) {
+            String newCat = category_input.getText().replaceAll("\\s+", " ");
+            admin.addBookToCategory(currBook, newCat);
+            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
+        }
     }
 
     @FXML
