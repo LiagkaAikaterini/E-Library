@@ -14,6 +14,7 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import models.Admin;
 import models.Book;
+import models.Category;
 import models.Library;
 
 
@@ -194,14 +195,17 @@ public class AdminModifyBookController implements Initializable {
     }
 
     private void setCategoryLabel() {
-        String cat = Library.categoryOfBook(currBook.getISBN());
+        Category cat = Library.categoryOfBook(currBook.getISBN());
+        
         
         if (cat == null) {
             category.setText(null);
         }
         else {
-            category.setText(cat);
+            String catName = cat.getName();
+            category.setText(catName);
         }
+        
     }
 
     public static Book getCurrBook() {

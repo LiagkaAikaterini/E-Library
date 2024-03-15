@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import models.Book;
+import models.Category;
 import models.Library;
 import models.Book.Review;
 
@@ -88,13 +89,14 @@ public class UserBookDetailsController implements Initializable {
     }
 
     private void setCategoryLabel(Book book) {
-        String cat = Library.categoryOfBook(book.getISBN());
+        Category cat = Library.categoryOfBook(book.getISBN());
         
         if (cat == null) {
             category.setText(null);
         }
         else {
-            category.setText(cat);
+            String catName = cat.getName();
+            category.setText(catName);
         }
     }
 

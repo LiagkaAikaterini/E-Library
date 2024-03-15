@@ -13,6 +13,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import models.Book;
+import models.Category;
 import models.Library;
 
 public class UserReviewBookController implements Initializable {
@@ -80,13 +81,14 @@ public class UserReviewBookController implements Initializable {
     }
 
     private void bookCategoryDisplay() {
-        String cat = Library.categoryOfBook(currBook.getISBN());
+        Category cat = Library.categoryOfBook(currBook.getISBN());
         
         if (cat == null) {
             category.setText(null);
         }
         else {
-            category.setText(cat);
+            String catName = cat.getName();
+            category.setText(catName);
         }
     }
 

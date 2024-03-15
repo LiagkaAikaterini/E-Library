@@ -3,6 +3,9 @@ package models;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import exceptions.InvalidUserInformationException;
 
 
 public class User extends UserBase{
@@ -14,8 +17,31 @@ public class User extends UserBase{
     private LocalDate birthDate;
     private List<String> borrowHistory;
 
-    public User(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) {
+    public User(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) throws Exception {
         super(username, password, false);
+        
+        // check if idNum is unique
+        if (!Library.isIdNumUnique(idNum)) {
+            throw new InvalidUserInformationException("This ID number is already used by another registered user. Please enter a unique ID Number");
+        }
+
+        //check if email has the correct format something@domain.end
+        Pattern correctEmailFormat = Pattern.compile("^[A-Za-z]\\w{5,29}$");
+        
+        if (!correctEmailFormat.matcher(email).matches()) {
+            throw new InvalidUserInformationException("Invalid E-mail Format: Please enter a valid e-mail");
+        }
+        
+        // check if email is unique
+        if (!Library.isEmailUnique(email)) {
+            throw new InvalidUserInformationException("This e-mail is already used by another registered user. Please enter another email");
+        }
+
+        // birthday cannot be future date
+        if (birthDate.isAfter(java.time.LocalDate.now())) {
+            throw new Exception("Future Date");
+        }
+        
         this.firstName = firstName;
         this.lastName = lastName;
         this.idNum = idNum;
@@ -84,11 +110,13 @@ public class User extends UserBase{
                 throw new Exception("You have not borrowed this book yet. Please borrow the book before you try to review it.");
             }
 
-        boolean res;
+            boolean res;
+            /*
             if (rating == 0) {
                 res = book.addReview(this.getUsername(), comment);
             }
-            else if (comment.isEmpty()) {
+             */
+            if (comment.isEmpty()) {
                 res = book.addReview(this.getUsername(), rating);
             }
             else{
@@ -129,14 +157,31 @@ public class User extends UserBase{
     public String getIdNum() {
         return idNum;
     }
-    public void setIdNum(String idNum) {
+    public void setIdNum(String idNum) throws Exception {
+        // check if idNum is unique
+        if (!Library.isIdNumUnique(idNum)) {
+            throw new InvalidUserInformationException("This ID number is already used by another registered user. Please enter a unique ID Number");
+        }
+
         this.idNum = idNum;
     }
 
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email) {
+    public void setEmail(String email) throws Exception {
+        //check if email has the correct format something@domain.end
+        Pattern correctEmailFormat = Pattern.compile("^[A-Za-z]\\w{5,29}$");
+        
+        if (!correctEmailFormat.matcher(email).matches()) {
+            throw new InvalidUserInformationException("Invalid E-mail Format: Please enter a valid e-mail");
+        }
+        
+        // check if email is unique
+        if (!Library.isEmailUnique(email)) {
+            throw new InvalidUserInformationException("This e-mail is already used by another registered user. Please enter another email");
+        }
+
         this.email = email;
     }
 
@@ -150,7 +195,10 @@ public class User extends UserBase{
     public LocalDate getBirthDate() {
         return birthDate;
     }
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(LocalDate birthDate) throws Exception {
+        if (birthDate.isAfter(java.time.LocalDate.now())) {
+            throw new Exception("Future Date");
+        }
         this.birthDate = birthDate;
     }
 

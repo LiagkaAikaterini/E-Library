@@ -23,7 +23,11 @@ public class Book implements Serializable{
         private int rating;
         private String comment;
     
-        public Review(String username, int rating, String comment) {
+        public Review(String username, int rating, String comment) throws Exception {
+            if ( !(rating >= 1 && rating <= 5) ) {
+                throw new Exception("The rating should be between 1 and 5");
+            }
+
             this.username = username;
             this.rating = rating;
             this.comment = comment;
@@ -41,7 +45,7 @@ public class Book implements Serializable{
         }
         public void setRating(int rating) {
             try {
-                if ( !(rating >= 0 && rating <= 5) ) {
+                if ( !(rating >= 1 && rating <= 5) ) {
                     throw new Exception("The rating should be between 1 and 5");
                 }
     
@@ -61,7 +65,17 @@ public class Book implements Serializable{
     }
 
 
-    public Book(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable) {
+    public Book(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable) throws Exception {
+        // check if isbn available - unique
+        if (Library.findBook(ISBN) != null) {
+            throw new Exception("Not unique isbn - book already exists with this isbn");
+        }
+
+        // date published cannot be in the future 
+        if (datePublished.isAfter(java.time.LocalDate.now())) {
+            throw new Exception("Future Date");
+        }
+
         this.title = title;
         this.author = author;
         this.publisher = publisher;
@@ -87,10 +101,10 @@ public class Book implements Serializable{
             int count = 0;
             int sum = 0;
             for (Review rev : this.reviews) {
-                if (rev.rating != 0) {
+                //if (rev.rating != 0) {
                     sum += rev.rating;
                     count++;
-                }
+                //}
             }
 
             /* check if all the reviews have only comments and no ratings 
@@ -101,7 +115,6 @@ public class Book implements Serializable{
             */
 
             this.avgRating = (sum/count);
-            return;
         }
         catch(ArithmeticException e) {
             // IF ONLY DIVISION BY ZERO - DO NOT KNOW 
@@ -118,11 +131,6 @@ public class Book implements Serializable{
 
     public boolean addReview(String username, int rating, String comment) {
         try {
-            // !!!!!!!!!!!!!!!!!!! WHAT HAPPENS IF HE DELETES RATING - 0 SHOULD BE ALLOWED
-            //check if rating valid
-            if ( !(rating >= 0 && rating <= 5) ) {
-                throw new Exception("invalid rating");   
-            }
 
             // if this user has already reviewed that book change the existing review
             for (Review rev: this.reviews) {
@@ -149,11 +157,6 @@ public class Book implements Serializable{
 
     public boolean addReview(String username, int rating) {
         try {
-            // !!!!!!!!!!!!!!!!!!! WHAT HAPPENS IF HE DELETES RATING - 0 SHOULD BE ALLOWED
-            //check if rating valid
-            if ( !(rating >= 0 && rating <= 5) ) {
-                throw new Exception("invalid rating");   
-            }
 
             // if this user has already reviewed that book change the existing review
             for (Review rev: this.reviews) {
@@ -176,6 +179,7 @@ public class Book implements Serializable{
                     
     }
 
+    /*
     public boolean addReview(String username, String comment) {
         // if this user has already reviewed that book change the existing review
         try {    
@@ -195,6 +199,7 @@ public class Book implements Serializable{
         }
             
     }
+ */
 
     public void deleteReviewsOfUser(String username) {
         for (Review rev : this.reviews){
@@ -245,7 +250,7 @@ public class Book implements Serializable{
             return;
         }
 
-        if ( !Library.isIsbnAvailable(iSBN) ) {
+        if ( Library.findBook(iSBN) != null ) {
             throw new Exception("This isbn is not available. Please enter unique isbn.");
         }
 
@@ -255,7 +260,10 @@ public class Book implements Serializable{
     public LocalDate getDatePublished() {
         return datePublished;
     }
-    public void setDatePublished(LocalDate datePublished) {
+    public void setDatePublished(LocalDate datePublished) throws Exception {
+        if (datePublished.isAfter(java.time.LocalDate.now())) {
+            throw new Exception("Future Date");
+        }
         this.datePublished = datePublished;
     }
 

@@ -2,14 +2,17 @@ package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
+import models.Library;
 
 public class RegisterAdminController implements Initializable{
 
@@ -54,7 +57,24 @@ public class RegisterAdminController implements Initializable{
 
     @FXML
     void signup(MouseEvent event) {
-        username_input.getText();
+        String username = username_input.getText();
+        String password = password_input.getText();
+        String passwordConfirmation = password2_input.getText();
+        String libraryPassword = libraryPassword_input.getText();
+
+        // check username 
+        
+
+        // check password
+        if (!password.equals(passwordConfirmation)) {
+            NavigationController.showAlert(
+                AlertType.ERROR, 
+                "The password", 
+                "/views/register_admin.fxml"
+            );
+            return;
+        }
+
     }
 
     

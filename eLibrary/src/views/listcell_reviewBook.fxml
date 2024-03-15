@@ -9,7 +9,7 @@
 
 <HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="75.0" prefWidth="480.0" HBox.hgrow="ALWAYS">
+      <VBox prefWidth="480.0" HBox.hgrow="ALWAYS">
          <children>
             <Label fx:id="bookcell_title" prefHeight="20.0" prefWidth="433.0" text="booktitle">
                <font>

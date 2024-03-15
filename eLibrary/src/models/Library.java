@@ -122,9 +122,9 @@ public class Library {
         return result;
     }
 
-    public static boolean isUsernameAvailable(String username) {
+    public static boolean isIdNumUnique(String idNum) {
         for (User user : allUsers) {
-            if ( username.equals(user.getUsername()) ) {
+            if ( idNum.equals(user.getIdNum()) ) {
                 return false;
             }
         }
@@ -132,9 +132,9 @@ public class Library {
         return true;
     }
 
-    public static boolean isIsbnAvailable(String isbn) {
-        for (Book book : allBooks) {
-            if ( isbn.equals(book.getISBN()) ) {
+    public static boolean isEmailUnique(String email) {
+        for (User user : allUsers) {
+            if ( email.equals(user.getEmail()) ) {
                 return false;
             }
         }
@@ -142,11 +142,11 @@ public class Library {
         return true;
     }
 
-    public static String categoryOfBook(String isbn) {
+    public static Category categoryOfBook(String isbn) {
         for (Category category : allCategories) {
             List<String> categoryBooks = category.getBooksISBN();
             if ( categoryBooks.contains(isbn) ) {
-                return category.getName();
+                return category;
             }
         }
 

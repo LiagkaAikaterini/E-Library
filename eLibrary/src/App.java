@@ -91,6 +91,21 @@ public class App extends Application  {
          }
 
          */
+        System.out.println();
+        System.out.println("USERS");
+        System.out.println();
+        for (User user : Library.getAllUsers()) {
+            System.out.println(user.getUsername());
+            System.out.println(user.getPassword());
+        }
+
+        System.out.println();
+        System.out.println("ADMINS");
+        System.out.println();
+        for (Admin user : Library.getAllAdmins()) {
+            System.out.println(user.getUsername());
+            System.out.println(user.getPassword());
+        }
 
         NavigationController.setStage(primaryStage);
         NavigationController.loadPage("/views/home.fxml");

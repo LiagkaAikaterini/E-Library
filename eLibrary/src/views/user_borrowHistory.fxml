@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserBorrowHistoryController">
    <content>
       <AnchorPane minWidth="450.0" prefHeight="333.0" prefWidth="450.0" style="-fx-background-color: #EEDDC2;">
@@ -20,7 +19,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ListView fx:id="activeBorrowsList" blendMode="MULTIPLY" focusTraversable="false" layoutX="14.0" layoutY="39.2" maxHeight="258.0" minWidth="-Infinity" prefHeight="258.0" prefWidth="430.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
+            <ListView fx:id="activeBorrowsList" blendMode="MULTIPLY" focusTraversable="false" layoutX="14.0" layoutY="39.2" maxHeight="258.0" minWidth="-Infinity" prefHeight="260.0" prefWidth="430.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
                <effect>
                   <ColorAdjust brightness="-0.02" />
                </effect>

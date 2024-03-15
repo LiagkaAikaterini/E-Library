@@ -43,8 +43,6 @@ public class AdminManageBooksController implements Initializable{
             contr.setBookList(category.getAllCategoryBooks());
 
             vbox.getChildren().add(anchorPane); // Add AnchorPane to the VBox
-
-            
         }
         catch(Exception e) {
             e.printStackTrace();

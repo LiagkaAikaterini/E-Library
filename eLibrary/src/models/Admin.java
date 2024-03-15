@@ -6,12 +6,12 @@ import java.util.List;
 
 public class Admin extends UserBase {
 
-    public Admin(String username, String password) {
+    public Admin(String username, String password) throws Exception {
         super(username, password, true);
     }
 
 
-    public void createBook(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) {
+    public void createBook(String title, String author, String publisher, String summary, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) throws Exception {
         Book newBook = new Book(title, author, publisher, ISBN, datePublished, copiesAvailable);   
         Library.addBook(newBook);
 
@@ -22,8 +22,16 @@ public class Admin extends UserBase {
 
     public void addBookToCategory(Book book, String categoryName) {
         try {
+            // the book can be in one category only - remove from previous category
+            // null handling because we don't want NullPointerException Handling to get triggered from here
+            Category cat = Library.categoryOfBook(book.getISBN());
+            if (cat != null) {
+                cat.removeFromCategoryBooks(book.getISBN());
+            }
+
             Category targetCategory = Library.findCategory(categoryName);
 
+            // if there is no category with that name NullPointerException is thrown
             targetCategory.addToCategoryBooks(book.getISBN());
         }        
         catch(NullPointerException n){
@@ -34,11 +42,11 @@ public class Admin extends UserBase {
     }
 
     public void createCategory(String categoryName) {
-            // if category does not already exists
-            if ( Library.findCategory(categoryName) == null ) {
-                Category newCat = new Category(categoryName);
-                Library.addCategory(newCat);
-            }
+        // if category does not already exists
+        if ( Library.findCategory(categoryName) == null ) {
+            Category newCat = new Category(categoryName);
+            Library.addCategory(newCat);
+        }
     }
 
     public void deleteCategory(Category category) {
@@ -178,7 +186,7 @@ public class Admin extends UserBase {
 
     }
 
-    public void changeBookDatePublished(Book book, LocalDate date) {
+    public void changeBookDatePublished(Book book, LocalDate date) throws Exception {
         book.setDatePublished(date);
     }
 
@@ -227,11 +235,11 @@ public class Admin extends UserBase {
         user.setLastName(lastname);
     }
 
-    public void changeUserIdNum(User user, String id) {
+    public void changeUserIdNum(User user, String id) throws Exception {
         user.setIdNum(id);
     }
 
-    public void changeUserEmail(User user, String email) {
+    public void changeUserEmail(User user, String email) throws Exception {
         user.setEmail(email);
     }
 
@@ -239,7 +247,7 @@ public class Admin extends UserBase {
         user.setAddress(address);
     }
 
-    public void changeUserBirthday(User user, LocalDate date) {
+    public void changeUserBirthday(User user, LocalDate date) throws Exception {
         user.setBirthDate(date);
     }
 
