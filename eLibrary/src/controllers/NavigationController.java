@@ -1,12 +1,14 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import models.UserBase;
@@ -40,7 +42,7 @@ public class NavigationController {
     }
 
 
-    public static void showAlert(AlertType alertType, String message, String reloadPagePath) {
+    public static ButtonType showAlert(AlertType alertType, String message, String reloadPagePath) {
         Alert customAlert = new Alert(alertType);
         //customAlert.setAlertType(alertType);
         //customAlert.setTitle(title);
@@ -60,7 +62,9 @@ public class NavigationController {
             });
         }
 
-        customAlert.show();
+        final Optional<ButtonType> result = customAlert.showAndWait();
+
+        return result.orElse(ButtonType.CANCEL);
     }
 
 

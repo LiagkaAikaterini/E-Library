@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
@@ -60,6 +61,16 @@ public class LoginController implements Initializable {
 
         if (existingUser == null) {
             NavigationController.showAlert(AlertType.ERROR, "User does not exist", "/views/login.fxml");
+            /*
+            // HANDLE THE ALERT RESULT - WAHT USER CLISK
+
+            if (y == ButtonType.OK) {
+                System.out.println("ok");
+            }
+            else if (y == ButtonType.CANCEL) {
+                System.out.println("cancellllllllllllllllllllll");
+            }
+            */
         }
         else {
             NavigationController.setLoggedPerson(existingUser);
