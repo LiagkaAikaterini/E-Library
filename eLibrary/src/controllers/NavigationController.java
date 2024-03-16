@@ -49,17 +49,19 @@ public class NavigationController {
         customAlert.setHeaderText(null);
         customAlert.setContentText(message);
 
-        if (loggedPerson == null) { 
-            // not logged in -> general pages
-            customAlert.setOnCloseRequest(e -> {
-                loadPage(reloadPagePath);
-            });
-        }
-        else {
-            // logged in -> i have a navigation menu template
-            customAlert.setOnCloseRequest(e -> {
-                loadCenter(reloadPagePath);
-            });
+        if (!reloadPagePath.isEmpty()) { 
+            if (loggedPerson == null) { 
+                // not logged in -> general pages
+                customAlert.setOnCloseRequest(e -> {
+                    loadPage(reloadPagePath);
+                });
+            }
+            else {
+                // logged in -> i have a navigation menu template
+                customAlert.setOnCloseRequest(e -> {
+                    loadCenter(reloadPagePath);
+                });
+            }
         }
 
         final Optional<ButtonType> result = customAlert.showAndWait();

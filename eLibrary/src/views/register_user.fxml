@@ -55,34 +55,76 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="password_input" layoutX="225.0" layoutY="184.0" prefWidth="240.0" promptText="Create password" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="135.0" />
-                  <Button fx:id="signup_btn" alignment="CENTER" layoutX="225.0" layoutY="545.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#signup" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefWidth="240.0" style="-fx-background-color: #B69E7A;" text="Sign Up" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="575.0">
+                  <PasswordField fx:id="password_input" layoutX="225.0" layoutY="184.0" prefWidth="240.0" promptText="Create password" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="155.0" />
+                  <Button fx:id="signup_btn" alignment="CENTER" layoutX="225.0" layoutY="545.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#signup" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefWidth="240.0" style="-fx-background-color: #B69E7A;" text="Sign Up" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="600.0">
                      <effect>
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="60.0" />
-                  <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="115.0" />
+                  <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="60.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="135.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <TextField fx:id="username_input" layoutX="218.0" layoutY="84.0" prefWidth="240.0" promptText="Create unique username" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="80.0" />
-                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="-3.0" layoutY="570.0" prefHeight="36.0" prefWidth="602.0" text="You already have an account? Log In" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="590.0">
+                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="-3.0" layoutY="570.0" prefHeight="36.0" prefWidth="602.0" text="You already have an account? Log In" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="615.0">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label layoutX="220.0" layoutY="169.0" text="First Name" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="225.0" />
-                  <Label layoutX="217.0" layoutY="209.0" text="Last Name" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="280.0" />
-                  <Label layoutX="217.0" layoutY="262.0" text="ID number" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="335.0" />
-                  <Label layoutX="217.0" layoutY="311.0" text="Email" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="390.0" />
-                  <Label layoutX="217.0" layoutY="353.0" text="Address" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="445.0" />
-                  <Label layoutX="217.0" layoutY="408.0" text="Date of Birth" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="500.0" />
-                  <TextField fx:id="firstname_input" layoutX="220.0" layoutY="187.0" prefWidth="240.0" promptText="Enter you first name" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="245.0" />
-                  <TextField fx:id="lastname_input" layoutX="215.0" layoutY="237.0" prefWidth="240.0" promptText="Enter your last name" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="300.0" />
-                  <TextField fx:id="id_input" layoutX="213.0" layoutY="280.0" prefWidth="240.0" promptText="Enter your ID number" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="355.0" />
-                  <TextField fx:id="email_input" layoutX="213.0" layoutY="329.0" prefWidth="240.0" promptText="Enter your e-mail address" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="410.0" />
-                  <DatePicker fx:id="birthday_input" layoutX="213.0" layoutY="426.0" prefWidth="240.0" promptText="Enter your date of birth" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="520.0" />
-                  <TextField fx:id="address_input" layoutX="183.0" layoutY="408.0" prefHeight="26.0" prefWidth="240.0" promptText="Street name, street number, zip code, city" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="465.0" />
-                  <Label layoutX="187.0" layoutY="168.0" text="Confirm Password" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="165.0" />
-                  <PasswordField fx:id="password2_input" layoutX="180.0" layoutY="186.0" prefWidth="240.0" promptText="Confirm your password" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="185.0" />
+                  <Label layoutX="220.0" layoutY="169.0" text="First Name" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="255.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="217.0" layoutY="209.0" text="Last Name" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="305.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="217.0" layoutY="262.0" text="ID number" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="360.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="217.0" layoutY="311.0" text="Email" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="415.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="217.0" layoutY="353.0" text="Address" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="470.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="217.0" layoutY="408.0" text="Date of Birth" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="525.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="firstname_input" layoutX="220.0" layoutY="187.0" prefWidth="240.0" promptText="Enter you first name" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="275.0" />
+                  <TextField fx:id="lastname_input" layoutX="215.0" layoutY="237.0" prefWidth="240.0" promptText="Enter your last name" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="325.0" />
+                  <TextField fx:id="id_input" layoutX="213.0" layoutY="280.0" prefWidth="240.0" promptText="Enter your ID number. It must be unique." AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="380.0" />
+                  <TextField fx:id="email_input" layoutX="213.0" layoutY="329.0" prefWidth="240.0" promptText="Enter your e-mail. It must be unique." AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="435.0" />
+                  <DatePicker fx:id="birthday_input" layoutX="213.0" layoutY="426.0" prefWidth="240.0" promptText="Enter your date of birth" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="545.0" />
+                  <TextField fx:id="address_input" layoutX="183.0" layoutY="408.0" prefHeight="26.0" prefWidth="240.0" promptText="Street name, street number, zip code, city" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="490.0" />
+                  <Label layoutX="187.0" layoutY="168.0" text="Confirm Password" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="185.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <PasswordField fx:id="password2_input" layoutX="180.0" layoutY="186.0" prefWidth="240.0" promptText="Confirm your password" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="205.0" />
+                  <Label layoutX="183.2" layoutY="103.8" prefHeight="15.0" prefWidth="229.0" text="Acceptable Format : a-z, A-Z, 0-9,  _  " AnchorPane.leftAnchor="183.2" AnchorPane.topAnchor="103.8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="183.0" layoutY="117.0" prefHeight="4.0" prefWidth="230.0" text="Username must start with letter" AnchorPane.leftAnchor="183.0" AnchorPane.topAnchor="117.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="184.0" layoutY="230.0" prefHeight="15.0" prefWidth="229.0" text="Password must be 5 or more characters" AnchorPane.leftAnchor="183.0" AnchorPane.topAnchor="230.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </content>

@@ -9,6 +9,7 @@ import exceptions.UserNotFoundException;
 
 
 public class Library {
+    private static final String password = "d4yur7g";
     private static List<Admin> allAdmins;
     private static List<User> allUsers;
     private static List<Book> allBooks;
@@ -262,6 +263,10 @@ public class Library {
     }
     public static void removeActiveBorrow(Borrowed borrow) {
         Library.allActiveBorrows.remove(borrow);
+    }
+
+    public static String getPassword() {
+        return password;
     }
 
 }

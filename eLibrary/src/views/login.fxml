@@ -28,8 +28,14 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="75.0" />
-            <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="140.0" />
+            <Label layoutX="227.0" layoutY="70.0" text="Username " AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="75.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="227.0" layoutY="158.0" text="Password" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="140.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="username_input" layoutX="225.0" layoutY="98.0" prefWidth="150.0" promptText="Enter your username" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="95.0" />
             <Label alignment="CENTER" contentDisplay="TOP" layoutY="255.8" prefHeight="23.0" prefWidth="600.0" text="You don't have an account? Sign Up" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="245.0">
                <font>

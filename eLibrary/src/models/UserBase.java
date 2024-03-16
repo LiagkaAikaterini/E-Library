@@ -14,16 +14,20 @@ public class UserBase implements Serializable {
 
     public UserBase(String username, String password, boolean isAdmin) throws InvalidUserInfoException {
         // Before creating the object we make sure the username is unique 
-        //and has the appropriate caharacters A-Z, a-z, 0-9, _, starts with letter and has length between 6 and 30
-        Pattern allowedUsernamePattern = Pattern.compile("^[A-Za-z]\\w{5,29}$");
+        //and has the appropriate caharacters A-Z, a-z, 0-9, _, and starts with letter
+        Pattern allowedUsernamePattern = Pattern.compile("^[A-Za-z]\\w*$");
 
         if (!allowedUsernamePattern.matcher(username).matches()) {
-            throw new InvalidUserInfoException("Invalid Username: Please use only letters (A-Z, a-z), numbers (0-9), and underscores (_). The username must start with a letter and contain between 6-30 characters");
+            throw new InvalidUserInfoException("Invalid Username: Please use only letters (A-Z, a-z), numbers (0-9), and underscores (_). The username must start with letter");
         }
 
         // 
         if (Library.isUsernameOccupied(username)) {
             throw new InvalidUserInfoException("This username is already used, please choose another unique username");
+        }
+
+        if (password.length() < 5) {
+            throw new InvalidUserInfoException("Too short password. Please create a password with 5 or more characters.");
         }
 
         this.username = username;
@@ -111,7 +115,10 @@ public class UserBase implements Serializable {
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {
+    public void setPassword(String password) throws InvalidUserInfoException {
+        if (password.length() < 5) {
+            throw new InvalidUserInfoException("Too short password. Please create a password with 5 or more characters.");
+        }
         this.password = password;
     }
 
