@@ -149,27 +149,27 @@ public class Library {
         }
         catch (UserNotFoundException e) {}
 
-        return true;
+        return false;
     }
 
     public static boolean isIdNumOccupied(String idNum) {
         for (User user : allUsers) {
             if ( idNum.equals(user.getIdNum()) ) {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public static boolean isEmailOccupied(String email) {
         for (User user : allUsers) {
             if ( email.equals(user.getEmail()) ) {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public static Category categoryOfBook(String isbn) throws NotFoundException {

@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 
 import controllers.NavigationController;
+import exceptions.BorrowLimitException;
+import exceptions.InvalidBookInfoException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidUserInfoException;
+import exceptions.NoCopiesAvailableException;
 import exceptions.NotFoundException;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -42,7 +47,8 @@ public class App extends Application  {
         Library.addCategory(c1);
 
         user.borrowBook(b2);
-        */
+        Platform.exit();
+        
 
         
         /*
@@ -90,21 +96,7 @@ public class App extends Application  {
          }
 
          */
-        System.out.println();
-        System.out.println("USERS");
-        System.out.println();
-        for (User user : Library.getAllUsers()) {
-            System.out.println(user.getUsername());
-            System.out.println(user.getPassword());
-        }
-
-        System.out.println();
-        System.out.println("ADMINS");
-        System.out.println();
-        for (Admin user : Library.getAllAdmins()) {
-            System.out.println(user.getUsername());
-            System.out.println(user.getPassword());
-        }
+        
 
         NavigationController.setStage(primaryStage);
         NavigationController.loadPage("/views/home.fxml");
