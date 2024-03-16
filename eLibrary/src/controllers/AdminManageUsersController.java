@@ -22,13 +22,13 @@ public class AdminManageUsersController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<User> observableBooklist = FXCollections.observableArrayList();
-        List<User> categories = Library.getAllUsers();
+        ObservableList<User> observableUserList = FXCollections.observableArrayList();
+        List<User> users = Library.getAllUsers();
 
-        observableBooklist.addAll(categories);
+        observableUserList.addAll(users);
         
-        userList.setItems(observableBooklist);
-        userList.setCellFactory(booklist -> new ListCellAdminUser());   
+        userList.setItems(observableUserList);
+        userList.setCellFactory(userlist -> new ListCellAdminUser());   
     }
 
 }

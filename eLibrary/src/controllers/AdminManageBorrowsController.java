@@ -20,13 +20,13 @@ public class AdminManageBorrowsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<Borrowed> observableBooklist = FXCollections.observableArrayList();
+        ObservableList<Borrowed> observableBorrowList = FXCollections.observableArrayList();
         List<Borrowed> activeBorrows = Library.getAllActiveBorrows();
 
-        observableBooklist.addAll(activeBorrows);
+        observableBorrowList.addAll(activeBorrows);
         
-        borrowsList.setItems(observableBooklist);
-        borrowsList.setCellFactory(booklist -> new ListCellAdminBorrow());
+        borrowsList.setItems(observableBorrowList);
+        borrowsList.setCellFactory(borrowlist -> new ListCellAdminBorrow());
     }
 
 }

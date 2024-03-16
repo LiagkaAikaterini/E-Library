@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 
 import controllers.NavigationController;
+import exceptions.NotFoundException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-
-import models.Library;
 import models.*;
 
 public class App extends Application  {

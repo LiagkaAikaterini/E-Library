@@ -48,13 +48,13 @@ public class AdminManageCategoriesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<Category> observableBooklist = FXCollections.observableArrayList();
+        ObservableList<Category> observableCatList = FXCollections.observableArrayList();
         List<Category> categories = Library.getAllCategories();
 
-        observableBooklist.addAll(categories);
+        observableCatList.addAll(categories);
         
-        categoryList.setItems(observableBooklist);
-        categoryList.setCellFactory(booklist -> new ListCellAdminCategory());   
+        categoryList.setItems(observableCatList);
+        categoryList.setCellFactory(catlist -> new ListCellAdminCategory());   
     }
 
 }

@@ -27,15 +27,13 @@ public class SearchResultController implements Initializable {
         // populate listView with all the search result books  
         ObservableList<Book> observableBooklist = FXCollections.observableArrayList();
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //  handling if result == null
-        //
         observableBooklist.addAll(result);
         searchResultList.setItems(observableBooklist);
 
         // set the suitable cell type based on whether we are in User or Admin mode
         if (NavigationController.getLoggedPerson().getIsAdmin()) {
             // An Admin logged in
+            searchResultList.setCellFactory(booklist -> new ListCellAdminBook());
         }
         else {
             // A simple User logged in

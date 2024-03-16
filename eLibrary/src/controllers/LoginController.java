@@ -1,21 +1,18 @@
 package controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
+import exceptions.UserNotFoundException;
 import models.Library;
 import models.UserBase;
 
-public class LoginController implements Initializable {
+
+public class LoginController {
 
     @FXML
     private Button home_btn;
@@ -42,37 +39,24 @@ public class LoginController implements Initializable {
         buttonEntered.setBlendMode(BlendMode.SRC_OVER);
     }
 
+    // navigation button handlers
     @FXML
     void goToHome(MouseEvent event) {
         NavigationController.loadPage("/views/home.fxml");
     }
-
     @FXML
     void goToRegister(MouseEvent event) {
         NavigationController.loadPage("/views/register.fxml");
     }
 
+    // login handler
     @FXML
     void login(MouseEvent event) {
         String username = username_input.getText();
         String password = password_input.getText();
 
-        UserBase existingUser = Library.authenticateUser(username, password);
-
-        if (existingUser == null) {
-            NavigationController.showAlert(AlertType.ERROR, "User does not exist", "/views/login.fxml");
-            /*
-            // HANDLE THE ALERT RESULT - WAHT USER CLISK
-
-            if (y == ButtonType.OK) {
-                System.out.println("ok");
-            }
-            else if (y == ButtonType.CANCEL) {
-                System.out.println("cancellllllllllllllllllllll");
-            }
-            */
-        }
-        else {
+        try {
+            UserBase existingUser = Library.authenticateUser(username, password);
             NavigationController.setLoggedPerson(existingUser);
             
             if (existingUser.getIsAdmin()) {
@@ -81,14 +65,11 @@ public class LoginController implements Initializable {
             else {
                 NavigationController.loadPage("/views/user_template.fxml");
             }
-        }
-    }
-    
-    
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
         
+        }
+        catch (UserNotFoundException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+        }
     }
 
 }

@@ -1,14 +1,18 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.InvalidDateException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import models.Book;
 import models.UserBase;
+
 
 public class SearchFormController {
 
@@ -40,50 +44,64 @@ public class SearchFormController {
         String title = title_input.getText().replaceAll("\\s+", " ");
         String author = author_input.getText().replaceAll("\\s+", " ");
         String year = year_input.getText().replaceAll("\\s+", "");
-        
-        List<Book> res1 = null;
+
+
+        // execute searchs seperately for each text field that is not empty
+        List< List<Book> > results = new ArrayList<>();
+
+
+        if ( !title.isEmpty() ) {
+            List<Book> resTitle = UserBase.searchByTitle(title);
+            results.add(resTitle);
+        }
+
+        if ( !author.isEmpty() ) {
+            List<Book> resAuthor = UserBase.searchByAuthor(author);
+            results.add(resAuthor);
+        }
 
         if ( !year.isEmpty() ) {
             try {
                 int yearInt = Integer.parseInt(year);
 
-                // check if year negative or in the future
-                // invalid years
+                // check if year negative or in the future - invalid years
                 if (yearInt < 0 || yearInt > java.time.LocalDate.now().getYear()) {
-                    throw new NumberFormatException();
+                    throw new InvalidDateException("The year provided is invalid. Please ensure the year you enter is a positive integer and does not represent a future year.");
                 }
 
-                res1 = UserBase.searchByYear(yearInt);
-                
-                // If parsing succeeds, input is a valid integer
-                //showAlert("Valid Integer", "Input is a valid integer: " + value);
-            } catch (NumberFormatException ex) {
-                System.out.println("INVALID YEAR");
-                // If parsing fails, input is not a valid integer
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ->     Alert and the search will not be executed
-                //showAlert("Invalid Input", "Input is not a valid integer");
+                List<Book> resYear = UserBase.searchByYear(yearInt);
+                results.add(resYear);
+            } 
+            catch (NumberFormatException e) {
+                NavigationController.showAlert(AlertType.ERROR, "The year provided in not a valid Integer.", "/views/searchForm.fxml");
+            }
+            catch (InvalidDateException e) {
+                NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/searchForm.fxml");
             }
         }
 
-        List<Book> res2 = UserBase.searchByTitle(title);
-        List<Book> res3 = UserBase.searchByAuthor(author);
-        
-        List<Book> searchRes = UserBase.search(res1, res2, res3);
 
-        if (searchRes == null) {
-            // no input
-            System.out.println("NO INPUT");
+        // all the search result Book Lists are saved in the "results" List
+        // according to the size of this list we combine the resultLists the appropriate way 
+        List<Book> searchRes = null;
+
+        switch (results.size()) {
+            case 1:
+                searchRes = results.get(0);
+                break;
+            case 2:
+                searchRes = UserBase.combineSearches(results.get(0), results.get(1));
+                break;
+            case 3:
+                searchRes = UserBase.combineThreeSearches(results.get(0), results.get(1), results.get(2));
+                break;
         }
-        else {
-            System.out.println("DONE");
+
+        // if searchRes == null no input was given so user stay in the searchForm page
+        if (searchRes != null) {
             SearchResultController.setResult(searchRes);
             NavigationController.loadCenter("/views/searchResult.fxml");
         }
-        
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // execute search 
-        
-        
     }
 
 }

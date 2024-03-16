@@ -50,15 +50,11 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // get top 5 books 
-        ObservableList<Book> studentObservableList = FXCollections.observableArrayList();
+        ObservableList<Book> observableBookList = FXCollections.observableArrayList();
 
-        for (Book book : Library.getAllBooks()) {
-            studentObservableList.add(book);
-        }
+        observableBookList.addAll(Library.getTop5Books());
 
-        // show top 5 books
-        topBooklist.setItems(studentObservableList);
+        topBooklist.setItems(observableBookList);
         topBooklist.setCellFactory(booklist -> new ListCellBook());
         
     }
