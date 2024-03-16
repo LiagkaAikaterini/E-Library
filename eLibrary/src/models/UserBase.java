@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import exceptions.InvalidUserInformationException;
+import exceptions.InvalidUserInfoException;
+import exceptions.UserNotFoundException;
 
 
 public class UserBase implements Serializable {
@@ -13,17 +14,18 @@ public class UserBase implements Serializable {
     private String password;
     private boolean isAdmin;
 
-    public UserBase(String username, String password, boolean isAdmin) throws Exception{
+    public UserBase(String username, String password, boolean isAdmin) throws InvalidUserInfoException {
         // Before creating the object we make sure the username is unique 
         //and has the appropriate caharacters A-Z, a-z, 0-9, _, starts with letter and has length between 6 and 30
         Pattern allowedUsernamePattern = Pattern.compile("^[A-Za-z]\\w{5,29}$");
 
         if (!allowedUsernamePattern.matcher(username).matches()) {
-            throw new InvalidUserInformationException("Invalid Username: Please use only letters (A-Z, a-z), numbers (0-9), and underscores (_). The username must start with a letter and contain between 6-30 characters");
+            throw new InvalidUserInfoException("Invalid Username: Please use only letters (A-Z, a-z), numbers (0-9), and underscores (_). The username must start with a letter and contain between 6-30 characters");
         }
 
-        if ( Library.findAdmin(username) != null || Library.findUser(username) != null ) {
-            throw new InvalidUserInformationException("This username is already used, please choose another unique username");
+        // 
+        if (Library.isUsernameOccupied(username)) {
+            throw new InvalidUserInfoException("This username is already used, please choose another unique username");
         }
 
         this.username = username;
@@ -139,12 +141,12 @@ public class UserBase implements Serializable {
         Pattern allowedUsernamePattern = Pattern.compile("^[a-zA-Z0-9_]*$");
 
         if (!allowedUsernamePattern.matcher(username).matches()) {
-            throw new InvalidUserInformationException("Invalid Username: Please use only letters (A-Z, a-z), numbers (0-9), and underscores (_)");
+            throw new InvalidUserInfoException("Invalid Username: Please use only letters (A-Z, a-z), numbers (0-9), and underscores (_)");
         }
 
-        // if there is an admin or a user with this username - username not available
+        // if there is already an admin or a user with this username - username not available
         if ( Library.findAdmin(username) != null || Library.findUser(username) != null ) {
-            throw new InvalidUserInformationException("This username is not available. Please choose a different username");
+            throw new InvalidUserInfoException("This username is not available. Please choose a different username");
         }
         
         this.username = username;

@@ -5,6 +5,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.InvalidBookInfoException;
+import exceptions.InvalidDateException;
+import exceptions.NotFoundException;
+import exceptions.ReviewException;
+import exceptions.UserNotFoundException;
+
 
 public class Book implements Serializable{
     private String title;
@@ -23,9 +29,9 @@ public class Book implements Serializable{
         private int rating;
         private String comment;
     
-        public Review(String username, int rating, String comment) throws Exception {
+        public Review(String username, int rating, String comment) throws ReviewException {
             if ( !(rating >= 1 && rating <= 5) ) {
-                throw new Exception("The rating should be between 1 and 5");
+                throw new ReviewException("The rating should be between 1 and 5");
             }
 
             this.username = username;
@@ -43,37 +49,40 @@ public class Book implements Serializable{
         public int getRating() {
             return rating;
         }
-        public void setRating(int rating) {
-            try {
-                if ( !(rating >= 1 && rating <= 5) ) {
-                    throw new Exception("The rating should be between 1 and 5");
-                }
-    
-                this.rating = rating;
+        public void setRating(int rating) throws ReviewException {
+            if ( !(rating >= 1 && rating <= 5) ) {
+                throw new ReviewException("The rating should be between 1 and 5");
             }
-            catch(Exception e) {
-                e.printStackTrace();
-            }
+
+            this.rating = rating;
         }
     
         public String getUsername() {
             return username;
         }
-        public void setUsername(String username) {
+        public void setUsername(String username) throws UserNotFoundException {
+            // first check if user exists then change the username 
+            Library.findUser(username);
             this.username = username;
         }
     }
 
 
-    public Book(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable) throws Exception {
-        // check if isbn available - unique
-        if (Library.findBook(ISBN) != null) {
-            throw new Exception("Not unique isbn - book already exists with this isbn");
+    public Book(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable) throws InvalidBookInfoException, InvalidDateException {
+        // check if isbn available - must be unique for each book - isbn = id of the book
+        try {
+            Library.findBook(ISBN);
+            throw new InvalidBookInfoException("This ISBN already exists. Please provide a new unique ISBN.");
         }
+        catch (NotFoundException e) {}
 
         // date published cannot be in the future 
         if (datePublished.isAfter(java.time.LocalDate.now())) {
-            throw new Exception("Future Date");
+            throw new InvalidDateException("A Book that already exists in the library cannot be published in a future Date.");
+        }
+
+        if (copiesAvailable < 0) {
+            throw new InvalidBookInfoException("The available copies of a book cannot be a negative number.");
         }
 
         this.title = title;
@@ -83,13 +92,12 @@ public class Book implements Serializable{
         this.datePublished = datePublished;
         this.copiesAvailable = copiesAvailable;
         this.reviews = new ArrayList<Review>();
-        this.avgRating = 0;
+        this.avgRating = 0.0;
     }
 
     public void updateAvgRating() {
         // if there are no reviews for the book yet
-        // if all the reviews have only comments and no ratings
-        // int count will remain zero throw an ArithmetcException so i handle that 
+        // int count will remain zero and throw an ArithmetcException so i handle that 
         
         try {
             /*
@@ -102,9 +110,8 @@ public class Book implements Serializable{
             int sum = 0;
             for (Review rev : this.reviews) {
                 //if (rev.rating != 0) {
-                    sum += rev.rating;
-                    count++;
-                //}
+                sum += rev.rating;
+                count++;
             }
 
             /* check if all the reviews have only comments and no ratings 
@@ -117,9 +124,9 @@ public class Book implements Serializable{
             this.avgRating = (sum/count);
         }
         catch(ArithmeticException e) {
-            // IF ONLY DIVISION BY ZERO - DO NOT KNOW 
+            // IF ONLY DIVISION BY ZERO
             if ( (e.getMessage()).contains("/ by zero") ) {
-                this.avgRating = 0;
+                this.avgRating = 0.0;
             }
             else {
                 //throw e;
@@ -129,54 +136,21 @@ public class Book implements Serializable{
           
     }
 
-    public boolean addReview(String username, int rating, String comment) {
-        try {
-
-            // if this user has already reviewed that book change the existing review
-            for (Review rev: this.reviews) {
-                if ( (rev.username).equals(username) ) {
-                    rev.setComment(comment);
-                    rev.setRating(rating);
-                    updateAvgRating();
-                    return true;
-                }
+    public void addReview(String username, int rating, String comment) throws ReviewException {
+        // if this user has already reviewed that book change the existing review
+        for (Review rev: this.reviews) {
+            if ( (rev.username).equals(username) ) {
+                rev.setComment(comment);
+                rev.setRating(rating);
+                updateAvgRating();
             }
-
-            // else create new review - add it to the review list
-            
-            Review newReview = new Review(username, rating, comment);
-            this.reviews.add(newReview);
-            updateAvgRating();
-            return true;
-        } 
-        catch(Exception e){
-            e.printStackTrace();
-            return false;
         }
-    }
 
-    public boolean addReview(String username, int rating) {
-        try {
-
-            // if this user has already reviewed that book change the existing review
-            for (Review rev: this.reviews) {
-                if ( (rev.username).equals(username) ) {
-                    rev.setRating(rating);
-                    updateAvgRating();
-                    return true;
-                }
-            }
-            // else create new review and add it to the review list
-            Review newReview = new Review(username, rating, "");
-            this.reviews.add(newReview);
-            updateAvgRating();
-            return true;
-            
-        }
-        catch (Exception e) {
-            return false;
-        }
-                    
+        // else create new review - add it to the review list
+        
+        Review newReview = new Review(username, rating, comment);
+        this.reviews.add(newReview);
+        updateAvgRating();    
     }
 
     /*
@@ -202,16 +176,16 @@ public class Book implements Serializable{
  */
 
     public void deleteReviewsOfUser(String username) {
-        for (Review rev : this.reviews){
-            if ( (rev.getUsername()).equals(username) ) {
+        for (Review rev : this.reviews) {
+            if ( (rev.username).equals(username) ) {
                 this.reviews.remove(rev);
             }
         }
     }
 
-    public void changeReviewsUsername(String oldUsername, String newUsername) {
-        for (Review rev : this.reviews){
-            if ( (rev.getUsername()).equals(oldUsername) ) {
+    public void changeReviewsUsername(String oldUsername, String newUsername) throws UserNotFoundException {
+        for (Review rev : this.reviews) {
+            if ( (rev.username).equals(oldUsername) ) {
                 rev.setUsername(newUsername);
             }
         }
@@ -245,14 +219,16 @@ public class Book implements Serializable{
     public String getISBN() {
         return ISBN;
     }
-    public void setISBN(String iSBN) throws Exception{
+    public void setISBN(String iSBN) throws InvalidBookInfoException {
         if (iSBN.equals(this.ISBN)) {
             return;
         }
 
-        if ( Library.findBook(iSBN) != null ) {
-            throw new Exception("This isbn is not available. Please enter unique isbn.");
+        try {
+            Library.findBook(ISBN);
+            throw new InvalidBookInfoException("This ISBN already exists. Please provide a new unique ISBN.");
         }
+        catch (NotFoundException e) {}
 
         this.ISBN = iSBN;
     }
@@ -260,9 +236,9 @@ public class Book implements Serializable{
     public LocalDate getDatePublished() {
         return datePublished;
     }
-    public void setDatePublished(LocalDate datePublished) throws Exception {
+    public void setDatePublished(LocalDate datePublished) throws InvalidDateException {
         if (datePublished.isAfter(java.time.LocalDate.now())) {
-            throw new Exception("Future Date");
+            throw new InvalidDateException("A Book that already exists in the library cannot be published in a future Date.");
         }
         this.datePublished = datePublished;
     }
@@ -270,7 +246,10 @@ public class Book implements Serializable{
     public int getCopiesAvailable() {
         return copiesAvailable;
     }
-    public void setCopiesAvailable(int copiesAvailable) {
+    public void setCopiesAvailable(int copiesAvailable) throws InvalidBookInfoException {
+        if (copiesAvailable < 0) {
+            throw new InvalidBookInfoException("The available copies of a book cannot be a negative number.");
+        }
         this.copiesAvailable = copiesAvailable;
     }
 

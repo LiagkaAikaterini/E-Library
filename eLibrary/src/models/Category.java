@@ -1,5 +1,8 @@
 package models;
 import java.util.List;
+
+import exceptions.NotFoundException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -17,7 +20,11 @@ public class Category implements Serializable {
         List<Book> books = new ArrayList<Book>();
 
         for (String isbn : booksISBN) {
-            books.add(Library.findBook(isbn));
+            try {
+                Book book = Library.findBook(isbn);
+                books.add(book);
+            }
+            catch (NotFoundException e) {}
         }
 
         return books;

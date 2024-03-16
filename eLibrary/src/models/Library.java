@@ -1,6 +1,12 @@
 package models;
 
 import java.util.List;
+
+import exceptions.InvalidUserInfoException;
+import exceptions.NewCategoryException;
+import exceptions.NotFoundException;
+import exceptions.UserNotFoundException;
+
 import java.util.ArrayList;
 
 
@@ -32,25 +38,7 @@ public class Library {
     // Retrieve User or Admin seperately
     // check in frontend
     // Exception not logged in yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public static User getCurrUser(UserBase loggedUser) {
-        for (User user : allUsers) {
-            if ( (user.getUsername()).equals(loggedUser.getUsername()) ) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    public static Admin getCurrAdmin(UserBase loggedUser) {
-        for (Admin admin : allAdmins) {
-            if ( (admin.getUsername()).equals(loggedUser.getUsername()) ) {
-                return admin;
-            }
-        }
-        return null;
-    }
-
-    public static UserBase authenticateUser(String username, String password) {
+    public static UserBase authenticateUser(String username, String password) throws UserNotFoundException {
         for (User user : allUsers) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 return user;
@@ -63,11 +51,39 @@ public class Library {
             }
         }
 
-        return null;
+        throw new UserNotFoundException();
+    }
+
+    public static List<Book> getTop5Books() {
+
+        List<Book> top5Books = allBooks;
+        
+        top5Books.sort((book1, book2) -> {
+            if (book1.getAvgRating() > book2.getAvgRating()) {
+                // sort book1 before book2
+                return -1;
+            }
+            else if (book1.getAvgRating() < book2.getAvgRating()) {
+                // book1 after book2
+                return 1;
+            }
+            else{
+                // leave order unchanged
+                return 0;
+            }
+        });
+
+        if (top5Books.size() < 5) {
+            return top5Books;
+        }
+        else {
+            return top5Books.subList(0, 5);
+        }
+
     }
 
 
-    public static Book findBook(String isbn) {
+    public static Book findBook(String isbn) throws NotFoundException {
         List<Book> books = getAllBooks();
 
         for (Book book : books) {
@@ -76,37 +92,37 @@ public class Library {
             }
         }
 
-        return null;
+        throw new NotFoundException("Book not found");
     }
 
-    public static Category findCategory(String name) {
+    public static Category findCategory(String name) throws NotFoundException {
         for (Category category : allCategories) {
             if ( (category.getName()).equals(name) ) {
                 return category;
             }
         }
 
-        return null;
+        throw new NotFoundException("Category not found");
     }
 
-    public static User findUser(String username) {
+    public static User findUser(String username) throws UserNotFoundException {
         for (User user : allUsers) {
             if ( (user.getUsername()).equals(username)) {
                 return user;
             }
         }
 
-        return null;
+        throw new UserNotFoundException();
     }
 
-    public static Admin findAdmin(String username) {
+    public static Admin findAdmin(String username) throws UserNotFoundException {
         for (Admin admin : allAdmins) {
             if ( (admin.getUsername()).equals(username)) {
                 return admin;
             }
         }
 
-        return null;
+        throw new UserNotFoundException();
     }
 
 
@@ -122,7 +138,23 @@ public class Library {
         return result;
     }
 
-    public static boolean isIdNumUnique(String idNum) {
+    public static boolean isUsernameOccupied(String username) throws InvalidUserInfoException {
+        try {
+            Library.findAdmin(username);
+            return true;
+        }
+        catch (UserNotFoundException e) {}
+
+        try {
+            Library.findUser(username);
+            return true;
+        }
+        catch (UserNotFoundException e) {}
+
+        return true;
+    }
+
+    public static boolean isIdNumOccupied(String idNum) {
         for (User user : allUsers) {
             if ( idNum.equals(user.getIdNum()) ) {
                 return false;
@@ -132,7 +164,7 @@ public class Library {
         return true;
     }
 
-    public static boolean isEmailUnique(String email) {
+    public static boolean isEmailOccupied(String email) {
         for (User user : allUsers) {
             if ( email.equals(user.getEmail()) ) {
                 return false;
@@ -142,7 +174,7 @@ public class Library {
         return true;
     }
 
-    public static Category categoryOfBook(String isbn) {
+    public static Category categoryOfBook(String isbn) throws NotFoundException {
         for (Category category : allCategories) {
             List<String> categoryBooks = category.getBooksISBN();
             if ( categoryBooks.contains(isbn) ) {
@@ -150,23 +182,20 @@ public class Library {
             }
         }
 
-        return null;
+        throw new NotFoundException("This Book belongs to no category. Please add category for this book.");
     }
     
 
-    public static void createCategory(String newCategoryName) {
-        try {
-            for (Category category : allCategories) {
-                if (category.getName().equals(newCategoryName)) {
-                    throw new Exception("This category already exists, please enter a new unique category name");
-                }
+    public static void createCategory(String newCategoryName) throws NewCategoryException {
+        // if category already exists
+        for (Category category : allCategories) {
+            if (newCategoryName.equals(category.getName())) {
+                throw new NewCategoryException();
             }
-            Category cat = new Category(newCategoryName);
-            addCategory(cat);
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        Category cat = new Category(newCategoryName);
+        addCategory(cat);
     }
 
 

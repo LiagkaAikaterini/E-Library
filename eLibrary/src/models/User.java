@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import exceptions.InvalidUserInformationException;
+import exceptions.BorrowLimitException;
+import exceptions.InvalidBookInfoException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidUserInfoException;
+import exceptions.NoCopiesAvailableException;
+import exceptions.ReviewException;
 
 
 public class User extends UserBase{
@@ -17,29 +22,29 @@ public class User extends UserBase{
     private LocalDate birthDate;
     private List<String> borrowHistory;
 
-    public User(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) throws Exception {
+    public User(String username, String password, String firstName, String lastName, String idNum, String email, String address, LocalDate birthDate) throws InvalidDateException, InvalidUserInfoException {
         super(username, password, false);
         
         // check if idNum is unique
-        if (!Library.isIdNumUnique(idNum)) {
-            throw new InvalidUserInformationException("This ID number is already used by another registered user. Please enter a unique ID Number");
+        if (Library.isIdNumOccupied(idNum)) {
+            throw new InvalidUserInfoException("This ID number is already used by another registered user. Please enter a unique ID Number");
         }
 
         //check if email has the correct format something@domain.end
         Pattern correctEmailFormat = Pattern.compile("^[A-Za-z]\\w{5,29}$");
         
         if (!correctEmailFormat.matcher(email).matches()) {
-            throw new InvalidUserInformationException("Invalid E-mail Format: Please enter a valid e-mail");
+            throw new InvalidUserInfoException("Invalid E-mail Format: Please enter a valid e-mail");
         }
         
         // check if email is unique
-        if (!Library.isEmailUnique(email)) {
-            throw new InvalidUserInformationException("This e-mail is already used by another registered user. Please enter another email");
+        if (Library.isEmailOccupied(email)) {
+            throw new InvalidUserInfoException("This e-mail is already used by another registered user. Please enter another email");
         }
 
         // birthday cannot be future date
         if (birthDate.isAfter(java.time.LocalDate.now())) {
-            throw new Exception("Future Date");
+            throw new InvalidDateException("Please Enter a valid birth date. It cannot be set to date in the future.");
         }
         
         this.firstName = firstName;
@@ -60,76 +65,66 @@ public class User extends UserBase{
     }
 
     
-    public boolean borrowBook(Book book) {
-        try {
-            if ( !canBorrow() ) {
-                throw new Exception("You have already borrowed 2 books. Return a book first to borrow another one.");
-            }
-            
-            // now that i have assured that this user can borrow a new book do the borrowing
-            int copies = book.getCopiesAvailable();
-            if (copies > 0) {
-                String isbn = book.getISBN();
-                Borrowed newBorrow = new Borrowed(isbn, this.getUsername());
-                Library.addActiveBorrow(newBorrow);
-                // add to borrow history imediatelly after the book is borrowed - even if borrow is active - No duplicated allowed
-                if ( !(this.borrowHistory).contains(isbn) ) {
-                    this.borrowHistory.add(isbn);
-                }
-                
-                // update copies
-                book.setCopiesAvailable(copies - 1);
-                return true;
-            }
-            else {
-                throw new Exception("The book has no available copies.");
-            }
-        }
-        catch(Exception e) {
-            return false;
+    public void borrowBook(Book book) throws BorrowLimitException, NoCopiesAvailableException, InvalidBookInfoException {
+
+        if ( !canBorrow() ) {
+            throw new BorrowLimitException();
         }
 
+        int copies = book.getCopiesAvailable();
+        if (copies <= 0) {
+            throw new NoCopiesAvailableException();
+        }
+
+        String isbn = book.getISBN();
+        Borrowed newBorrow = new Borrowed(isbn, this.getUsername());
+        Library.addActiveBorrow(newBorrow);
+        
+        // add to borrow history imediatelly after the book is borrowed - even if borrow is active
+        // No duplicates allowed
+        if ( !((this.borrowHistory).contains(isbn)) ) {
+            this.borrowHistory.add(isbn);
+        }
+        
+        // update copies
+        book.setCopiesAvailable(copies - 1);        
     }
 
-    public boolean hasBookBeenBorrowed(Book book) {
-        // check if he has borrowed it in the past - it contains active borrowed books' isbns as well
-        for (String b : this.borrowHistory) {
-            if ( b.equals(book.getISBN()) ) {
+    public boolean isBorrowActive(Book book) {
+        // check if he is currently borrowing this book
+        List<Borrowed> myBorrows = Library.findUsersActiveBorrows(this.getUsername());
+
+        for (Borrowed bor : myBorrows) {
+            if ( (bor.getBookISBN()).equals(book.getISBN()) ) {
                 return true;
             }
         }
 
         return false;
     }
-
     
-    public boolean reviewBook(Book book, int rating, String comment) {
-        // check if user has actually borrowed the book he is trying to review
-        try {
-            if ( !hasBookBeenBorrowed(book) ) {
-                throw new Exception("You have not borrowed this book yet. Please borrow the book before you try to review it.");
-            }
+    public void reviewBook(Book book, int rating, String comment) throws ReviewException {
+        // check if user is actually currently borrowing the book he is trying to review 
+        if ( !isBorrowActive(book) ) {
+            throw new ReviewException("You are not currently borrowing this book. Your borrow must be active in order to review a book.");
+        }
 
-            boolean res;
-            /*
-            if (rating == 0) {
-                res = book.addReview(this.getUsername(), comment);
-            }
-             */
-            if (comment.isEmpty()) {
-                res = book.addReview(this.getUsername(), rating);
-            }
-            else{
-                res = book.addReview(this.getUsername(), rating, comment);
-            }
-            
-            return res;
+        /*
+        if (rating == 0) {
+            res = book.addReview(this.getUsername(), comment);
         }
-        catch(Exception e){
-            return false;
+        if (comment.isEmpty()) {
+            book.addReview(this.getUsername(), rating);
         }
+        else{
+            book.addReview(this.getUsername(), rating, comment);
+        }
+        
+        */
+
+        book.addReview(this.getUsername(), rating, comment);
+        
     }
-
 
 
     public void addBorrowHistory(String bookISBN) {
@@ -157,10 +152,10 @@ public class User extends UserBase{
     public String getIdNum() {
         return idNum;
     }
-    public void setIdNum(String idNum) throws Exception {
+    public void setIdNum(String idNum) throws InvalidUserInfoException {
         // check if idNum is unique
-        if (!Library.isIdNumUnique(idNum)) {
-            throw new InvalidUserInformationException("This ID number is already used by another registered user. Please enter a unique ID Number");
+        if (Library.isIdNumOccupied(idNum)) {
+            throw new InvalidUserInfoException("This ID number is already used by another registered user. Please enter a unique ID Number");
         }
 
         this.idNum = idNum;
@@ -169,17 +164,17 @@ public class User extends UserBase{
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email) throws Exception {
+    public void setEmail(String email) throws InvalidUserInfoException {
         //check if email has the correct format something@domain.end
         Pattern correctEmailFormat = Pattern.compile("^[A-Za-z]\\w{5,29}$");
         
         if (!correctEmailFormat.matcher(email).matches()) {
-            throw new InvalidUserInformationException("Invalid E-mail Format: Please enter a valid e-mail");
+            throw new InvalidUserInfoException("Invalid E-mail Format: Please enter a valid e-mail");
         }
         
         // check if email is unique
-        if (!Library.isEmailUnique(email)) {
-            throw new InvalidUserInformationException("This e-mail is already used by another registered user. Please enter another email");
+        if (Library.isEmailOccupied(email)) {
+            throw new InvalidUserInfoException("This e-mail is already used by another registered user. Please enter another email");
         }
 
         this.email = email;
@@ -195,9 +190,9 @@ public class User extends UserBase{
     public LocalDate getBirthDate() {
         return birthDate;
     }
-    public void setBirthDate(LocalDate birthDate) throws Exception {
+    public void setBirthDate(LocalDate birthDate) throws InvalidDateException {
         if (birthDate.isAfter(java.time.LocalDate.now())) {
-            throw new Exception("Future Date");
+            throw new InvalidDateException("Please Enter a valid birth date. It cannot be set to date in the future.");
         }
         this.birthDate = birthDate;
     }

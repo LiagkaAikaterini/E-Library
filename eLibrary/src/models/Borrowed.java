@@ -3,6 +3,8 @@ package models;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import exceptions.InvalidDateException;
+
 
 public class Borrowed implements Serializable {
     private String bookISBN;
@@ -31,32 +33,26 @@ public class Borrowed implements Serializable {
         this.username = username;
     }
 
+    // No setter - you cannot set a new borrowing date, it is initialized automatically when the borrow is created
     public LocalDate getBorrowingDate() {
         return borrowingDate;
     }
-    // cannot set new borrowing date - remove !!!!!!!!!!!!!!!!!!!!!!!!
-    public void setBorrowingDate(LocalDate borrowingDate) {
-        this.borrowingDate = borrowingDate;
-    }
+    
 
     public LocalDate getReturnDate() {
         return returnDate;
     }
-    public void setReturnDate(LocalDate returnDate) {
-        try {
-            if(returnDate.equals(this.returnDate)) {
-                return;
-            }
-            // ensure that the new return date is after the previous return date
-            // you cannot oblige someone to return a book before the borrowing time limit 
-            if ( returnDate.isBefore(this.returnDate) ) {
-                throw new Exception("Invalid retun date");
-            }
-            this.returnDate = returnDate;
+    public void setReturnDate(LocalDate returnDate) throws InvalidDateException {
+        if(returnDate.equals(this.returnDate)) {
+            return;
         }
-        catch(Exception e){
-            e.printStackTrace();
+        // ensure that the new return date is after the previous return date
+        // you cannot oblige someone to return a book before the borrowing time limit 
+        if ( returnDate.isBefore(this.returnDate) ) {
+            throw new InvalidDateException("Invalid return date. Choose a return date after the borrowing date");
         }
+        
+        this.returnDate = returnDate;  
     }
 
 }
