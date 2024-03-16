@@ -1,13 +1,11 @@
 package models;
 
 import java.util.List;
-
+import java.util.ArrayList;
 import exceptions.InvalidUserInfoException;
 import exceptions.NewCategoryException;
 import exceptions.NotFoundException;
 import exceptions.UserNotFoundException;
-
-import java.util.ArrayList;
 
 
 public class Library {

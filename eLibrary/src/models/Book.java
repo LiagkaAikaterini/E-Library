@@ -9,7 +9,6 @@ import exceptions.InvalidBookInfoException;
 import exceptions.InvalidDateException;
 import exceptions.NotFoundException;
 import exceptions.ReviewException;
-import exceptions.UserNotFoundException;
 
 
 public class Book implements Serializable{
@@ -60,9 +59,7 @@ public class Book implements Serializable{
         public String getUsername() {
             return username;
         }
-        public void setUsername(String username) throws UserNotFoundException {
-            // first check if user exists then change the username 
-            Library.findUser(username);
+        public void setUsername(String username) {
             this.username = username;
         }
     }
@@ -183,7 +180,7 @@ public class Book implements Serializable{
         }
     }
 
-    public void changeReviewsUsername(String oldUsername, String newUsername) throws UserNotFoundException {
+    public void changeReviewsUsername(String oldUsername, String newUsername) {
         for (Review rev : this.reviews) {
             if ( (rev.username).equals(oldUsername) ) {
                 rev.setUsername(newUsername);

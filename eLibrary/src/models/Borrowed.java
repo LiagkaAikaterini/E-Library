@@ -2,7 +2,6 @@ package models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import exceptions.InvalidDateException;
 
 
@@ -22,7 +21,7 @@ public class Borrowed implements Serializable {
     public String getBookISBN() {
         return bookISBN;
     }
-    public void setBookISBN(String bookISBN) {
+    public void setBookISBN(String bookISBN){
         this.bookISBN = bookISBN;
     }
 

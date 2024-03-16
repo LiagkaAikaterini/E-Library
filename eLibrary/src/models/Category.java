@@ -1,10 +1,9 @@
 package models;
+
 import java.util.List;
-
-import exceptions.NotFoundException;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import exceptions.NotFoundException;
 
 
 public class Category implements Serializable {

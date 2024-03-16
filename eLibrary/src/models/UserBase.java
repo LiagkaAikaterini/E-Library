@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import exceptions.InvalidUserInfoException;
-import exceptions.UserNotFoundException;
 
 
 public class UserBase implements Serializable {
@@ -35,10 +33,7 @@ public class UserBase implements Serializable {
 
     
     public static List<Book> searchByYear(Integer year) {
-        // if no input null will be returned - if no matches empty ArrayList will be returned
-        if (year == null) {
-            return null;
-        }
+        // if no matches empty ArrayList will be returned
 
         List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
@@ -53,11 +48,7 @@ public class UserBase implements Serializable {
     }
 
     public static List<Book> searchByTitle(String title) {
-        // if no input null will be returned - if no matches empty ArrayList will be returned
-        if (title.isEmpty()) {
-            return null;
-        }
-
+        // if no matches empty ArrayList will be returned
         List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
@@ -71,11 +62,7 @@ public class UserBase implements Serializable {
     }
 
     public static List<Book> searchByAuthor(String author) {
-        // if no input null will be returned - if no matches empty ArrayList will be returned
-        if (author.isEmpty()) {
-            return null;
-        }
-
+        // if no matches empty ArrayList will be returned
         List<Book> books = Library.getAllBooks();
         List<Book> searchResult = new ArrayList<Book>();
         
@@ -88,7 +75,7 @@ public class UserBase implements Serializable {
         return searchResult;
     }
 
-    public static List<Book> search(List<Book> res1, List<Book> res2, List<Book> res3) {
+    public static List<Book> combineThreeSearches(List<Book> res1, List<Book> res2, List<Book> res3) {
         return combineSearches(res1, combineSearches(res2, res3));
     }
 
@@ -131,7 +118,7 @@ public class UserBase implements Serializable {
     public String getUsername() {
         return username;
     }
-    public void setUsername(String username) throws Exception {
+    public void setUsername(String username) throws InvalidUserInfoException {
         if ( username.equals(this.username) ) {
             return;
         }
@@ -140,12 +127,12 @@ public class UserBase implements Serializable {
         // make sure the username has the appropriate caharacters A-Z, a-z, 0-9, _
         Pattern allowedUsernamePattern = Pattern.compile("^[a-zA-Z0-9_]*$");
 
-        if (!allowedUsernamePattern.matcher(username).matches()) {
+        if ( !allowedUsernamePattern.matcher(username).matches() ) {
             throw new InvalidUserInfoException("Invalid Username: Please use only letters (A-Z, a-z), numbers (0-9), and underscores (_)");
         }
 
         // if there is already an admin or a user with this username - username not available
-        if ( Library.findAdmin(username) != null || Library.findUser(username) != null ) {
+        if ( Library.isUsernameOccupied(username) ) {
             throw new InvalidUserInfoException("This username is not available. Please choose a different username");
         }
         

@@ -3,94 +3,80 @@ package models;
 import java.time.LocalDate;
 import java.util.List;
 
+import exceptions.InvalidBookInfoException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidUserInfoException;
+import exceptions.NotFoundException;
+
 
 public class Admin extends UserBase {
 
-    public Admin(String username, String password) throws Exception {
+    public Admin(String username, String password) throws InvalidUserInfoException {
         super(username, password, true);
     }
 
 
-    public void createBook(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) throws Exception {
+    public void createBook(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) throws InvalidBookInfoException, InvalidDateException, NotFoundException {
+        // all books must be in some category
+        // if category does not exist an exception will be thrown and the book will not be created
+        addBookToCategory(ISBN, categoryName);
+        
         Book newBook = new Book(title, author, publisher, ISBN, datePublished, copiesAvailable);   
         Library.addBook(newBook);
 
-        // all books must be in some category
-        addBookToCategory(newBook, categoryName);
+        
     }
 
 
-    public void addBookToCategory(Book book, String categoryName) {
+    public void addBookToCategory(String bookISBN, String categoryName) throws NotFoundException {
         try {
-            // the book can be in one category only - remove from previous category
-            // null handling because we don't want NullPointerException Handling to get triggered from here
-            Category cat = Library.categoryOfBook(book.getISBN());
-            if (cat != null) {
-                cat.removeFromCategoryBooks(book.getISBN());
-            }
-
-            Category targetCategory = Library.findCategory(categoryName);
-
-            // if there is no category with that name NullPointerException is thrown
-            targetCategory.addToCategoryBooks(book.getISBN());
-        }        
-        catch(NullPointerException n){
-            // if it does not exist create it first and call the method again
-            createCategory(categoryName);
-            addBookToCategory(book, categoryName);
+            // the book can be in one category only 
+            // remove from previous category if the book is not newly created
+            Category cat = Library.categoryOfBook(bookISBN);
+            cat.removeFromCategoryBooks(bookISBN);
         }
+        catch (NotFoundException e) {}
+
+        
+        // find the category we want to put the book in - if it does not exist throw NotFoundException
+        Category targetCategory = Library.findCategory(categoryName);
+        targetCategory.addToCategoryBooks(bookISBN);
+        
     }
 
     public void createCategory(String categoryName) {
-        // if category does not already exists
-        if ( Library.findCategory(categoryName) == null ) {
+        // if category does not already exists create category
+        try { 
+            Library.findCategory(categoryName);
+        }
+        catch (NotFoundException e) {
             Category newCat = new Category(categoryName);
             Library.addCategory(newCat);
         }
     }
 
     public void deleteCategory(Category category) {
-        try{
+        String currISBN = null;
+        try{   
             for (String isbn : category.getBooksISBN()) {
+                currISBN = isbn;
                 Book book = Library.findBook(isbn);
                 deleteBook(book);
             }
 
             Library.removeCategory(category);
         }
-        catch (NullPointerException e) {
-            // category does not exist
-        }
+        catch (NotFoundException e) {
+            // Book not found
+            category.removeFromCategoryBooks(currISBN);
+            deleteCategory(category);
+        }  
     }
 
-    // I assume the category given actually exists !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void changeCategoryName(String categoryName, String newCategoryName) {
-        try{
-            Category category = Library.findCategory(categoryName);
-            
-            category.setName(newCategoryName);        
-        }
-        catch(NullPointerException e) {
-            createCategory(newCategoryName);
-        }
+    public void changeCategoryName(String categoryName, String newCategoryName) throws NotFoundException {
+        Category category = Library.findCategory(categoryName);
+        category.setName(newCategoryName); 
     }
-
-    /*
-     *  what do i get BookISBN or Book ??????????????????????????????????????????????????????
-     *  I assume the frontend gives the object to be removed
-     */
-    public Book findBook(String Isbn){
-        List<Book> books = Library.getAllBooks();
-        
-        for (Book book : books) {
-            if (book.getISBN().equals(Isbn)) {
-                return book;
-            }
-        }
-
-        return null;
-    }
-
 
     public void deleteBook(Book bookToDelete) {
         // delete all borrows that has not been returned
@@ -116,11 +102,20 @@ public class Admin extends UserBase {
 
         for (Borrowed borrow : activeBorrows) {
             if ( (borrow.getUsername()).equals(userToDelete.getUsername()) ) {
-                terminateBorrow(borrow);
+                try {
+                    terminateBorrow(borrow);
+                }
+                catch(NotFoundException e) {
+                    // the book of the borrow was not found in the library, so we just remove the borrow for ActiveBorrows
+                    Library.removeActiveBorrow(borrow);
+                }
+                catch (InvalidBookInfoException e) {
+                    // this is never thrown as we add book copies so the copies cannot get negative
+                }
             }
         }
 
-        //remove all reviews of User 
+        //remove all reviews of this User 
         List<Book> books = Library.getAllBooks();
 
         for (Book book : books) {
@@ -131,7 +126,7 @@ public class Admin extends UserBase {
         Library.removeUser(userToDelete);       
     }
 
-    public void terminateBorrow(Borrowed borrow) {
+    public void terminateBorrow(Borrowed borrow) throws NotFoundException, InvalidBookInfoException {
         Book book = Library.findBook( borrow.getBookISBN() );
 
         //remove from app's active borrows
@@ -146,11 +141,6 @@ public class Admin extends UserBase {
         return Library.getAllActiveBorrows();
     }
 
-    /* ??????????????????????????????????????????????????????????
-    *  the histories and borrows will change automatically -------- CHECK
-    *  modify book information
-    */
-
     // NOT REVIEWS AND AVG RATING
     public void changeBookTitle(Book book, String title) {
         book.setTitle(title);
@@ -164,7 +154,7 @@ public class Admin extends UserBase {
         book.setPublisher(publisher);
     }
 
-    public void changeBookISBN(Book book, String newISBN) throws Exception {
+    public void changeBookISBN(Book book, String newISBN) throws InvalidBookInfoException {
         String oldISBN = book.getISBN();
 
         // change isbn - if not unique isbn -> exception will be thrown here -> the following will not execute
@@ -180,25 +170,27 @@ public class Admin extends UserBase {
 
         // change isbn in borrow history of all users that have borrowed the book - no duplicated in borrow history
         for (User user : Library.getAllUsers()) {
-            user.removeBorrowHistory(oldISBN);
-            user.addBorrowHistory(newISBN);
+            if ( user.getBorrowHistory().contains(oldISBN) ) {
+                user.removeBorrowHistory(oldISBN);
+                user.addBorrowHistory(newISBN);
+            }
         }
 
     }
 
-    public void changeBookDatePublished(Book book, LocalDate date) throws Exception {
+    public void changeBookDatePublished(Book book, LocalDate date) throws InvalidDateException {
         book.setDatePublished(date);
     }
 
-    public void changeBookCopies(Book book, int copies) {
+    public void changeBookCopies(Book book, int copies) throws InvalidBookInfoException {
         book.setCopiesAvailable(copies);
     }
 
 
     // modify User information - NOT PASSWORD
     // NOT BORROW HISTORY LISTS
-    public void changeUserUsername(User user, String newUsername) {
-        try {
+    public void changeUserUsername(User user, String newUsername) throws InvalidUserInfoException {
+        
             String oldUsername = user.getUsername();
 
             // change username - if invalid username -> exception will be thrown here -> the following will not execute
@@ -217,10 +209,6 @@ public class Admin extends UserBase {
                 book.changeReviewsUsername(oldUsername, newUsername);
             }
 
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void changeUserFirstname(User user, String firstname) {
@@ -231,11 +219,11 @@ public class Admin extends UserBase {
         user.setLastName(lastname);
     }
 
-    public void changeUserIdNum(User user, String id) throws Exception {
+    public void changeUserIdNum(User user, String id) throws InvalidUserInfoException {
         user.setIdNum(id);
     }
 
-    public void changeUserEmail(User user, String email) throws Exception {
+    public void changeUserEmail(User user, String email) throws InvalidUserInfoException {
         user.setEmail(email);
     }
 
@@ -243,7 +231,7 @@ public class Admin extends UserBase {
         user.setAddress(address);
     }
 
-    public void changeUserBirthday(User user, LocalDate date) throws Exception {
+    public void changeUserBirthday(User user, LocalDate date) throws InvalidDateException {
         user.setBirthDate(date);
     }
 
