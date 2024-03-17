@@ -98,7 +98,7 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
                 bookcell_author.setText("by " + currBook.getAuthor());
                 bookcell_isbn.setText("ISBN: " + currBook.getISBN());;
                 bookcell_rating.setText(
-                    currBook.getAvgRating() + "  (" + String.valueOf(currBook.getCopiesAvailable()) + " reviews)"
+                    currBook.getAvgRating() + "  (" + String.valueOf(currBook.getReviews().size()) + " user reviews)"
                 );
                 bookcell_borrowDate.setText(String.valueOf(borrow.getBorrowingDate()));
                 bookcell_returnDate.setText(String.valueOf(borrow.getReturnDate()));

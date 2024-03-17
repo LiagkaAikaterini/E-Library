@@ -49,7 +49,7 @@ public class ListCellBook extends ListCell<Book> {
             bookcell_author.setText("by " + book.getAuthor());
             bookcell_isbn.setText("ISBN: " + book.getISBN());;
             bookcell_rating.setText(
-                book.getAvgRating() + "  (" + String.valueOf(book.getCopiesAvailable()) + " reviews)"
+                book.getAvgRating() + "  (" + String.valueOf(book.getReviews().size()) + " user reviews)"
             );
 
             setText(null);
