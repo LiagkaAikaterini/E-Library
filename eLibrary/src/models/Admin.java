@@ -2,7 +2,6 @@ package models;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import exceptions.InvalidBookInfoException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidUserInfoException;
@@ -73,9 +72,21 @@ public class Admin extends UserBase {
         }  
     }
 
-    public void changeCategoryName(String categoryName, String newCategoryName) throws NotFoundException {
-        Category category = Library.findCategory(categoryName);
-        category.setName(newCategoryName); 
+    public void changeCategoryName(Category category, String newCategoryName) {
+        String oldName = category.getName();
+
+        if ( oldName.equals(newCategoryName) ) {
+            return;
+        }
+
+        try { 
+            Library.findCategory(newCategoryName);
+        }
+        catch (NotFoundException e) {
+            // if a category with this name does not already exist
+            category.setName(newCategoryName);
+        }
+        
     }
 
     public void deleteBook(Book bookToDelete) {
@@ -95,6 +106,7 @@ public class Admin extends UserBase {
         // delete book
         Library.removeBook(bookToDelete);
     }
+    
 
     public void deleteUser(User userToDelete) {
         // terminate all current borrows of user - book copies fixed
@@ -102,16 +114,7 @@ public class Admin extends UserBase {
 
         for (Borrowed borrow : activeBorrows) {
             if ( (borrow.getUsername()).equals(userToDelete.getUsername()) ) {
-                try {
-                    terminateBorrow(borrow);
-                }
-                catch(NotFoundException e) {
-                    // the book of the borrow was not found in the library, so we just remove the borrow for ActiveBorrows
-                    Library.removeActiveBorrow(borrow);
-                }
-                catch (InvalidBookInfoException e) {
-                    // this is never thrown as we add book copies so the copies cannot get negative
-                }
+                terminateBorrow(borrow);
             }
         }
 
@@ -126,15 +129,24 @@ public class Admin extends UserBase {
         Library.removeUser(userToDelete);       
     }
 
-    public void terminateBorrow(Borrowed borrow) throws NotFoundException, InvalidBookInfoException {
-        Book book = Library.findBook( borrow.getBookISBN() );
+    public void terminateBorrow(Borrowed borrow) {
+        try {
+            Book book = Library.findBook( borrow.getBookISBN() );
 
-        //remove from app's active borrows
-        Library.removeActiveBorrow(borrow);
+            //remove from app's active borrows
+            Library.removeActiveBorrow(borrow);
 
-        //fix copies of book
-        int currCopies = book.getCopiesAvailable();
-        book.setCopiesAvailable(currCopies + 1);
+            //fix copies of book
+            int currCopies = book.getCopiesAvailable();
+            book.setCopiesAvailable(currCopies + 1);
+        }
+        catch(NotFoundException e) {
+            // the book of the borrow was not found in the library, so we just remove the borrow for ActiveBorrows without worrying about the copies
+            Library.removeActiveBorrow(borrow);
+        }
+        catch (InvalidBookInfoException e) {
+            // this is never thrown as we add book copies so the available copies cannot get negative here
+        }
     }
 
     public List<Borrowed> watchActiveBorrows() {

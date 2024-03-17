@@ -36,8 +36,8 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="title_input" layoutX="60.0" layoutY="62.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new Username" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="65.0" />
-            <TextField fx:id="copies_input" layoutX="7.0" layoutY="176.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new first name" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="125.0" />
+            <TextField fx:id="title_input" layoutX="60.0" layoutY="62.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter the new book's Title" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="65.0" />
+            <TextField fx:id="copies_input" layoutX="7.0" layoutY="176.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter the available copies (must be positive integer or 0)" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="125.0" />
             <Label alignment="CENTER" layoutX="28.0" layoutY="381.0" text="Publishing Date :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="405.0">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -59,11 +59,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="category_input" layoutX="17.0" layoutY="195.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new last name" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="185.0" />
-            <TextField fx:id="author_input" layoutX="17.0" layoutY="300.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new ID number" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="245.0" />
-            <TextField fx:id="publisher_input" layoutX="17.0" layoutY="405.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new e-mail" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="305.0" />
-            <TextField fx:id="isbn_input" layoutX="17.0" layoutY="510.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new home address" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="365.0" />
-            <DatePicker fx:id="publishDate_input" layoutX="146.0" layoutY="705.0" prefHeight="26.0" prefWidth="165.0" promptText="Pick new birth date" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="425.0" />
+            <TextField fx:id="category_input" layoutX="17.0" layoutY="195.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter already existing category" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="185.0" />
+            <TextField fx:id="author_input" layoutX="17.0" layoutY="300.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter the book author" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="245.0" />
+            <TextField fx:id="publisher_input" layoutX="17.0" layoutY="405.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter the book's publisher" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="305.0" />
+            <TextField fx:id="isbn_input" layoutX="17.0" layoutY="510.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter unique book ISBN (no whitespaces)" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="365.0" />
+            <DatePicker fx:id="publishDate_input" layoutX="146.0" layoutY="705.0" prefHeight="26.0" prefWidth="165.0" promptText="Pick the publishing date" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="425.0" />
          </children>
       </AnchorPane>
    </content>

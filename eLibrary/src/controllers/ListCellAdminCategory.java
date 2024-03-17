@@ -1,15 +1,16 @@
 package controllers;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import exceptions.UserNotFoundException;
 import models.Admin;
 import models.Category;
 import models.Library;
@@ -52,24 +53,36 @@ public class ListCellAdminCategory extends ListCell<Category> {
 
     @FXML
     void changeCategoryName(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        String currCellCategoryName = getItem().getName();
-        String newCategoryName = newName_input.getText().replaceAll("\\s+", " ");
+        try {
+            Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
+            Category currCellCategory = getItem();
+            String newCategoryName = newName_input.getText().replaceAll("\\s+", "");
 
-        if (admin != null){
-            admin.changeCategoryName(currCellCategoryName, newCategoryName);
+            admin.changeCategoryName(currCellCategory, newCategoryName);
             NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+        }
+        catch (UserNotFoundException e) {
+            // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
         }
     }
 
     @FXML
     void deleteCategory(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        Category currCellCategory = getItem();
+        try { 
+            Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
+            Category currCellCategory = getItem();
 
-        if (admin != null){
             admin.deleteCategory(currCellCategory);
-            NavigationController.loadCenter("/views/admin_manageBooks.fxml");
+            NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+        }
+        catch (UserNotFoundException e) {
+            // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
         }
     }
 

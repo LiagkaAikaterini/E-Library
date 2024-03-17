@@ -2,8 +2,10 @@ package controllers;
 
 import java.io.IOException;
 
+import exceptions.UserNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -63,14 +65,21 @@ public class ListCellAdminBook extends ListCell<Book> {
         }
     }
 
+
     @FXML
     void deleteBook(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        Book currCellBook = getItem();
+        try {
+            Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
+            Book currCellBook = getItem();
 
-        if (admin != null){
             admin.deleteBook(currCellBook);
             NavigationController.loadCenter("/views/admin_manageBooks.fxml");
+        }
+        catch (UserNotFoundException e) {
+            // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
         }
     }
    

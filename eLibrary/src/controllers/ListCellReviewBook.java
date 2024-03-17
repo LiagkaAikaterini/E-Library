@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,12 +8,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-
+import exceptions.NotFoundException;
 import models.Book;
 import models.Borrowed;
 import models.Library;
+import models.User;
+
 
 public class ListCellReviewBook extends ListCell<Borrowed> {
+
+    private Book currBook;
     
     @FXML
     private HBox hbox;
@@ -52,25 +55,17 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
 
     @FXML
     void goToReviewBook(MouseEvent event) {
-        Borrowed borrow = getItem();
-        Book currBook = Library.findBook(borrow.getBookISBN());
-        
-        if (currBook != null) {
-            //UserBookDetailsController.setCurrBook(currBook);
-            NavigationController.loadCenter("/views/user_reviewBook.fxml");
-        }
+        // buttons shown only for when currBook != null
+        UserReviewBookController.setCurrBook(currBook);
+        NavigationController.loadCenter("/views/user_reviewBook.fxml");
     }
     
 
     @FXML
     void goToBookDetails(MouseEvent event) {
-        Borrowed borrow = getItem();
-        Book currBook = Library.findBook(borrow.getBookISBN());
-
-        if (currBook != null) {
-            UserBookDetailsController.setCurrBook(currBook);
-            NavigationController.loadCenter("/views/user_bookDetails.fxml");
-        }
+        // buttons shown only for when currBook != null
+        UserBookDetailsController.setCurrBook(currBook);
+        NavigationController.loadCenter("/views/user_bookDetails.fxml");
     }
 
 
@@ -95,20 +90,44 @@ public class ListCellReviewBook extends ListCell<Borrowed> {
 
             hbox.prefWidthProperty().bind(getListView().widthProperty());
 
-            Book book = Library.findBook(borrow.getBookISBN());
+            try {
+                // we keep the Book object of the borrow in a field currBook as we need it for the button handling
+                this.currBook = Library.findBook(borrow.getBookISBN());
 
-            bookcell_title.setText(book.getTitle());
-            bookcell_author.setText("by " + book.getAuthor());
-            bookcell_isbn.setText("ISBN: " + book.getISBN());;
-            bookcell_rating.setText(
-                book.getAvgRating() + "  (" + String.valueOf(book.getCopiesAvailable()) + " reviews)"
-            );
-            bookcell_borrowDate.setText(String.valueOf(borrow.getBorrowingDate()));
-            bookcell_returnDate.setText(String.valueOf(borrow.getReturnDate()));
+                bookcell_title.setText(currBook.getTitle());
+                bookcell_author.setText("by " + currBook.getAuthor());
+                bookcell_isbn.setText("ISBN: " + currBook.getISBN());;
+                bookcell_rating.setText(
+                    currBook.getAvgRating() + "  (" + String.valueOf(currBook.getCopiesAvailable()) + " reviews)"
+                );
+                bookcell_borrowDate.setText(String.valueOf(borrow.getBorrowingDate()));
+                bookcell_returnDate.setText(String.valueOf(borrow.getReturnDate()));
 
-            setText(null);
-            setGraphic(hbox);
+                setText(null);
+                setGraphic(hbox);
+            }
+            catch (NotFoundException e) {
+                // this will most likely never been thrown as we make sure our data is consistent in the model package
+                // book of the borrow not found in the library - inconsistent data: the borrow must have been removed already
+                
+                // fistly we fix all the possible inconsistent data of the Library (deleted book dependencies)
+                for (Borrowed bor : Library.getAllActiveBorrows()) {
+                    if( (bor.getBookISBN()).equals(borrow.getBookISBN()) ) {
+                        Library.removeActiveBorrow(bor);
+                    }
+                }
+                for (User user : Library.getAllUsers()) {
+                    user.removeBorrowHistory(borrow.getBookISBN());
+                }
+    
+                // then we set empty cell
+                setText(null);
+                setGraphic(null);
+            }
         }
     }
     
+    public Book getCurrBook() {
+        return this.currBook;
+    }
 }

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import exceptions.NewCategoryException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 
@@ -38,11 +40,17 @@ public class AdminManageCategoriesController implements Initializable {
         addCategory_btn.setBlendMode(BlendMode.SRC_OVER);
     }
 
+
     @FXML
     void addCategory(MouseEvent event) {
-        String newCategory = newCategory_input.getText().replaceAll("\\s+", " ");
-        Library.createCategory(newCategory);
-        NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+        String newCategory = newCategory_input.getText().replaceAll("\\s+", "");
+        try {
+            Library.createCategory(newCategory);
+            NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+        }
+        catch (NewCategoryException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
     }
 
 

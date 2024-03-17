@@ -64,7 +64,7 @@ public class User extends UserBase{
     }
 
     
-    public void borrowBook(Book book) throws BorrowLimitException, NoCopiesAvailableException, InvalidBookInfoException {
+    public void borrowBook(Book book) throws BorrowLimitException, NoCopiesAvailableException {
 
         if ( !canBorrow() ) {
             throw new BorrowLimitException();
@@ -85,8 +85,15 @@ public class User extends UserBase{
             this.borrowHistory.add(isbn);
         }
         
-        // update copies
-        book.setCopiesAvailable(copies - 1);        
+        try {
+            // update copies
+            book.setCopiesAvailable(copies - 1); 
+        }
+        catch (InvalidBookInfoException e) {
+            // this is never thrown as we checked already if there are available copies 
+            // so the available copies >=1 and cannot get negative here
+        }
+               
     }
 
     public boolean isBorrowActive(Book book) {

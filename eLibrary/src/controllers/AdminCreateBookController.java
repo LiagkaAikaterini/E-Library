@@ -1,18 +1,23 @@
 package controllers;
 
 import java.time.LocalDate;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
+import exceptions.InvalidBookInfoException;
+import exceptions.InvalidDateException;
+import exceptions.NotFoundException;
+import exceptions.UserNotFoundException;
 import models.Admin;
 import models.Library;
-import models.UserBase;
+
 
 public class AdminCreateBookController {
+
     @FXML
     private TextField title_input;
     @FXML
@@ -42,44 +47,44 @@ public class AdminCreateBookController {
         createBook_btn.setBlendMode(BlendMode.SRC_OVER);
     }
 
+
     @FXML
     void createNewBook(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-
-        String category = category_input.getText().replaceAll("\\s+", " ");
-        
-        String title = title_input.getText().replaceAll("\\s+", " ");
-        String author = author_input.getText().replaceAll("\\s+", " ");
-        String publisher = publisher_input.getText().replaceAll("\\s+", " ");
-        String isbn = isbn_input.getText().replaceAll("\\s+", "");
-        LocalDate publishDate = publishDate_input.getValue();
-
-        String copies = copies_input.getText().replaceAll("\\s+", "");
-
         try {
-                int copiesInt = Integer.parseInt(copies);
+            // if logged in admin not found -> UserNotFoundException
+            Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
 
-                // check if year negative or in the future
-                // invalid years
-                if (copiesInt < 0) {
-                    throw new NumberFormatException();
-                }
+            // the replaceAll whitespace characters (space, tab, newline) with a single space or no space, according to the field
+            // for example ISBN or category should have no whitespace characters - one word
+            String category = category_input.getText().replaceAll("\\s+", "");
+            
+            String title = title_input.getText().replaceAll("\\s+", " ");
+            String author = author_input.getText().replaceAll("\\s+", " ");
+            String publisher = publisher_input.getText().replaceAll("\\s+", " ");
+            String isbn = isbn_input.getText().replaceAll("\\s+", "");
+            LocalDate publishDate = publishDate_input.getValue();
 
-                if (admin != null) {
-                    admin.createBook(title, author, publisher, isbn, publishDate, copiesInt, category);
-                }
-                
-                // If parsing succeeds, input is a valid integer
-                //showAlert("Valid Integer", "Input is a valid integer: " + value);
-            } catch (NumberFormatException ex) {
-                System.out.println("INVALID YEAR");
-                // If parsing fails, input is not a valid integer
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ->     Alert and the search will not be executed
-                //showAlert("Invalid Input", "Input is not a valid integer");
-            }
+            String copies = copies_input.getText().replaceAll("\\s+", ""); 
+            int copiesInt = Integer.parseInt(copies);
         
+            // if some argument is not right the Book object will not be created -> throws custom exceptions
+            admin.createBook(title, author, publisher, isbn, publishDate, copiesInt, category);
 
-        
+            // succeessful creation navigate back to manage books
+            NavigationController.loadCenter("/views/admin_manageBooks.fxml");     
+        }
+        catch (UserNotFoundException e) {
+            // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+        }
+        catch (NumberFormatException e) {
+            NavigationController.showAlert(AlertType.ERROR, "The copies you provided is not a valid Integer.", "");
+        }
+        catch (InvalidBookInfoException | NotFoundException | InvalidDateException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
     }
 
 }

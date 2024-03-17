@@ -2,8 +2,12 @@ package controllers;
 
 import java.io.IOException;
 
+import exceptions.BorrowLimitException;
+import exceptions.NoCopiesAvailableException;
+import exceptions.UserNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -11,6 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 import models.Book;
+import models.Library;
+import models.User;
 
 
 public class ListCellBorrow extends ListCell<Book> {
@@ -58,12 +64,25 @@ public class ListCellBorrow extends ListCell<Book> {
     @FXML
     void borrowBookRequest(MouseEvent event) {
         // maybe show alert to verify borrow 
-        Book currBook = getItem();
+        try {
+            User currUser = Library.findUser(NavigationController.getLoggedPerson().getUsername());
+            Book currBook = getItem();
 
-        if (currBook != null) {
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
+            currUser.borrowBook(currBook);
+
+            // successfull borrow, go automatically to borrow history to show it
+            NavigationController.loadCenter("/views/user_borrowHistory.fxml");
         }
+        catch (UserNotFoundException e) {
+            // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+        }
+        catch (BorrowLimitException | NoCopiesAvailableException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
+        
     }
 
 

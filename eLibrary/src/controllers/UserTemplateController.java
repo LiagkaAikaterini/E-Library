@@ -87,17 +87,11 @@ public class UserTemplateController implements Initializable {
     @FXML
     void onEnterSearch(ActionEvent event) { 
         String title = topSearchBar.getText().replaceAll("\\s+", " ");
-        List<Book> searchRes = UserBase.searchByTitle(title);
 
-        if (searchRes == null) {
-            // no input
-            System.out.println("NO INPUT");
-            //NavigationController.loadCenter("/views/homepage.fxml");
-        }
-        else {
-            System.out.println("DONE");
+        if (!title.isEmpty()) {
+            List<Book> searchRes = UserBase.searchByTitle(title);
+            
             SearchResultController.setResult(searchRes);
-            NavigationController.loadPage("/views/user_template.fxml");
             NavigationController.loadCenter("/views/searchResult.fxml");
         }
     }
@@ -119,9 +113,9 @@ public class UserTemplateController implements Initializable {
     // Loads default content when the application starts
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        profile_dropdown.setText(NavigationController.getLoggedPerson().getUsername());
         NavigationController.setMainLayout(mainLayout);
         NavigationController.loadCenter("/views/homepage.fxml");
-        profile_dropdown.setText(NavigationController.getLoggedPerson().getUsername());
     }
 
 }

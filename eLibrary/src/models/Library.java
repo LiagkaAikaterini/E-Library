@@ -50,7 +50,7 @@ public class Library {
             }
         }
 
-        throw new UserNotFoundException();
+        throw new UserNotFoundException("User not found. Please check your information and try to login again.");
     }
 
     public static List<Book> getTop5Books() {
