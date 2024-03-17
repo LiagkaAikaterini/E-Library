@@ -4,10 +4,15 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import exceptions.BorrowLimitException;
+import exceptions.NoCopiesAvailableException;
+import exceptions.NotFoundException;
+import exceptions.UserNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -16,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import models.Book;
 import models.Category;
 import models.Library;
+import models.User;
 import models.Book.Review;
 
 public class UserBookDetailsController implements Initializable {
@@ -59,16 +65,39 @@ public class UserBookDetailsController implements Initializable {
 
     @FXML
     void borrowBook(MouseEvent event) {
-        // ??????????????????????????????????????????????????????????????????????????????????
+        try {
+            User currUser = Library.findUser(NavigationController.getLoggedPerson().getUsername());
+
+            currUser.borrowBook(currBook);
+            // successfull borrow, go automatically to borrow history to show it
+            NavigationController.loadCenter("/views/user_borrowHistory.fxml");
+        }
+        catch (UserNotFoundException e) {
+            // user not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+        }
+        catch (BorrowLimitException | NoCopiesAvailableException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (currBook != null) {
+        try {
+            if (currBook == null) {
+                // if currBook null the page cannot be initialized - no need for null check in the other functions - button handlers 
+                throw new NullPointerException();
+            }
+
             setBookLabels(currBook);
             setCategoryLabel(currBook);
             setReviewList(currBook);
+        }
+        catch (NullPointerException e) {
+            NavigationController.showAlert(AlertType.ERROR, "Something went wrong. This details book page could not be opened.", "/views/homepage.fxml");
         }
     }
 
@@ -89,14 +118,14 @@ public class UserBookDetailsController implements Initializable {
     }
 
     private void setCategoryLabel(Book book) {
-        Category cat = Library.categoryOfBook(book.getISBN());
-        
-        if (cat == null) {
-            category.setText(null);
-        }
-        else {
+        try {
+            Category cat = Library.categoryOfBook(book.getISBN());
             String catName = cat.getName();
             category.setText(catName);
+        }
+        catch (NotFoundException e) {
+            // category not found
+            category.setText(null);
         }
     }
 

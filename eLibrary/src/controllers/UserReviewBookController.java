@@ -2,9 +2,9 @@ package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -12,9 +12,14 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
+import exceptions.NotFoundException;
+import exceptions.ReviewException;
+import exceptions.UserNotFoundException;
 import models.Book;
 import models.Category;
 import models.Library;
+import models.User;
+
 
 public class UserReviewBookController implements Initializable {
 
@@ -32,22 +37,14 @@ public class UserReviewBookController implements Initializable {
     private Label year;
     @FXML
     private Label isbn;
+    @FXML
+    private Label successLabel;
 
     @FXML
     private TextArea comment_input;
 
     @FXML
     private ToggleGroup rating_input;
-    @FXML
-    private ToggleButton rating1;
-    @FXML
-    private ToggleButton rating2;
-    @FXML
-    private ToggleButton rating3;
-    @FXML
-    private ToggleButton rating4;
-    @FXML
-    private ToggleButton rating5;
 
     @FXML
     private Button submitReview_btn;
@@ -62,14 +59,82 @@ public class UserReviewBookController implements Initializable {
         submitReview_btn.setBlendMode(BlendMode.SRC_OVER);
     }
 
+
     @FXML
     void submitReview(MouseEvent event) {
-        // ???????????????????????????????????????????????????????????????????
+        try {
+
+            User currUser = Library.findUser(NavigationController.getLoggedPerson().getUsername());
+            // get input and replace whitespace characters (space, tab, newline) with a single space
+            String comment = comment_input.getText().replaceAll("\\s+", " ");
+
+            if (comment.isEmpty()) {
+                comment = " ";
+            }
+
+            ToggleButton chosenButton = (ToggleButton) rating_input.getSelectedToggle();
+            
+            if (chosenButton == null) {
+                NavigationController.showAlert(AlertType.ERROR, "You cannot submit review without rating. Please add a rating.", "");
+                return;
+            }
+
+            String ratingText = chosenButton.getText();
+
+            switch ( ratingText ) {
+                case "1":
+                    currUser.reviewBook(currBook, 1, comment);
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    break;
+                case "2":
+                    currUser.reviewBook(currBook, 2, comment);
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    break;
+                case "3":
+                    currUser.reviewBook(currBook, 3, comment);
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    break;
+                case "4":
+                    currUser.reviewBook(currBook, 4, comment);
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    break;
+                case "5":
+                    currUser.reviewBook(currBook, 5, comment);
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    break;
+                default:
+                    NavigationController.showAlert(AlertType.ERROR, "You cannot submit review without rating. Please add a rating.", "");
+                    break;
+            }
+        }
+        catch (UserNotFoundException e) {
+            // user not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+        }
+        catch (ReviewException e) {
+            // this will never been thrown as we handle the rating with the switch above and a 1-5 range toggleGroup
+            // so we add only acceptable ratings 1-5 and otherwise we show an alert to the user
+        }
     }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bookInfoDisplay();
-        bookCategoryDisplay();
+        try {
+            if (currBook == null) {
+                // if currBook null the page cannot be initialized - no need for null check in the other functions - handlers 
+                throw new NullPointerException();
+            }
+
+            bookInfoDisplay();
+            bookCategoryDisplay();
+        }
+        catch (NullPointerException e) {
+            NavigationController.showAlert(AlertType.ERROR, "Something went wrong. This review book page could not be opened.", "/views/user_borrowHistory.fxml");
+        }
+        
     }
 
     private void bookInfoDisplay() {
@@ -81,14 +146,14 @@ public class UserReviewBookController implements Initializable {
     }
 
     private void bookCategoryDisplay() {
-        Category cat = Library.categoryOfBook(currBook.getISBN());
-        
-        if (cat == null) {
-            category.setText(null);
-        }
-        else {
+        try {
+            Category cat = Library.categoryOfBook(currBook.getISBN());
             String catName = cat.getName();
             category.setText(catName);
+        }
+        catch (NotFoundException e) {
+            // category not found
+            category.setText(null);
         }
     }
 

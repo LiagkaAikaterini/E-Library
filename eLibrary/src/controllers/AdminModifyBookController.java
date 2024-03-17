@@ -3,15 +3,19 @@ package controllers;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
+import exceptions.InvalidBookInfoException;
+import exceptions.InvalidDateException;
+import exceptions.NotFoundException;
+import exceptions.UserNotFoundException;
 import models.Admin;
 import models.Book;
 import models.Category;
@@ -21,6 +25,7 @@ import models.Library;
 public class AdminModifyBookController implements Initializable {
 
     private static Book currBook;
+    private Admin admin;
     
     @FXML
     private Label title;
@@ -87,105 +92,104 @@ public class AdminModifyBookController implements Initializable {
     // admin changes user info - buttons OnClick handlers
     @FXML
     void changeTitle(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null) {
-            String newTitle = title_input.getText().replaceAll("\\s+", " ");
-            admin.changeBookTitle(currBook, newTitle);
-            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
-        }
+        String newTitle = title_input.getText().replaceAll("\\s+", " ");
+        admin.changeBookTitle(currBook, newTitle);
+        NavigationController.loadCenter("/views/admin_modifyBook.fxml");
     }
 
     @FXML
     void changeCopiesAvail(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null) {
-            try {
-                String newCopies = copies_input.getText().replaceAll("\\s+", "");
-                int newCopiesInt = Integer.parseInt(newCopies);
+        try {
+            String newCopies = copies_input.getText().replaceAll("\\s+", "");
+            int newCopiesInt = Integer.parseInt(newCopies);
 
-                // The copies cannot be negative - invalid input
-                if (newCopiesInt < 0) {
-                    throw new NumberFormatException();
-                }
-
-                admin.changeBookCopies(currBook, newCopiesInt);
-                NavigationController.loadCenter("/views/admin_modifyBook.fxml");
-                
-            } catch (NumberFormatException ex) {
-                System.out.println("INVALID copies");
-                // If parsing fails, input is not a valid integer
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ->     Alert and the change will not be executed
-                //showAlert("Invalid Input", "Input is not a valid copies integer");
-            }
-        }    
-
+            admin.changeBookCopies(currBook, newCopiesInt);
+            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
+            
+        } 
+        catch (NumberFormatException e) {
+            NavigationController.showAlert(AlertType.ERROR, "The copies you provided is not a valid Integer.", "");
+        }
+        catch (InvalidBookInfoException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
     }
     
     @FXML
     void changeCategory(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null) {
+        try {
             String newCat = category_input.getText().replaceAll("\\s+", " ");
-            admin.addBookToCategory(currBook, newCat);
+            admin.addBookToCategory(currBook.getISBN(), newCat);
             NavigationController.loadCenter("/views/admin_modifyBook.fxml");
+        }
+        catch(NotFoundException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
         }
     }
 
     @FXML
     void changeAuthor(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null) {
-            String newAuthor = author_input.getText().replaceAll("\\s+", " ");
-            admin.changeBookAuthor(currBook, newAuthor);
-            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
-        }
+        String newAuthor = author_input.getText().replaceAll("\\s+", " ");
+        admin.changeBookAuthor(currBook, newAuthor);
+        NavigationController.loadCenter("/views/admin_modifyBook.fxml");
     }
 
     @FXML
     void changePublisher(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null) {
-            String newPublisher = publisher_input.getText().replaceAll("\\s+", " ");
-            admin.changeBookPublisher(currBook, newPublisher);
-            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
-        }
+        String newPublisher = publisher_input.getText().replaceAll("\\s+", " ");
+        admin.changeBookPublisher(currBook, newPublisher);
+        NavigationController.loadCenter("/views/admin_modifyBook.fxml");
     }
 
     @FXML
-    void changeISBN(MouseEvent event) throws Exception {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null) {
+    void changeISBN(MouseEvent event) {
+        try {
             String newISBN = isbn_input.getText().replaceAll("\\s+", "");
             admin.changeBookISBN(currBook, newISBN);
             NavigationController.loadCenter("/views/admin_modifyBook.fxml");
+        }
+        catch(InvalidBookInfoException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
         }
     } 
 
     @FXML
     void changeDatePublished(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null) {
+        try {
             LocalDate newDate = publishDate_input.getValue();
             admin.changeBookDatePublished(currBook, newDate);
             NavigationController.loadCenter("/views/admin_modifyBook.fxml");
         }
+        catch(InvalidDateException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
+        
     }
 
     // Delete Book button - onClick handler
     @FXML
     void deleteBook(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
-            admin.deleteBook(currBook);
-            NavigationController.loadCenter("/views/admin_manageBooks.fxml");
-        }
+        admin.deleteBook(currBook);
+        NavigationController.loadCenter("/views/admin_manageBooks.fxml");
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        currBookInfoInit();
-        setCategoryLabel();
+        try {
+            // we keep admin in the page beacause it is used all the button handlers to keep the code simpler
+            this.admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
+            // initialize page info
+            currBookInfoInit();
+            setCategoryLabel();
+        }
+        catch (UserNotFoundException e) {
+            // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+        }
+        
     }
 
     
@@ -200,17 +204,15 @@ public class AdminModifyBookController implements Initializable {
     }
 
     private void setCategoryLabel() {
-        Category cat = Library.categoryOfBook(currBook.getISBN());
-        
-        
-        if (cat == null) {
-            category.setText(null);
-        }
-        else {
+        try {
+            Category cat = Library.categoryOfBook(currBook.getISBN());
             String catName = cat.getName();
             category.setText(catName);
         }
-        
+        catch (NotFoundException e) {
+            // category not found
+            category.setText(null);
+        }
     }
 
     public static Book getCurrBook() {

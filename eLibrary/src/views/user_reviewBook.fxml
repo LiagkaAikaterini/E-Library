@@ -73,15 +73,15 @@
       <Button fx:id="submitReview_btn" blendMode="MULTIPLY" layoutX="170.4" layoutY="319.0" mnemonicParsing="false" onMouseClicked="#submitReview" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" style="-fx-background-color: #B69E7A;" text="Submit Review" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0" />
       <HBox layoutX="10.399999618530273" layoutY="240.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="240.0">
          <children>
-            <ToggleButton fx:id="rating1" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="1">
+            <ToggleButton blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="1">
                <toggleGroup>
                   <ToggleGroup fx:id="rating_input" />
                </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="rating2" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="2" toggleGroup="$rating_input" />
-            <ToggleButton fx:id="rating3" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="3" toggleGroup="$rating_input" />
-            <ToggleButton fx:id="rating4" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="4" toggleGroup="$rating_input" />
-            <ToggleButton fx:id="rating5" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="5" toggleGroup="$rating_input" />
+            <ToggleButton blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="2" toggleGroup="$rating_input" />
+            <ToggleButton blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="3" toggleGroup="$rating_input" />
+            <ToggleButton blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="4" toggleGroup="$rating_input" />
+            <ToggleButton blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="22.0" text="5" toggleGroup="$rating_input" />
          </children>
       </HBox>
    </children>

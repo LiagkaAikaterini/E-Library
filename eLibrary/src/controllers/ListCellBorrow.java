@@ -74,7 +74,7 @@ public class ListCellBorrow extends ListCell<Book> {
             NavigationController.loadCenter("/views/user_borrowHistory.fxml");
         }
         catch (UserNotFoundException e) {
-            // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            // user not found in the library by findAdmin, log out automatically and tell admin to log in again.
             NavigationController.setMainLayout(null);
             NavigationController.setLoggedPerson(null);
             NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
