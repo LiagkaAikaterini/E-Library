@@ -177,8 +177,14 @@ public class AdminModifyBookController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            if (currBook == null) {
+                // if currBook null the page cannot be initialized - no need for null check in the other functions - button handlers 
+                throw new NullPointerException();
+            }
+
             // we keep admin in the page beacause it is used all the button handlers to keep the code simpler
             this.admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
+            
             // initialize page info
             currBookInfoInit();
             setCategoryLabel();
@@ -189,7 +195,9 @@ public class AdminModifyBookController implements Initializable {
             NavigationController.setLoggedPerson(null);
             NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
         }
-        
+        catch (NullPointerException e) {
+            NavigationController.showAlert(AlertType.ERROR, "Something went wrong. This modify book page could not be opened.", "/views/admin_manageBooks.fxml");
+        }
     }
 
     

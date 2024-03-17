@@ -4,8 +4,12 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import exceptions.InvalidDateException;
+import exceptions.InvalidUserInfoException;
+import exceptions.UserNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -20,6 +24,7 @@ import models.User;
 public class AdminModifyUserController implements Initializable {
 
     private static User currUser;
+    private Admin admin;
 
     @FXML
     private Label username;
@@ -85,89 +90,109 @@ public class AdminModifyUserController implements Initializable {
     // admin changes user info - buttons OnClick handlers
     @FXML
     void changeUsername(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
+        try { 
             String newUsername = username_input.getText().replaceAll("\\s+", "");
             admin.changeUserUsername(currUser, newUsername);
             NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
+        catch (InvalidUserInfoException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
+        
     }
 
     @FXML
     void changeFirstName(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
-            String newFirstname = firstaname_input.getText().replaceAll("\\s+", "");
-            admin.changeUserFirstname(currUser, newFirstname);
-            NavigationController.loadCenter("/views/admin_modifyUser.fxml");
-        }
+  
+        String newFirstname = firstaname_input.getText().replaceAll("\\s+", " ");
+        admin.changeUserFirstname(currUser, newFirstname);
+        NavigationController.loadCenter("/views/admin_modifyUser.fxml");
+        
     }
 
     @FXML
     void changeLastName(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
-            String newLastname = lastname_input.getText().replaceAll("\\s+", "");
-            admin.changeUserLastname(currUser, newLastname);
-            NavigationController.loadCenter("/views/admin_modifyUser.fxml");
-        }
+    
+        String newLastname = lastname_input.getText().replaceAll("\\s+", " ");
+        admin.changeUserLastname(currUser, newLastname);
+        NavigationController.loadCenter("/views/admin_modifyUser.fxml");
+        
     }
 
     @FXML
     void changeID(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
+        try { 
             String newIdNum = id_input.getText().replaceAll("\\s+", "");
             admin.changeUserIdNum(currUser, newIdNum);
             NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
+        catch (InvalidUserInfoException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
+        
     }
 
     @FXML
     void changeEmail(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
+        try { 
             String newEmail = email_input.getText().replaceAll("\\s+", "");
             admin.changeUserEmail(currUser, newEmail);
             NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
+        catch (InvalidUserInfoException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
     }
+
     @FXML
     void changeAddress(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
-            String newAddress = address_input.getText().replaceAll("\\s+", " ");
-            admin.changeUserAddress(currUser, newAddress);
-            NavigationController.loadCenter("/views/admin_modifyUser.fxml");
-        }
+        String newAddress = address_input.getText().replaceAll("\\s+", " ");
+        admin.changeUserAddress(currUser, newAddress);
+        NavigationController.loadCenter("/views/admin_modifyUser.fxml");
     }
     
     @FXML
     void changeBirthDate(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
+        try { 
             LocalDate newBirthday = birthday_input.getValue();
             admin.changeUserBirthday(currUser, newBirthday);
             NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
+        catch (InvalidDateException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        }
     }
 
-    // Delete User button - onClick handler
-    // ??????????????????????????????????????????????????????????????????????????????
-    // maybe add an alert that says User deleted successfully 
     @FXML
     void deleteUser(MouseEvent event) {
-        Admin admin = Library.getCurrAdmin(NavigationController.getLoggedPerson());
-        if (admin != null){
+        
             admin.deleteUser(currUser);
             NavigationController.loadCenter("/views/admin_manageUsers.fxml");
-        }
+        
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        currUserInfoInit();
+        try {
+            if (currUser == null) {
+                // if currUser null the page cannot be initialized - no need for null check in the other functions - button handlers 
+                throw new NullPointerException();
+            }
+            // we keep admin in the page because it is used all the button handlers to keep the code simpler
+            this.admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
+            // initialize page info
+            currUserInfoInit();
+        }
+        catch (UserNotFoundException e) {
+            // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+            NavigationController.setMainLayout(null);
+            NavigationController.setLoggedPerson(null);
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+        }
+        catch (NullPointerException e) {
+            NavigationController.showAlert(AlertType.ERROR, "Something went wrong. This modify user page could not be opened.", "/views/admin_manageUsers.fxml");
+        }
     }
 
 
@@ -187,8 +212,4 @@ public class AdminModifyUserController implements Initializable {
     public static void setCurrUser(User currUser) {
         AdminModifyUserController.currUser = currUser;
     }
-
-    
-    
-
 }
