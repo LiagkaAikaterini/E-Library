@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
@@ -75,8 +76,12 @@ public class ListCellAdminCategory extends ListCell<Category> {
             Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
             Category currCellCategory = getItem();
 
-            admin.deleteCategory(currCellCategory);
-            NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+            // ask for confirmation from the admin first
+            ButtonType conf = NavigationController.showAlert(AlertType.CONFIRMATION, "Delete Category : If you press OK this category and all its book will be deleted permanently.", "");
+            if (conf == ButtonType.OK) {
+                admin.deleteCategory(currCellCategory);
+                NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+            }
         }
         catch (UserNotFoundException e) {
             // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.

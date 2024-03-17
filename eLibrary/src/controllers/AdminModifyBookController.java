@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -169,8 +170,12 @@ public class AdminModifyBookController implements Initializable {
     // Delete Book button - onClick handler
     @FXML
     void deleteBook(MouseEvent event) {
-        admin.deleteBook(currBook);
-        NavigationController.loadCenter("/views/admin_manageBooks.fxml");
+        // ask for confirmation from the admin first
+        ButtonType conf = NavigationController.showAlert(AlertType.CONFIRMATION, "Delete Book : If you press OK this book will be deleted permanently.", "");
+        if (conf == ButtonType.OK) {
+            admin.deleteBook(currBook);
+            NavigationController.loadCenter("/views/admin_manageBooks.fxml");
+        }
     }
 
 

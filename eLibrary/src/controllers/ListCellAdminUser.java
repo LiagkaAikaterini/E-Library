@@ -6,6 +6,7 @@ import exceptions.UserNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.Alert.AlertType;
@@ -69,8 +70,12 @@ public class ListCellAdminUser extends ListCell<User> {
             Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
             User currCellUser = getItem();
 
-            admin.deleteUser(currCellUser);
-            NavigationController.loadCenter("/views/admin_manageUsers.fxml");
+            // ask for confirmation from the admin first
+            ButtonType conf = NavigationController.showAlert(AlertType.CONFIRMATION, "Delete User : If you press OK this user will be deleted permanently.", "");
+            if (conf == ButtonType.OK) {
+                admin.deleteUser(currCellUser);
+                NavigationController.loadCenter("/views/admin_manageUsers.fxml");
+            }
         }
         catch (UserNotFoundException e) {
             // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.

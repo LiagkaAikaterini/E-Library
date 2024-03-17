@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -165,10 +166,12 @@ public class AdminModifyUserController implements Initializable {
 
     @FXML
     void deleteUser(MouseEvent event) {
-        
+        // ask for confirmation from the admin first
+        ButtonType conf = NavigationController.showAlert(AlertType.CONFIRMATION, "Delete User : If you press OK this user will be deleted permanently.", "");
+        if (conf == ButtonType.OK) {
             admin.deleteUser(currUser);
             NavigationController.loadCenter("/views/admin_manageUsers.fxml");
-        
+        }
     }
 
 

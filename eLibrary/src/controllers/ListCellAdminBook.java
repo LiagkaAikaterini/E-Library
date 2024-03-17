@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
@@ -71,9 +72,13 @@ public class ListCellAdminBook extends ListCell<Book> {
         try {
             Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
             Book currCellBook = getItem();
-
-            admin.deleteBook(currCellBook);
-            NavigationController.loadCenter("/views/admin_manageBooks.fxml");
+            
+            // ask for confirmation from the admin first
+            ButtonType conf = NavigationController.showAlert(AlertType.CONFIRMATION, "Delete Book : If you press OK this book will be deleted permanently.", "");
+            if (conf == ButtonType.OK) {
+                admin.deleteBook(currCellBook);
+                NavigationController.loadCenter("/views/admin_manageBooks.fxml");
+            } 
         }
         catch (UserNotFoundException e) {
             // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
