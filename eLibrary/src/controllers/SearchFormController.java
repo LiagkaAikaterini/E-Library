@@ -73,9 +73,11 @@ public class SearchFormController {
             } 
             catch (NumberFormatException e) {
                 NavigationController.showAlert(AlertType.ERROR, "The year provided in not a valid Integer.", "");
+                return;
             }
             catch (InvalidDateException e) {
                 NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+                return;
             }
         }
 

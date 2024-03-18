@@ -120,12 +120,16 @@ public class Admin extends UserBase {
 
     public void deleteUser(User userToDelete) {
         // terminate all current borrows of user - book copies fixed
-        List<Borrowed> activeBorrows = Library.getAllActiveBorrows();
+        List<Borrowed> borrowsToTerminate = new ArrayList<>();
 
-        for (Borrowed borrow : activeBorrows) {
+        for (Borrowed borrow : Library.getAllActiveBorrows()) {
             if ( (borrow.getUsername()).equals(userToDelete.getUsername()) ) {
-                terminateBorrow(borrow);
+                borrowsToTerminate.add(borrow);
             }
+        }
+
+        for (Borrowed b : borrowsToTerminate) {
+            terminateBorrow(b);
         }
 
         //remove all reviews of this User 
@@ -133,6 +137,7 @@ public class Admin extends UserBase {
 
         for (Book book : books) {
             book.deleteReviewsOfUser(userToDelete.getUsername());
+            book.updateAvgRating();
         }
 
         // delete user

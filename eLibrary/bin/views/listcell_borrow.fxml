@@ -11,7 +11,7 @@
    <children>
       <VBox prefHeight="75.0" prefWidth="480.0" HBox.hgrow="ALWAYS">
          <children>
-            <Label fx:id="bookcell_title" prefHeight="20.0" prefWidth="375.0" text="booktitle">
+            <Label fx:id="bookcell_title" prefHeight="20.0" text="booktitle">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

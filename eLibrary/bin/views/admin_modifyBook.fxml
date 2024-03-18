@@ -45,8 +45,8 @@
             <Button fx:id="category_btn" layoutX="174.0" layoutY="367.0" minHeight="23.0" mnemonicParsing="false" onMouseClicked="#changeCategory" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" style="-fx-background-color: #B69E7A;" text="Change Category" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="320.0" />
             <Button fx:id="copies_btn" layoutX="115.0" layoutY="429.0" minHeight="15.0" mnemonicParsing="false" onMouseClicked="#changeCopiesAvail" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" style="-fx-background-color: #B69E7A;" text="Change Available Copies" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="215.0" />
             <Button fx:id="title_btn" layoutX="298.0" layoutY="242.0" maxHeight="40.0" minHeight="23.0" mnemonicParsing="false" onMouseClicked="#changeTitle" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="23.0" prefWidth="114.0" style="-fx-background-color: #B69E7A;" text="Change Title" AnchorPane.leftAnchor="150.4" AnchorPane.rightAnchor="150.4" AnchorPane.topAnchor="110.0" />
-            <TextField fx:id="title_input" layoutX="209.0" layoutY="81.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new Username" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="80.0" />
-            <TextField fx:id="copies_input" layoutX="7.0" layoutY="176.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new first name" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="185.0" />
+            <TextField fx:id="title_input" layoutX="209.0" layoutY="81.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new book title" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="80.0" />
+            <TextField fx:id="copies_input" layoutX="7.0" layoutY="176.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new number of available copies (positive integer or 0)" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="185.0" />
             <Label alignment="CENTER" layoutX="28.0" layoutY="381.0" text="Publishing Date :" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="675.0">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -77,11 +77,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="category_input" layoutX="17.0" layoutY="195.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new last name" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="290.0" />
-            <TextField fx:id="author_input" layoutX="17.0" layoutY="300.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new ID number" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="395.0" />
-            <TextField fx:id="publisher_input" layoutX="17.0" layoutY="405.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new e-mail" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="500.0" />
-            <TextField fx:id="isbn_input" layoutX="17.0" layoutY="510.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new home address" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="605.0" />
-            <DatePicker fx:id="publishDate_input" layoutX="146.0" layoutY="705.0" prefHeight="26.0" prefWidth="165.0" promptText="Pick new birth date" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="710.0" />
+            <TextField fx:id="category_input" layoutX="17.0" layoutY="195.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter already existing category" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="290.0" />
+            <TextField fx:id="author_input" layoutX="17.0" layoutY="300.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new author" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="395.0" />
+            <TextField fx:id="publisher_input" layoutX="17.0" layoutY="405.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter new publisher" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="500.0" />
+            <TextField fx:id="isbn_input" layoutX="17.0" layoutY="510.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter book ISBN (no whitespaces). It must be unique." AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="605.0" />
+            <DatePicker fx:id="publishDate_input" layoutX="146.0" layoutY="705.0" prefHeight="26.0" prefWidth="165.0" promptText="Pick new publishing date" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="710.0" />
          </children>
       </AnchorPane>
    </content>

@@ -24,7 +24,7 @@
                   <ColorAdjust />
                </effect>
             </Label>
-            <ListView fx:id="topBooklist" blendMode="MULTIPLY" focusTraversable="false" layoutX="200.0" layoutY="67.0" mouseTransparent="true" prefHeight="305.6" prefWidth="600.0" style="-fx-background-color: #EEDDC2;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
+            <ListView fx:id="topBooklist" blendMode="MULTIPLY" focusTraversable="false" layoutX="200.0" layoutY="67.0" prefHeight="305.6" prefWidth="600.0" style="-fx-background-color: #EEDDC2;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
                <effect>
                   <ColorAdjust brightness="-0.02" />
                </effect></ListView>

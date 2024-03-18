@@ -95,7 +95,7 @@ public class Library {
 
     public static Category findCategory(String name) throws NotFoundException {
         for (Category category : allCategories) {
-            if ( (category.getName()).equals(name) ) {
+            if ( (category.getName()).equals(name.toLowerCase()) ) {
                 return category;
             }
         }

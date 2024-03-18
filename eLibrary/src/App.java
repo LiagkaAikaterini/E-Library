@@ -95,16 +95,16 @@ public class App extends Application  {
 
         try { 
             // BOOKS
-            Book b1 = new Book("To Kill a Mockingbird", "Harper Lee", "Penguin Random House",  "978-0-123456-78-9", java.time.LocalDate.of(2015, 7, 11), 3);
-            Book b2 = new Book("Another Book by Harper Lee", "Harper Lee", "HarperCollins Publishers",  "978-1-234567-89-0", java.time.LocalDate.of(2017, 9, 15), 5);
-            Book b3 = new Book("1984", "George Orwell", "Simon & Schuster",  "978-2-345678-90-1", java.time.LocalDate.of(2015, 6, 8), 7);
-            Book b4 = new Book("Animal Farm", "George Orwell", "Penguin Random House",  "978-3-456789-01-2", java.time.LocalDate.of(2011, 8, 17), 2);
-            Book b5 = new Book("Another Book by George Orwell", "George Orwell", "HarperCollins Publishers",  "978-4-567890-12-3", java.time.LocalDate.of(2020, 11, 22), 10);
-            Book b6 = new Book("The Hobbit", "J.R.R. Tolkien", "HarperCollins Publishers",  "978-5-678901-23-4", java.time.LocalDate.of(2011, 9, 21), 5);
-            Book b7 = new Book("The Lord of the Rings: The Fellowship of the Ring", "J.R.R. Tolkien", "Simon & Schuster",  "978-6-789012-34-5", java.time.LocalDate.of(2017, 7, 29), 3);
-            Book b8 = new Book("The Lord of the Rings: The Two Towers", "J.R.R. Tolkien", "Simon & Schuster",  "978-7-890123-45-6", java.time.LocalDate.of(2020, 11, 11), 4);
-            Book b9 = new Book("The Lord of the Rings: The Return of the King", "J.R.R. Tolkien", "Simon & Schuster",  "978-8-901234-56-7", java.time.LocalDate.of(2020, 10, 20), 0);
-            Book b10 = new Book("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", "Penguin Random House",  "978-9-012345-67-8", java.time.LocalDate.of(2015, 6, 26), 1);
+            Book b1 = new Book("To Kill a Mockingbird", "Harper Lee", "Penguin Random House",  "1-12345", java.time.LocalDate.of(2015, 7, 11), 3);
+            Book b2 = new Book("Another Book by Harper Lee", "Harper Lee", "HarperCollins Publishers",  "2-12345", java.time.LocalDate.of(2017, 9, 15), 5);
+            Book b3 = new Book("1984", "George Orwell", "Simon & Schuster",  "3-12345", java.time.LocalDate.of(2015, 6, 8), 7);
+            Book b4 = new Book("Animal Farm", "George Orwell", "Penguin Random House",  "4-12345", java.time.LocalDate.of(2011, 8, 17), 2);
+            Book b5 = new Book("Another Book by George Orwell", "George Orwell", "HarperCollins Publishers",  "5-12345", java.time.LocalDate.of(2020, 11, 22), 10);
+            Book b6 = new Book("The Hobbit", "J.R.R. Tolkien", "HarperCollins Publishers",  "6-12345", java.time.LocalDate.of(2011, 9, 21), 5);
+            Book b7 = new Book("The Lord of the Rings: The Fellowship of the Ring", "J.R.R. Tolkien", "Simon & Schuster",  "7-12345", java.time.LocalDate.of(2017, 7, 29), 3);
+            Book b8 = new Book("The Lord of the Rings: The Two Towers", "J.R.R. Tolkien", "Simon & Schuster",  "8-12345", java.time.LocalDate.of(2020, 11, 11), 4);
+            Book b9 = new Book("The Lord of the Rings: The Return of the King", "J.R.R. Tolkien", "Simon & Schuster",  "9-12345", java.time.LocalDate.of(2020, 10, 20), 0);
+            Book b10 = new Book("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", "Penguin Random House",  "10-12345", java.time.LocalDate.of(2015, 6, 26), 1);
 
             Library.addBook(b10);
             Library.addBook(b9);
@@ -118,10 +118,10 @@ public class App extends Application  {
             Library.addBook(b1);
 
             // CATEGORIES
-            Category c1 = new Category("Fantasy");
-            Category c2 = new Category("Fiction");
-            Category c3 = new Category("Mystery");
-            Category c4 = new Category("Dystopian");
+            Category c1 = new Category("fantasy");
+            Category c2 = new Category("fiction");
+            Category c3 = new Category("mystery");
+            Category c4 = new Category("dystopian");
             
             c1.addToCategoryBooks(b6.getISBN());
             c1.addToCategoryBooks(b7.getISBN());

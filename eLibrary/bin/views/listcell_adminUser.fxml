@@ -11,7 +11,7 @@
    <children>
       <VBox prefHeight="50.0" prefWidth="406.0">
          <children>
-            <Label fx:id="username" prefHeight="28.0" prefWidth="69.0" text="username ">
+            <Label fx:id="username" prefHeight="28.0" text="username ">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

@@ -60,9 +60,9 @@
                </font>
             </Label>
             <TextField fx:id="category_input" layoutX="17.0" layoutY="195.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter already existing category" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="185.0" />
-            <TextField fx:id="author_input" layoutX="17.0" layoutY="300.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter the book author" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="245.0" />
+            <TextField fx:id="author_input" layoutX="17.0" layoutY="300.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter the book's author" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="245.0" />
             <TextField fx:id="publisher_input" layoutX="17.0" layoutY="405.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter the book's publisher" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="305.0" />
-            <TextField fx:id="isbn_input" layoutX="17.0" layoutY="510.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter unique book ISBN (no whitespaces)" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="365.0" />
+            <TextField fx:id="isbn_input" layoutX="17.0" layoutY="510.0" minHeight="23.0" prefHeight="23.0" prefWidth="206.0" promptText="Enter book ISBN (no whitespaces). It must be unique." AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="365.0" />
             <DatePicker fx:id="publishDate_input" layoutX="146.0" layoutY="705.0" prefHeight="26.0" prefWidth="165.0" promptText="Pick the publishing date" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="425.0" />
          </children>
       </AnchorPane>

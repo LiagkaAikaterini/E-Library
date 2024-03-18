@@ -11,7 +11,7 @@ public class Category implements Serializable {
     private List<String> booksISBN;
 
     public Category(String name) {
-        this.name = name;
+        this.name = name.toLowerCase().replaceAll("\\s+", "");
         this.booksISBN = new ArrayList<String>();
     }
 
@@ -42,7 +42,7 @@ public class Category implements Serializable {
         return name;
     }
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toLowerCase().replaceAll("\\s+", "");
     }
 
     public List<String> getBooksISBN() {

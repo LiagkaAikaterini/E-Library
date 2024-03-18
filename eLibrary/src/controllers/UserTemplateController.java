@@ -92,6 +92,8 @@ public class UserTemplateController implements Initializable {
             List<Book> searchRes = UserBase.searchByTitle(title);
             
             SearchResultController.setResult(searchRes);
+            topSearchBar.setText("");
+            mainLayout.requestFocus();
             NavigationController.loadCenter("/views/searchResult.fxml");
         }
     }

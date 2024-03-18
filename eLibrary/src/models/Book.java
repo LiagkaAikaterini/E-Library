@@ -146,6 +146,7 @@ public class Book implements Serializable{
                 rev.setComment(comment);
                 rev.setRating(rating);
                 updateAvgRating();
+                return;
             }
         }
 

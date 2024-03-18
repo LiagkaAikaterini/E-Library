@@ -6,11 +6,12 @@
 
 <VBox fx:id="vbox" blendMode="MULTIPLY" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="username_rating" prefHeight="30.0" text="username + rating">
+      <Label fx:id="username" prefHeight="30.0" text="username">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <Label fx:id="rating" text="rating" />
       <Label fx:id="comment" maxHeight="1.7976931348623157E308" text="comment" />
    </children>
 </VBox>

@@ -27,7 +27,7 @@
             </Button>
          </children>
       </HBox>
-      <TextField fx:id="newName_input" maxWidth="478.0">
+      <TextField fx:id="newName_input" maxWidth="478.0" promptText="Enter new name for this category">
          <VBox.margin>
             <Insets bottom="5.0" right="10.0" />
          </VBox.margin>
