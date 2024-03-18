@@ -1,7 +1,10 @@
 package models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import exceptions.CategoryException;
 import exceptions.InvalidBookInfoException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidUserInfoException;
@@ -43,10 +46,11 @@ public class Admin extends UserBase {
         
     }
 
-    public void createCategory(String categoryName) {
+    public void createCategory(String categoryName) throws CategoryException {
         // if category does not already exists create category
         try { 
             Library.findCategory(categoryName);
+            throw new CategoryException();
         }
         catch (NotFoundException e) {
             Category newCat = new Category(categoryName);
@@ -72,7 +76,7 @@ public class Admin extends UserBase {
         }  
     }
 
-    public void changeCategoryName(Category category, String newCategoryName) {
+    public void changeCategoryName(Category category, String newCategoryName) throws CategoryException {
         String oldName = category.getName();
 
         if ( oldName.equals(newCategoryName) ) {
@@ -81,6 +85,7 @@ public class Admin extends UserBase {
 
         try { 
             Library.findCategory(newCategoryName);
+            throw new CategoryException();
         }
         catch (NotFoundException e) {
             // if a category with this name does not already exist
@@ -91,11 +96,16 @@ public class Admin extends UserBase {
 
     public void deleteBook(Book bookToDelete) {
         // delete all borrows that has not been returned
+        List<Borrowed> borrowsRemove = new ArrayList<>();
         for (Borrowed bor : Library.getAllActiveBorrows()) {
             if( (bor.getBookISBN()).equals(bookToDelete.getISBN()) ) {
                 // remove active borrow from the App's active borrow list
-                Library.removeActiveBorrow(bor);
+                borrowsRemove.add(bor);
             }
+        }
+
+        for (Borrowed bor : borrowsRemove) {
+            Library.removeActiveBorrow(bor);
         }
 
         //delete book from all histories - if user has not borrowed book nothing will happen
