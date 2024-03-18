@@ -30,10 +30,10 @@ public class User extends UserBase{
         }
 
         //check if email has the correct format something@domain.end
-        Pattern correctEmailFormat = Pattern.compile("^[A-Za-z]\\w{5,29}$");
+        Pattern correctEmailFormat = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
         
         if (!correctEmailFormat.matcher(email).matches()) {
-            throw new InvalidUserInfoException("Invalid E-mail Format: Please enter a valid e-mail");
+            throw new InvalidUserInfoException("Invalid E-mail Format: a valid format is username@domain.com\nusername can contain: a-z  A-Z  0-9  . _ % + -\nusername must be followed by @\ndomain can contain: a-z  A-Z  0-9  . - \ndomain must be followed by dot (.) and 2 letter characters ");
         }
         
         // check if email is unique
@@ -171,11 +171,15 @@ public class User extends UserBase{
         return email;
     }
     public void setEmail(String email) throws InvalidUserInfoException {
+        if (email.equals(this.email)) {
+            return;
+        }
+
         //check if email has the correct format something@domain.end
-        Pattern correctEmailFormat = Pattern.compile("^[A-Za-z]\\w{5,29}$");
+        Pattern correctEmailFormat = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
         
         if (!correctEmailFormat.matcher(email).matches()) {
-            throw new InvalidUserInfoException("Invalid E-mail Format: Please enter a valid e-mail");
+            throw new InvalidUserInfoException("Invalid E-mail Format: a valid format is username@domain.com\nusername can contain: a-z  A-Z  0-9  . _ % + -\nusername must be followed by @\ndomain can contain: a-z  A-Z  0-9  . - \ndomain must be followed by dot (.) and 2 letter characters ");
         }
         
         // check if email is unique
