@@ -45,7 +45,6 @@ public class SearchFormController {
         String author = author_input.getText().replaceAll("\\s+", " ");
         String year = year_input.getText().replaceAll("\\s+", "");
 
-
         // execute searchs seperately for each text field that is not empty
         List< List<Book> > results = new ArrayList<>();
 
@@ -73,10 +72,10 @@ public class SearchFormController {
                 results.add(resYear);
             } 
             catch (NumberFormatException e) {
-                NavigationController.showAlert(AlertType.ERROR, "The year provided in not a valid Integer.", "/views/searchForm.fxml");
+                NavigationController.showAlert(AlertType.ERROR, "The year provided in not a valid Integer.", "");
             }
             catch (InvalidDateException e) {
-                NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/searchForm.fxml");
+                NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
             }
         }
 
