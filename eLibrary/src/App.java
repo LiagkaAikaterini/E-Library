@@ -18,38 +18,7 @@ public class App extends Application  {
 
     @Override
     public void start(Stage primaryStage) {
-        /*
-        Library.setAllAdmins(new ArrayList<>());
-        Library.setAllUsers(new ArrayList<>());
-        Library.setAllActiveBorrows(new ArrayList<>());
-        Library.setAllBooks(new ArrayList<>());
-        Library.setAllCategories(new ArrayList<>());
-        
-        
-        try {
-            Admin a = new Admin("admin1", "STYLESHEET_CASPIAN");
-            Book b1 = new Book("book1", "author1", "publisher1",  "111", java.time.LocalDate.now(), 3);
-            Book b2 = new Book("book2", "author2", "publisher2", "222", java.time.LocalDate.now(), 5);
-            Category c1 = new Category("category1");
-            Category c2 = new Category("category2");
-            c1.addToCategoryBooks(b1.getISBN());
-            c2.addToCategoryBooks(b2.getISBN());
-            User user = new User("username", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_MODENA", "STYLESHEET_CASPIAN", java.time.LocalDate.now());
-            Library.addAdmins(a);
-            Library.addUsers(user);
-            Library.addBook(b2);
-            Library.addBook(b1);
-            Library.addCategory(c2);
-            Library.addCategory(c1);
-
-            user.borrowBook(b2);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        Platform.exit();
-        
+     
 
         
         /*
@@ -98,25 +67,10 @@ public class App extends Application  {
 
          */
         
+        //dummyDataCreation();
 
         NavigationController.setStage(primaryStage);
         NavigationController.loadPage("/views/home.fxml");
-
-        //NavigationController.loadPage("/views/user_template.fxml");
-        //NavigationController.loadPage("/views/admin_template.fxml");
-
-        /*
-        Book b1 = new Book("book21", "author1", "publisher1",  "hey", java.time.LocalDate.now(), 3);
-        Book b2 = new Book("book2222", "author2", "publisher2", "bitch", java.time.LocalDate.now(), 5);
-
-        Library.getAllCategories().get(0).addToCategoryBooks(b1.getISBN());
-        Library.getAllCategories().get(0).addToCategoryBooks(b2.getISBN());
-        Library.addBook(b1);
-        Library.addBook(b2);
-        
-        Platform.exit();
-        */
-        
     
     }
 
@@ -146,12 +100,12 @@ public class App extends Application  {
             Book b3 = new Book("1984", "George Orwell", "Simon & Schuster",  "978-2-345678-90-1", java.time.LocalDate.of(2015, 6, 8), 7);
             Book b4 = new Book("Animal Farm", "George Orwell", "Penguin Random House",  "978-3-456789-01-2", java.time.LocalDate.of(2011, 8, 17), 2);
             Book b5 = new Book("Another Book by George Orwell", "George Orwell", "HarperCollins Publishers",  "978-4-567890-12-3", java.time.LocalDate.of(2020, 11, 22), 10);
-            Book b6 = new Book("The Hobbit", "J.R.R. Tolkien", "HarperCollins Publishers",  "978-5-678901-23-4", java.time.LocalDate.of(2011, 9, 21), 0);
+            Book b6 = new Book("The Hobbit", "J.R.R. Tolkien", "HarperCollins Publishers",  "978-5-678901-23-4", java.time.LocalDate.of(2011, 9, 21), 5);
             Book b7 = new Book("The Lord of the Rings: The Fellowship of the Ring", "J.R.R. Tolkien", "Simon & Schuster",  "978-6-789012-34-5", java.time.LocalDate.of(2017, 7, 29), 3);
             Book b8 = new Book("The Lord of the Rings: The Two Towers", "J.R.R. Tolkien", "Simon & Schuster",  "978-7-890123-45-6", java.time.LocalDate.of(2020, 11, 11), 4);
-            Book b9 = new Book("The Lord of the Rings: The Return of the King", "J.R.R. Tolkien", "Simon & Schuster",  "978-8-901234-56-7", java.time.LocalDate.of(2020, 10, 20), 5);
+            Book b9 = new Book("The Lord of the Rings: The Return of the King", "J.R.R. Tolkien", "Simon & Schuster",  "978-8-901234-56-7", java.time.LocalDate.of(2020, 10, 20), 0);
             Book b10 = new Book("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", "Penguin Random House",  "978-9-012345-67-8", java.time.LocalDate.of(2015, 6, 26), 1);
-        
+
             Library.addBook(b10);
             Library.addBook(b9);
             Library.addBook(b8);
@@ -200,135 +154,136 @@ public class App extends Application  {
             User user4 = new User("emma_brown", "pass987", "Emma", "Brown", "AE765432", "emma@example.com", "321 Pine St", LocalDate.of(1987, 8, 25));
             User user5 = new User("michael_smith", "newpass", "Michael", "Smith", "AK543210", "michael@example.com", "567 Maple St", LocalDate.of(1995, 12, 8));
 
+            Library.addUsers(user1);
+            Library.addUsers(user2);
+            Library.addUsers(user3);
+            Library.addUsers(user4);
+            Library.addUsers(user5);
             //REVIEW CREATION - so the data is consistent
-            // user 1 Reviews
+
+            // b1
             user1.borrowBook(b1);
             user1.reviewBook(b1, 5, "A classic tale of morality and justice.");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
+
+            // b2
             user1.borrowBook(b2);
-            user1.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user1.borrowBook(b3);
-            user1.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user1.borrowBook(b4);
-            user1.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user1.borrowBook(b5);
-            user1.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user1.borrowBook(b6);
-            user1.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            // user 2 Reviews
-            user2.borrowBook(b1);
-            user2.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user2.borrowBook(b2);
-            user2.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user2.borrowBook(b3);
-            user2.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user2.borrowBook(b4);
-            user2.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user2.borrowBook(b5);
-            user2.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user2.borrowBook(b6);
-            user2.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            // user 3 Reviews
-            user3.borrowBook(b1);
-            user3.reviewBook(b1, 5, "A classic tale of morality and justice.");
+            user1.reviewBook(b2, 5, "Harper Lee's masterpiece. A must-read!");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
             user3.borrowBook(b2);
-            user3.reviewBook(b1, 5, "A classic tale of morality and justice.");
+            user3.reviewBook(b2, 4, " ");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
-            user3.borrowBook(b3);
-            user3.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user3.borrowBook(b4);
-            user3.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user3.borrowBook(b5);
-            user3.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user3.borrowBook(b6);
-            user3.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            // user 4 Reviews
-            user4.borrowBook(b1);
-            user4.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user4.borrowBook(b2);
-            user4.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user4.borrowBook(b3);
-            user4.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user4.borrowBook(b4);
-            user4.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user4.borrowBook(b5);
-            user4.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            user4.borrowBook(b6);
-            user4.reviewBook(b1, 5, "A classic tale of morality and justice.");
-            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
-
-            // user 5 Reviews
-            user5.borrowBook(b1);
-            user5.reviewBook(b1, 5, "A classic tale of morality and justice.");
+            user2.borrowBook(b2);
+            user2.reviewBook(b2, 2, "Not my cup of tea.");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
             user5.borrowBook(b2);
-            user5.reviewBook(b1, 5, "A classic tale of morality and justice.");
+            user5.reviewBook(b2, 1, "Terrible.");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
-            user5.borrowBook(b3);
-            user5.reviewBook(b1, 5, "A classic tale of morality and justice.");
+            
+            // b3
+            user1.borrowBook(b3);
+            user1.reviewBook(b3, 3, " ");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
-            user5.borrowBook(b4);
-            user5.reviewBook(b1, 5, "A classic tale of morality and justice.");
+            user2.borrowBook(b3);
+            user2.reviewBook(b3, 3, "An intriguing exploration of the American Dream.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+            
+            user3.borrowBook(b3);
+            user3.reviewBook(b3, 1, "Confusing.");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
-            user5.borrowBook(b5);
-            user5.reviewBook(b1, 5, "A classic tale of morality and justice.");
+
+            // b4
+            user1.borrowBook(b4);
+            user1.reviewBook(b4, 3, "Clever allegory with profound implications.");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
+
+            // b5
+            user1.borrowBook(b5);
+            user1.reviewBook(b5, 5, "A masterpiece of political satire.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+            user4.borrowBook(b5);
+            user4.reviewBook(b5, 4, " ");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+
+            // b6
             user5.borrowBook(b6);
-            user5.reviewBook(b1, 5, "A classic tale of morality and justice.");
+            user5.reviewBook(b6, 2, "Entertaining and full of whimsy.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+            
+
+
+            // b7
+            user2.borrowBook(b7);
+            user2.reviewBook(b7, 4, "Epic adventure with rich world-building.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+            user4.borrowBook(b7);
+            user4.reviewBook(b7, 3, "A bit slow-paced but beautifully written.");
             a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
 
+            // b8
+            user1.borrowBook(b8);
+            user1.reviewBook(b8, 4, " ");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+            user2.borrowBook(b8);
+            user2.reviewBook(b8, 2, "Not as good as the first.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+            user3.borrowBook(b8);
+            user3.reviewBook(b8, 5, "Incredible continuation of the epic saga.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+            
+            // b10
+            user1.borrowBook(b10);
+            user1.reviewBook(b10, 5, " ");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
 
 
+            user2.borrowBook(b10);
+            user2.reviewBook(b10, 4, " ");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+            user3.borrowBook(b10);
+            user3.reviewBook(b10, 5, "Really fun.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+            user4.borrowBook(b10);
+            user4.reviewBook(b10, 4, "Captures the imagination of both young and old.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+            user5.borrowBook(b10);
+            user5.reviewBook(b10, 5, "Magical and enchanting.");
+            a.terminateBorrow(Library.getAllActiveBorrows().get(0));
+
+
+            //HAVE SOME ACTIVE BORROWS
+            user1.borrowBook(b1);
+            user1.borrowBook(b6);
+
+            user2.borrowBook(b1);
+
+            user3.borrowBook(b1);
+
+            user4.borrowBook(b5);
+            user4.borrowBook(b8);
+
+
+
+            // Reviews and borrows are Made, add books to the Library
+            
             
         }
         catch (Exception e) {

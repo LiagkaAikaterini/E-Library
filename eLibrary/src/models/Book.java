@@ -118,7 +118,13 @@ public class Book implements Serializable{
             }
             */
 
-            this.avgRating = (sum/count);
+            double doubleSum = (double) sum;
+            double doubleCount = (double) count;
+
+            double avg = (doubleSum/doubleCount);
+            double avgRounded = Math.round(avg * 100.0) / 100.0;
+            
+            this.avgRating = avgRounded ;
         }
         catch(ArithmeticException e) {
             // IF ONLY DIVISION BY ZERO
