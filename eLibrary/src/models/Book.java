@@ -23,7 +23,7 @@ public class Book implements Serializable{
 
 
     // class for a book review
-    public static class Review {
+    public static class Review implements Serializable {
         private String username;
         private int rating;
         private String comment;
@@ -173,11 +173,18 @@ public class Book implements Serializable{
  */
 
     public void deleteReviewsOfUser(String username) {
+        List<Review> reviewToDelete = new ArrayList<>();
+
         for (Review rev : this.reviews) {
             if ( (rev.username).equals(username) ) {
-                this.reviews.remove(rev);
+                reviewToDelete.add(rev);
             }
         }
+
+        for (Review rev : reviewToDelete) {
+            this.reviews.remove(rev);
+        }
+
     }
 
     public void changeReviewsUsername(String oldUsername, String newUsername) {
