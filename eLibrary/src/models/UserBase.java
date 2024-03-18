@@ -43,7 +43,7 @@ public class UserBase implements Serializable {
         List<Book> searchResult = new ArrayList<Book>();
         
         for (Book book : books) {
-            if (book.getPublicationYear() == year) {
+            if (book.getPublicationYear().equals(year)) {
                 searchResult.add(book);
             }
         }
