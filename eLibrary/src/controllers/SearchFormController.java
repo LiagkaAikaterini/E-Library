@@ -41,7 +41,7 @@ public class SearchFormController {
     @FXML
     void search(MouseEvent event) {        
         // get input and replace whitespace characters (space, tab, newline) with a single space.
-        String title = title_input.getText().replaceAll("\\s+", " ");
+        String title = title_input.getText().replaceAll("\\s+", " ").strip();
         String author = author_input.getText().replaceAll("\\s+", " ");
         String year = year_input.getText().replaceAll("\\s+", "");
 

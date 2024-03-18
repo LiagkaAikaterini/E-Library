@@ -4,7 +4,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import exceptions.NewCategoryException;
+import exceptions.CategoryException;
+import exceptions.UserNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
-
+import models.Admin;
 import models.Category;
 import models.Library;
 
@@ -44,12 +45,21 @@ public class AdminManageCategoriesController implements Initializable {
     @FXML
     void addCategory(MouseEvent event) {
         String newCategory = newCategory_input.getText().replaceAll("\\s+", "");
-        try {
-            Library.createCategory(newCategory);
-            NavigationController.loadCenter("/views/admin_manageCategories.fxml");
-        }
-        catch (NewCategoryException e) {
-            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+        if (!newCategory.isEmpty()) { 
+            try {
+                Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
+                admin.createCategory(newCategory);
+                NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+            }
+            catch (UserNotFoundException e) {
+                // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
+                NavigationController.setMainLayout(null);
+                NavigationController.setLoggedPerson(null);
+                NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+            }
+            catch (CategoryException e) {
+                NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
+            }
         }
     }
 

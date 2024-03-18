@@ -92,7 +92,7 @@ public class AdminModifyUserController implements Initializable {
     @FXML
     void changeUsername(MouseEvent event) {
         try { 
-            String newUsername = username_input.getText().replaceAll("\\s+", "");
+            String newUsername = username_input.getText();
             admin.changeUserUsername(currUser, newUsername);
             NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
@@ -136,7 +136,7 @@ public class AdminModifyUserController implements Initializable {
     @FXML
     void changeEmail(MouseEvent event) {
         try { 
-            String newEmail = email_input.getText().replaceAll("\\s+", "");
+            String newEmail = email_input.getText();
             admin.changeUserEmail(currUser, newEmail);
             NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }

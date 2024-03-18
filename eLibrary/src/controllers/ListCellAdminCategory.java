@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import exceptions.CategoryException;
 import exceptions.UserNotFoundException;
 import models.Admin;
 import models.Category;
@@ -59,14 +60,19 @@ public class ListCellAdminCategory extends ListCell<Category> {
             Category currCellCategory = getItem();
             String newCategoryName = newName_input.getText().replaceAll("\\s+", "");
 
-            admin.changeCategoryName(currCellCategory, newCategoryName);
-            NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+            if (!newCategoryName.isEmpty()) {
+                admin.changeCategoryName(currCellCategory, newCategoryName);
+                NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+            }
         }
         catch (UserNotFoundException e) {
             // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
             NavigationController.setMainLayout(null);
             NavigationController.setLoggedPerson(null);
             NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "/views/login.fxml");
+        }
+        catch (CategoryException e) {
+            NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
         }
     }
 

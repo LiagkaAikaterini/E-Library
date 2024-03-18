@@ -1,10 +1,10 @@
 package exceptions;
 
-public class NewCategoryException extends Exception {
-    public NewCategoryException() {
+public class CategoryException extends Exception {
+    public CategoryException() {
         super("This category already exists, please enter a new unique category name");
     }
-    public NewCategoryException(String message) {
+    public CategoryException(String message) {
         super(message);
     }
 }
