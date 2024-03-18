@@ -84,23 +84,24 @@ public class UserReviewBookController implements Initializable {
             switch ( ratingText ) {
                 case "1":
                     currUser.reviewBook(currBook, 1, comment);
-                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    UserBookDetailsController.setCurrBook(currBook);
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 case "2":
                     currUser.reviewBook(currBook, 2, comment);
-                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 case "3":
                     currUser.reviewBook(currBook, 3, comment);
-                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 case "4":
                     currUser.reviewBook(currBook, 4, comment);
-                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 case "5":
                     currUser.reviewBook(currBook, 5, comment);
-                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Succeessfully","/views/user_reviewBook.fxml");
+                    NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 default:
                     NavigationController.showAlert(AlertType.ERROR, "You cannot submit review without rating. Please add a rating.", "");
