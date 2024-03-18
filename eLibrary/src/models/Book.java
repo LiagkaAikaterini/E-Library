@@ -216,18 +216,18 @@ public class Book implements Serializable{
     public String getISBN() {
         return ISBN;
     }
-    public void setISBN(String iSBN) throws InvalidBookInfoException {
-        if (iSBN.equals(this.ISBN)) {
+    public void setISBN(String isbn) throws InvalidBookInfoException {
+        if (isbn.equals(this.ISBN)) {
             return;
         }
 
         try {
-            Library.findBook(ISBN);
+            Library.findBook(isbn);
             throw new InvalidBookInfoException("This ISBN already exists. Please provide a new unique ISBN.");
         }
         catch (NotFoundException e) {}
 
-        this.ISBN = iSBN;
+        this.ISBN = isbn;
     }
 
     public LocalDate getDatePublished() {
