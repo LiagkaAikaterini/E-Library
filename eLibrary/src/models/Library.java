@@ -3,7 +3,6 @@ package models;
 import java.util.List;
 import java.util.ArrayList;
 import exceptions.InvalidUserInfoException;
-import exceptions.NewCategoryException;
 import exceptions.NotFoundException;
 import exceptions.UserNotFoundException;
 
@@ -185,17 +184,7 @@ public class Library {
     }
     
 
-    public static void createCategory(String newCategoryName) throws NewCategoryException {
-        // if category already exists
-        for (Category category : allCategories) {
-            if (newCategoryName.equals(category.getName())) {
-                throw new NewCategoryException();
-            }
-        }
-
-        Category cat = new Category(newCategoryName);
-        addCategory(cat);
-    }
+    
 
 
     // getters setters - add - remove
