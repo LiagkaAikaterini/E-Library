@@ -119,7 +119,7 @@ public class AdminModifyBookController implements Initializable {
     @FXML
     void changeCategory(MouseEvent event) {
         try {
-            String newCat = category_input.getText().replaceAll("\\s+", " ");
+            String newCat = category_input.getText().replaceAll("\\s+", "");
             admin.addBookToCategory(currBook.getISBN(), newCat);
             NavigationController.loadCenter("/views/admin_modifyBook.fxml");
         }

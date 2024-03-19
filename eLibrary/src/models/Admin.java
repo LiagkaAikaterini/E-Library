@@ -31,17 +31,11 @@ public class Admin extends UserBase {
 
 
     public void addBookToCategory(String bookISBN, String categoryName) throws NotFoundException {
-        try {
-            // the book can be in one category only 
-            // remove from previous category if the book is not newly created
-            Category cat = Library.categoryOfBook(bookISBN);
-            cat.removeFromCategoryBooks(bookISBN);
-        }
-        catch (NotFoundException e) {}
-
-        
-        // find the category we want to put the book in - if it does not exist throw NotFoundException
+        // if one of the categories not found - exceptions is thrown - no changes happens
+        Category cat = Library.categoryOfBook(bookISBN);
         Category targetCategory = Library.findCategory(categoryName);
+
+        cat.removeFromCategoryBooks(bookISBN);
         targetCategory.addToCategoryBooks(bookISBN);
         
     }
