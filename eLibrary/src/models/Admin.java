@@ -228,6 +228,14 @@ public class Admin extends UserBase {
             }
         }
 
+        // change isbn in category
+        for (Category cat : Library.getAllCategories()) {
+            if ( cat.getBooksISBN().contains(oldISBN) ) {
+                cat.removeFromCategoryBooks(oldISBN);
+                cat.addToCategoryBooks(newISBN);
+            }
+        }
+
     }
 
     public void changeBookTitle(Book book, String title) {

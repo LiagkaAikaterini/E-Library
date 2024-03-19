@@ -158,8 +158,10 @@ public class AdminModifyBookController implements Initializable {
     void changeDatePublished(MouseEvent event) {
         try {
             LocalDate newDate = publishDate_input.getValue();
-            admin.changeBookDatePublished(currBook, newDate);
-            NavigationController.loadCenter("/views/admin_modifyBook.fxml");
+            if (newDate != null){
+                admin.changeBookDatePublished(currBook, newDate);
+                NavigationController.loadCenter("/views/admin_modifyBook.fxml");
+            }
         }
         catch(InvalidDateException e) {
             NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");

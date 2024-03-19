@@ -45,7 +45,11 @@ public class AdminManageCategoriesController implements Initializable {
     @FXML
     void addCategory(MouseEvent event) {
         String newCategory = newCategory_input.getText().replaceAll("\\s+", "");
-        if (!newCategory.isEmpty()) { 
+        
+        if (newCategory.isEmpty()) {  
+            NavigationController.showAlert(AlertType.ERROR, "A category with empty name cannot be created", "/views/admin_manageCategories.fxml");
+        }
+        else {
             try {
                 Admin admin = Library.findAdmin(NavigationController.getLoggedPerson().getUsername());
                 admin.createCategory(newCategory);

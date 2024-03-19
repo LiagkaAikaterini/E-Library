@@ -65,13 +65,22 @@ public class AdminCreateBookController {
             LocalDate publishDate = publishDate_input.getValue();
 
             String copies = copies_input.getText().replaceAll("\\s+", ""); 
-            int copiesInt = Integer.parseInt(copies);
-        
-            // if some argument is not right the Book object will not be created -> throws custom exceptions
-            admin.createBook(title, author, publisher, isbn, publishDate, copiesInt, category);
 
-            // succeessful creation navigate back to manage books
-            NavigationController.loadCenter("/views/admin_manageBooks.fxml");     
+            // if all are fields are filled
+            if (!title.isEmpty() && !author.isEmpty() && !publisher.isEmpty() && !isbn.isEmpty() && !category.isEmpty() && !copies.isEmpty() && publishDate != null) {
+                
+                int copiesInt = Integer.parseInt(copies);
+                
+                // if some argument is not right the Book object will not be created -> throws custom exceptions
+                admin.createBook(title, author, publisher, isbn, publishDate, copiesInt, category);
+
+                // succeessful creation navigate back to manage books
+                NavigationController.loadCenter("/views/admin_manageBooks.fxml");  
+            }   
+            else {
+                NavigationController.showAlert(AlertType.INFORMATION, "Please to fill in all the fields to create a book.", "");
+                return;
+            }
         }
         catch (UserNotFoundException e) {
             // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.

@@ -47,11 +47,11 @@ public class App extends Application  {
             Library.addAdmins(a);
 
             //USERS 
-            User user1 = new User("john_doe", "password123", "John", "Doe", "ΑK323456", "john@example.com", "123 Main St", LocalDate.of(1985, 10, 15));
-            User user2 = new User("jane_smith", "hello123", "Jane", "Smith", "ΑΘ987654", "jane@example.com", "456 Elm St", LocalDate.of(1990, 5, 25));
-            User user3 = new User("mike_jones", "hey456", "Mike", "Jones", "ΑΩ456789", "mike@example.com", "789 Oak St", LocalDate.of(1978, 3, 8));
-            User user4 = new User("emma_brown", "pass987", "Emma", "Brown", "AE765432", "emma@example.com", "321 Pine St", LocalDate.of(1987, 8, 25));
-            User user5 = new User("michael_smith", "newpass", "Michael", "Smith", "AK543210", "michael@example.com", "567 Maple St", LocalDate.of(1995, 12, 8));
+            User user1 = new User("john_doe", "11111", "John", "Doe", "ΑK323456", "john@example.com", "123 Main St", LocalDate.of(1985, 10, 15));
+            User user2 = new User("jane_smith", "11111", "Jane", "Smith", "ΑΘ987654", "jane@example.com", "456 Elm St", LocalDate.of(1990, 5, 25));
+            User user3 = new User("mike_jones", "11111", "Mike", "Jones", "ΑΩ456789", "mike@example.com", "789 Oak St", LocalDate.of(1978, 3, 8));
+            User user4 = new User("emma_brown", "11111", "Emma", "Brown", "AE765432", "emma@example.com", "321 Pine St", LocalDate.of(1987, 8, 25));
+            User user5 = new User("michael_smith", "11111", "Michael", "Smith", "AK543210", "michael@example.com", "567 Maple St", LocalDate.of(1995, 12, 8));
 
             Library.addUsers(user1);
             Library.addUsers(user2);
@@ -228,11 +228,6 @@ public class App extends Application  {
 
             user4.borrowBook(b5);
             user4.borrowBook(b8);
-
-
-
-            // Reviews and borrows are Made, add books to the Library
-            
             
         }
         catch (Exception e) {

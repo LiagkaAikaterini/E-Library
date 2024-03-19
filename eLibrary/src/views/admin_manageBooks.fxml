@@ -13,16 +13,16 @@
       <ColorAdjust saturation="-0.6" />
    </effect>
    <children>
-      <Label layoutX="197.0" layoutY="6.4" minWidth="230.0" prefHeight="28.0" prefWidth="230.0" text="Manage Books" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Label layoutX="11.0" layoutY="10.0" minWidth="230.0" prefHeight="28.0" prefWidth="230.0" text="Manage Books" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="scrollpane" fitToHeight="true" fitToWidth="true" layoutX="10.399999618530273" layoutY="40.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+      <ScrollPane fx:id="scrollpane" fitToHeight="true" fitToWidth="true" layoutX="11.2" layoutY="60.8" prefHeight="262.0" prefWidth="430.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="61.0">
          <content>
-            <VBox fx:id="vbox" style="-fx-background-color: #EEDDC2;" />
+            <VBox fx:id="vbox" prefHeight="261.0" prefWidth="429.0" style="-fx-background-color: #EEDDC2;" />
          </content>
       </ScrollPane>
-      <Button fx:id="addNewBook" layoutX="331.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goToCreateBook" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefWidth="118.0" style="-fx-background-color: #B69E7A;" text="Add new Book" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="addNewBook" layoutX="331.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goToCreateBook" onMouseEntered="#hoverActivated" onMouseExited="#hoverDeactivated" prefHeight="44.0" prefWidth="118.0" style="-fx-background-color: #B69E7A;" text="Add new Book" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>

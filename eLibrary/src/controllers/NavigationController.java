@@ -24,7 +24,7 @@ public class NavigationController {
     public static void loadPage(String fxmlFile) {
         try {
             Parent root = FXMLLoader.load(NavigationController.class.getResource(fxmlFile));            
-            Scene scene = new Scene(root, 600, 400);
+            Scene scene = new Scene(root, 800, 600);
             stage.setTitle("Medialab");
             stage.setScene(scene);
             stage.show();

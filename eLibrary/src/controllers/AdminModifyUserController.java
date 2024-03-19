@@ -156,12 +156,15 @@ public class AdminModifyUserController implements Initializable {
     void changeBirthDate(MouseEvent event) {
         try { 
             LocalDate newBirthday = birthday_input.getValue();
-            admin.changeUserBirthday(currUser, newBirthday);
-            NavigationController.loadCenter("/views/admin_modifyUser.fxml");
+            if (newBirthday != null){
+                admin.changeUserBirthday(currUser, newBirthday);
+                NavigationController.loadCenter("/views/admin_modifyUser.fxml");
+            }
         }
         catch (InvalidDateException e) {
             NavigationController.showAlert(AlertType.ERROR, e.getMessage(), "");
         }
+        
     }
 
     @FXML

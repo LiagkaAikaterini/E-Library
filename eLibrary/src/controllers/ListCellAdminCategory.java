@@ -64,6 +64,9 @@ public class ListCellAdminCategory extends ListCell<Category> {
                 admin.changeCategoryName(currCellCategory, newCategoryName);
                 NavigationController.loadCenter("/views/admin_manageCategories.fxml");
             }
+            else {
+                NavigationController.loadCenter("/views/admin_manageCategories.fxml");
+            }
         }
         catch (UserNotFoundException e) {
             // admin not found in the library by findAdmin, log out automatically and tell admin to log in again.
