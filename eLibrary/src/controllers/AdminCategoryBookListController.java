@@ -22,11 +22,6 @@ public class AdminCategoryBookListController {
         ObservableList<Book> observableBookList = FXCollections.observableArrayList();
 
         observableBookList.addAll(allCatBooks);
-        
-
-        // calculate listView height according to Listcell height so that all books can be shown whith no scrollbar
-        double height = observableBookList.size() * 80 + 30;
-        bookList.setPrefHeight(height);
 
         bookList.setItems(observableBookList);
         bookList.setCellFactory(booklist -> new ListCellAdminBook());

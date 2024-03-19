@@ -86,7 +86,7 @@ public class App extends Application  {
 
 
     // dummy data generation - it was used once to create data to put in the Library
-    public static void dummyDataCreation () {
+    public static void dummyDataCreation() {
         Library.setAllAdmins(new ArrayList<>());
         Library.setAllUsers(new ArrayList<>());
         Library.setAllActiveBorrows(new ArrayList<>());
@@ -94,6 +94,24 @@ public class App extends Application  {
         Library.setAllCategories(new ArrayList<>());
 
         try { 
+            //ADMINS
+            Admin a = new Admin("medialab", "medialab_2024");
+            
+            Library.addAdmins(a);
+
+            //USERS 
+            User user1 = new User("john_doe", "password123", "John", "Doe", "ΑK323456", "john@example.com", "123 Main St", LocalDate.of(1985, 10, 15));
+            User user2 = new User("jane_smith", "hello123", "Jane", "Smith", "ΑΘ987654", "jane@example.com", "456 Elm St", LocalDate.of(1990, 5, 25));
+            User user3 = new User("mike_jones", "hey456", "Mike", "Jones", "ΑΩ456789", "mike@example.com", "789 Oak St", LocalDate.of(1978, 3, 8));
+            User user4 = new User("emma_brown", "pass987", "Emma", "Brown", "AE765432", "emma@example.com", "321 Pine St", LocalDate.of(1987, 8, 25));
+            User user5 = new User("michael_smith", "newpass", "Michael", "Smith", "AK543210", "michael@example.com", "567 Maple St", LocalDate.of(1995, 12, 8));
+
+            Library.addUsers(user1);
+            Library.addUsers(user2);
+            Library.addUsers(user3);
+            Library.addUsers(user4);
+            Library.addUsers(user5);
+            
             // BOOKS
             Book b1 = new Book("To Kill a Mockingbird", "Harper Lee", "Penguin Random House",  "1-12345", java.time.LocalDate.of(2015, 7, 11), 3);
             Book b2 = new Book("Another Book by Harper Lee", "Harper Lee", "HarperCollins Publishers",  "2-12345", java.time.LocalDate.of(2017, 9, 15), 5);
@@ -142,23 +160,7 @@ public class App extends Application  {
             Library.addCategory(c3);
             Library.addCategory(c4);
 
-            //ADMINS
-            Admin a = new Admin("medialab", "medialab_2024");
-            
-            Library.addAdmins(a);
-
-            //USERS 
-            User user1 = new User("john_doe", "password123", "John", "Doe", "ΑK323456", "john@example.com", "123 Main St", LocalDate.of(1985, 10, 15));
-            User user2 = new User("jane_smith", "hello123", "Jane", "Smith", "ΑΘ987654", "jane@example.com", "456 Elm St", LocalDate.of(1990, 5, 25));
-            User user3 = new User("mike_jones", "hey456", "Mike", "Jones", "ΑΩ456789", "mike@example.com", "789 Oak St", LocalDate.of(1978, 3, 8));
-            User user4 = new User("emma_brown", "pass987", "Emma", "Brown", "AE765432", "emma@example.com", "321 Pine St", LocalDate.of(1987, 8, 25));
-            User user5 = new User("michael_smith", "newpass", "Michael", "Smith", "AK543210", "michael@example.com", "567 Maple St", LocalDate.of(1995, 12, 8));
-
-            Library.addUsers(user1);
-            Library.addUsers(user2);
-            Library.addUsers(user3);
-            Library.addUsers(user4);
-            Library.addUsers(user5);
+           
             //REVIEW CREATION - so the data is consistent
 
             // b1
