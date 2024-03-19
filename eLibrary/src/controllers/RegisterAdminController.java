@@ -56,10 +56,10 @@ public class RegisterAdminController {
     
     @FXML
     void signup(MouseEvent event) {
-        String username = username_input.getText();
-        String password = password_input.getText();
-        String passwordConfirmation = password2_input.getText();
-        String libraryPassword = libraryPassword_input.getText(); 
+        String username = username_input.getText().strip();
+        String password = password_input.getText().strip();
+        String passwordConfirmation = password2_input.getText().strip();
+        String libraryPassword = libraryPassword_input.getText().strip(); 
         
         // if all fields are filled before pressing the sign up button
         if ( !username.isEmpty() && !password.isEmpty() && !passwordConfirmation.isEmpty() && !libraryPassword.isEmpty()) {

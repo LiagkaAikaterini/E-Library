@@ -86,7 +86,7 @@ public class UserTemplateController implements Initializable {
     // top search bar that is contained on the upper menu handled
     @FXML
     void onEnterSearch(ActionEvent event) { 
-        String title = topSearchBar.getText().replaceAll("\\s+", " ");
+        String title = topSearchBar.getText().replaceAll("\\s+", " ").strip();
 
         if (!title.isEmpty()) {
             List<Book> searchRes = UserBase.searchByTitle(title);

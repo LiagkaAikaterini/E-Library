@@ -6,7 +6,10 @@ import exceptions.InvalidUserInfoException;
 import exceptions.NotFoundException;
 import exceptions.UserNotFoundException;
 
-
+/* 
+ *  Class that handles all the library data
+ *  all methods and fields static 
+ */
 public class Library {
     private static final String password = "d4yur7g";
     private static List<Admin> allAdmins;
@@ -15,6 +18,9 @@ public class Library {
     private static List<Category> allCategories;
     private static List<Borrowed> allActiveBorrows;
 
+    /* 
+     *  deserialize data from each data file and populate the corresponding list
+     */
     public static void initializeData() {
         Library.allAdmins = DataStorageManager.deserialize("src/medialab/admins.ser");
         Library.allUsers = DataStorageManager.deserialize("src/medialab/users.ser");
@@ -23,8 +29,10 @@ public class Library {
         Library.allActiveBorrows = DataStorageManager.deserialize("src/medialab/borrows.ser");
     }
 
+    /* 
+     *  serialize data from the Library lists to the correct data file
+     */
     public static void saveData() {
-        // serialize data from each data file and populate the corresponding list
         DataStorageManager.serialize("src/medialab/admins.ser", allAdmins);
         DataStorageManager.serialize("src/medialab/users.ser", allUsers);
         DataStorageManager.serialize("src/medialab/books.ser", allBooks);
@@ -32,28 +40,10 @@ public class Library {
         DataStorageManager.serialize("src/medialab/borrows.ser", allActiveBorrows);
     }
 
-
-    // Retrieve User or Admin seperately
-    // check in frontend
-    // Exception not logged in yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public static UserBase authenticateUser(String username, String password) throws UserNotFoundException {
-        for (User user : allUsers) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return user;
-            }
-        }
-
-        for (Admin admin : allAdmins) {
-            if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
-                return admin;
-            }
-        }
-
-        throw new UserNotFoundException("User not found. Please check your information and try to login again.");
-    }
-
+    /* 
+     *  returns a sorted list with the top 5 books of the library
+     */
     public static List<Book> getTop5Books() {
-
         List<Book> top5Books = allBooks;
         
         top5Books.sort((book1, book2) -> {
@@ -77,10 +67,56 @@ public class Library {
         else {
             return top5Books.subList(0, 5);
         }
-
     }
 
+    /* 
+     *  check if user is registered in my system
+     */
+    public static UserBase authenticateUser(String username, String password) throws UserNotFoundException {
+        for (User user : allUsers) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
 
+        for (Admin admin : allAdmins) {
+            if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
+                return admin;
+            }
+        }
+
+        throw new UserNotFoundException("User not found. Please check your information and try to login again.");
+    }
+
+    /* 
+     *  Find User
+     */
+    public static User findUser(String username) throws UserNotFoundException {
+        for (User user : allUsers) {
+            if ( (user.getUsername()).equals(username)) {
+                return user;
+            }
+        }
+
+        throw new UserNotFoundException();
+    }
+
+    /* 
+     *  Find Admin
+     */
+    public static Admin findAdmin(String username) throws UserNotFoundException {
+        for (Admin admin : allAdmins) {
+            if ( (admin.getUsername()).equals(username)) {
+                return admin;
+            }
+        }
+
+        throw new UserNotFoundException();
+    }
+
+    /* 
+     *  Find Book
+     */
     public static Book findBook(String isbn) throws NotFoundException {
         List<Book> books = getAllBooks();
 
@@ -93,6 +129,9 @@ public class Library {
         throw new NotFoundException("Book not found");
     }
 
+    /* 
+     *  Find Category
+     */
     public static Category findCategory(String name) throws NotFoundException {
         for (Category category : allCategories) {
             if ( (category.getName()).equals(name.toLowerCase()) ) {
@@ -103,27 +142,9 @@ public class Library {
         throw new NotFoundException("Category not found");
     }
 
-    public static User findUser(String username) throws UserNotFoundException {
-        for (User user : allUsers) {
-            if ( (user.getUsername()).equals(username)) {
-                return user;
-            }
-        }
-
-        throw new UserNotFoundException();
-    }
-
-    public static Admin findAdmin(String username) throws UserNotFoundException {
-        for (Admin admin : allAdmins) {
-            if ( (admin.getUsername()).equals(username)) {
-                return admin;
-            }
-        }
-
-        throw new UserNotFoundException();
-    }
-
-
+    /* 
+     *  Find all active borrows for a specific user
+     */
     public static List<Borrowed> findUsersActiveBorrows(String username) {
         List<Borrowed> result = new ArrayList<Borrowed>();
 
@@ -136,6 +157,23 @@ public class Library {
         return result;
     }
 
+    /* 
+     *  Find the category of a specific book - in this system every book belongs to a category
+     */
+    public static Category categoryOfBook(String isbn) throws NotFoundException {
+        for (Category category : allCategories) {
+            List<String> categoryBooks = category.getBooksISBN();
+            if ( categoryBooks.contains(isbn) ) {
+                return category;
+            }
+        }
+
+        throw new NotFoundException("This Book belongs to no category. Please add category for this book.");
+    }
+    
+    /* 
+     *  returns true if this specific username is already used by another User or Admin
+     */
     public static boolean isUsernameOccupied(String username) throws InvalidUserInfoException {
         try {
             Library.findAdmin(username);
@@ -152,6 +190,9 @@ public class Library {
         return false;
     }
 
+    /* 
+     *  returns true if the specific idNum is already used by another User
+     */
     public static boolean isIdNumOccupied(String idNum) {
         for (User user : allUsers) {
             if ( idNum.equals(user.getIdNum()) ) {
@@ -162,6 +203,9 @@ public class Library {
         return false;
     }
 
+    /* 
+     *  returns true if the specific email is already used by another User
+     */
     public static boolean isEmailOccupied(String email) {
         for (User user : allUsers) {
             if ( email.equals(user.getEmail()) ) {
@@ -171,23 +215,10 @@ public class Library {
 
         return false;
     }
-
-    public static Category categoryOfBook(String isbn) throws NotFoundException {
-        for (Category category : allCategories) {
-            List<String> categoryBooks = category.getBooksISBN();
-            if ( categoryBooks.contains(isbn) ) {
-                return category;
-            }
-        }
-
-        throw new NotFoundException("This Book belongs to no category. Please add category for this book.");
-    }
     
-
-    
-
-
-    // getters setters - add - remove
+    /* 
+     *  setters - getters - add - remove
+     */
     public static List<Admin> getAllAdmins() {
         return allAdmins;
     }
@@ -240,7 +271,6 @@ public class Library {
         Library.allCategories.remove(category);
     }
 
-
     public static List<Borrowed> getAllActiveBorrows() {
         return allActiveBorrows;
     }
@@ -254,6 +284,7 @@ public class Library {
         Library.allActiveBorrows.remove(borrow);
     }
 
+    // static final library password - no setter
     public static String getPassword() {
         return password;
     }

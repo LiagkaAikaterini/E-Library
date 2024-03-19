@@ -102,7 +102,7 @@ public class AdminTemplateController implements Initializable {
 
     @FXML
     void onEnterSearch(ActionEvent event) { 
-        String title = topSearchBar.getText().replaceAll("\\s+", " ");
+        String title = topSearchBar.getText().replaceAll("\\s+", " ").strip();
 
         if (!title.isEmpty()) {
             List<Book> searchRes = UserBase.searchByTitle(title);

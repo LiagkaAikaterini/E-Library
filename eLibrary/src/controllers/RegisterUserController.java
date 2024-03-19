@@ -75,14 +75,14 @@ public class RegisterUserController {
 
     @FXML
     void signup(MouseEvent event) {
-        String username = username_input.getText();
-        String password = password_input.getText();
-        String passwordConfirmation = password2_input.getText();
-        String firstname = firstname_input.getText();
-        String lastname = lastname_input.getText();
+        String username = username_input.getText().strip();
+        String password = password_input.getText().strip();
+        String passwordConfirmation = password2_input.getText().strip();
+        String firstname = firstname_input.getText().replaceAll("\\s+", " ").strip();
+        String lastname = lastname_input.getText().replaceAll("\\s+", " ").strip();
         String idNum = id_input.getText().replaceAll("\\s+", "");
-        String email = email_input.getText();
-        String address = address_input.getText();
+        String email = email_input.getText().strip();
+        String address = address_input.getText().replaceAll("\\s+", " ").strip();
         LocalDate date = birthday_input.getValue();
 
         // if all text fields are filled

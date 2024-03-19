@@ -18,28 +18,42 @@ public class Admin extends UserBase {
     }
 
 
+    /* 
+     *  creates a new Book
+     */
     public void createBook(String title, String author, String publisher, String ISBN, LocalDate datePublished, int copiesAvailable, String categoryName) throws InvalidBookInfoException, InvalidDateException, NotFoundException {
         // all books must be in some category
         // if category does not exist an exception will be thrown and the book will not be created
         addBookToCategory(ISBN, categoryName);
         
         Book newBook = new Book(title, author, publisher, ISBN, datePublished, copiesAvailable);   
-        Library.addBook(newBook);
-
-        
+        Library.addBook(newBook);        
     }
 
-
+    /* 
+     *  adds a book to an already existing category
+     */
     public void addBookToCategory(String bookISBN, String categoryName) throws NotFoundException {
-        // if one of the categories not found - exceptions is thrown - no changes happens
-        Category cat = Library.categoryOfBook(bookISBN);
+        // if new category does not exist an exception will be thrown immediately - nothing of the following should get executed
         Category targetCategory = Library.findCategory(categoryName);
-
-        cat.removeFromCategoryBooks(bookISBN);
-        targetCategory.addToCategoryBooks(bookISBN);
+       
+        // the book can be in one category only 
+        // remove from previous category if the book is not newly created
+        try {
+            Category cat = Library.categoryOfBook(bookISBN);
+            cat.removeFromCategoryBooks(bookISBN);
+        }
+        catch (NotFoundException e) {
+            // the book is created now so it does not belong to a category yet, no actions should be taken 
+        }
         
+        // lastly add book to the new existing category
+        targetCategory.addToCategoryBooks(bookISBN);
     }
 
+    /* 
+     *  creates a new empty category
+     */
     public void createCategory(String categoryName) throws CategoryException {
         // if category does not already exists create category
         try { 
@@ -52,6 +66,9 @@ public class Admin extends UserBase {
         }
     }
 
+    /* 
+     *  deletes an existing category and all its books 
+     */
     public void deleteCategory(Category category) {
         String currISBN = null;
         try{   
@@ -64,12 +81,16 @@ public class Admin extends UserBase {
             Library.removeCategory(category);
         }
         catch (NotFoundException e) {
-            // Book not found
+            // Book not found - thrown from inside the iteration
+            // simply remove the isbn from category booklist and continue
             category.removeFromCategoryBooks(currISBN);
             deleteCategory(category);
         }  
     }
 
+    /* 
+     *  changes the name of an existing category - makes sure it is unique
+     */
     public void changeCategoryName(Category category, String newCategoryName) throws CategoryException {
         String oldName = category.getName();
 
@@ -88,12 +109,15 @@ public class Admin extends UserBase {
         
     }
 
+    /* 
+     *  delete Book, all its active borrows, and adjust all user's borrow history
+     */
     public void deleteBook(Book bookToDelete) {
-        // delete all borrows that has not been returned
+        // delete all borrows that has not been returned 
+        // remove active borrow from the App's active borrow list
         List<Borrowed> borrowsRemove = new ArrayList<>();
         for (Borrowed bor : Library.getAllActiveBorrows()) {
             if( (bor.getBookISBN()).equals(bookToDelete.getISBN()) ) {
-                // remove active borrow from the App's active borrow list
                 borrowsRemove.add(bor);
             }
         }
@@ -112,6 +136,9 @@ public class Admin extends UserBase {
     }
     
 
+    /* 
+     *  delete User, all his active borrows, and all his reviews
+     */
     public void deleteUser(User userToDelete) {
         // terminate all current borrows of user - book copies fixed
         List<Borrowed> borrowsToTerminate = new ArrayList<>();
@@ -138,6 +165,9 @@ public class Admin extends UserBase {
         Library.removeUser(userToDelete);       
     }
 
+    /* 
+     *  Terminate an active borrow
+     */
     public void terminateBorrow(Borrowed borrow) {
         try {
             Book book = Library.findBook( borrow.getBookISBN() );
@@ -148,9 +178,11 @@ public class Admin extends UserBase {
             //fix copies of book
             int currCopies = book.getCopiesAvailable();
             book.setCopiesAvailable(currCopies + 1);
+
         }
         catch(NotFoundException e) {
-            // the book of the borrow was not found in the library, so we just remove the borrow for ActiveBorrows without worrying about the copies
+            // the book of the borrow was not found in the library
+            // so we just remove the borrow for ActiveBorrows without worrying about the copies
             Library.removeActiveBorrow(borrow);
         }
         catch (InvalidBookInfoException e) {
@@ -158,24 +190,23 @@ public class Admin extends UserBase {
         }
     }
 
+    /* 
+     *  get all Active borrows of the Library
+     */
     public List<Borrowed> watchActiveBorrows() {
         return Library.getAllActiveBorrows();
     }
 
-    // NOT REVIEWS AND AVG RATING
-    public void changeBookTitle(Book book, String title) {
-        book.setTitle(title);
-    }
 
-    public void changeBookAuthor(Book book, String author) {
-        book.setAuthor(author);
-    }
-
-    public void changeBookPublisher(Book book, String publisher) {
-        book.setPublisher(publisher);
-    }
+    /* 
+     *  Modify BOOK details - fields
+     *  NOT reviews and avg rating
+     */
 
     public void changeBookISBN(Book book, String newISBN) throws InvalidBookInfoException {
+        /* 
+         *  Change the ISBN in all the object instances that refer to this book - its ISBN is the id of a specific book object
+         */
         String oldISBN = book.getISBN();
 
         // change isbn - if not unique isbn -> exception will be thrown here -> the following will not execute
@@ -199,6 +230,18 @@ public class Admin extends UserBase {
 
     }
 
+    public void changeBookTitle(Book book, String title) {
+        book.setTitle(title);
+    }
+
+    public void changeBookAuthor(Book book, String author) {
+        book.setAuthor(author);
+    }
+
+    public void changeBookPublisher(Book book, String publisher) {
+        book.setPublisher(publisher);
+    }
+
     public void changeBookDatePublished(Book book, LocalDate date) throws InvalidDateException {
         book.setDatePublished(date);
     }
@@ -208,27 +251,32 @@ public class Admin extends UserBase {
     }
 
 
-    // modify User information - NOT PASSWORD
-    // NOT BORROW HISTORY LISTS
+    /* 
+     *  Modify USER details - fields
+     *  NOT borrow history list
+     */
+
     public void changeUserUsername(User user, String newUsername) throws InvalidUserInfoException {
-        
-            String oldUsername = user.getUsername();
+        /* 
+         *  Change the username in all the object instances that refer to this user - his username is the id of a specific user object
+         */
+        String oldUsername = user.getUsername();
 
-            // change username - if invalid username -> exception will be thrown here -> the following will not execute
-            user.setUsername(newUsername);
+        // change username - if invalid username -> exception will be thrown here -> the following will not execute
+        user.setUsername(newUsername);
 
-            // username is used as User id so we need to fix the references to this user
-            // change username in Active borrows 
-            for (Borrowed borrow : Library.getAllActiveBorrows()) {
-                if ( oldUsername.equals(borrow.getUsername()) ) {
-                    borrow.setUsername(newUsername);
-                }
+        // username is used as User id so we need to fix the references to this user
+        // change username in Active borrows 
+        for (Borrowed borrow : Library.getAllActiveBorrows()) {
+            if ( oldUsername.equals(borrow.getUsername()) ) {
+                borrow.setUsername(newUsername);
             }
+        }
 
-            // change username in reviews
-            for (Book book : Library.getAllBooks()) {
-                book.changeReviewsUsername(oldUsername, newUsername);
-            }
+        // change username in reviews
+        for (Book book : Library.getAllBooks()) {
+            book.changeReviewsUsername(oldUsername, newUsername);
+        }
 
     }
 

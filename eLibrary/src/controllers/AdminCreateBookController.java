@@ -58,9 +58,9 @@ public class AdminCreateBookController {
             // for example ISBN or category should have no whitespace characters - one word
             String category = category_input.getText().replaceAll("\\s+", "");
             
-            String title = title_input.getText().replaceAll("\\s+", " ");
-            String author = author_input.getText().replaceAll("\\s+", " ");
-            String publisher = publisher_input.getText().replaceAll("\\s+", " ");
+            String title = title_input.getText().replaceAll("\\s+", " ").strip();
+            String author = author_input.getText().replaceAll("\\s+", " ").strip();
+            String publisher = publisher_input.getText().replaceAll("\\s+", " ").strip();
             String isbn = isbn_input.getText().replaceAll("\\s+", "");
             LocalDate publishDate = publishDate_input.getValue();
 

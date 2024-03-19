@@ -10,11 +10,17 @@ public class Category implements Serializable {
     private String name;
     private List<String> booksISBN;
 
+    /* 
+     *  the name converted to one lowercase word
+     */
     public Category(String name) {
         this.name = name.toLowerCase().replaceAll("\\s+", "");
         this.booksISBN = new ArrayList<String>();
     }
 
+    /* 
+     *  returns the list of Books contained in the category
+     */
     public List<Book> getAllCategoryBooks() {
         List<Book> books = new ArrayList<Book>();
 
@@ -29,14 +35,15 @@ public class Category implements Serializable {
         return books;
     }
 
+    /* 
+     *  setters - getters - add - remove
+     */
     public void addToCategoryBooks(String bookIsbn) {
         this.booksISBN.add(bookIsbn);
     }
-
     public void removeFromCategoryBooks(String bookIsbn) {
         this.booksISBN.remove(bookIsbn);
     }
-
 
     public String getName() {
         return name;

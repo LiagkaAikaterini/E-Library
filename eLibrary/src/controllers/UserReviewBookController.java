@@ -63,10 +63,9 @@ public class UserReviewBookController implements Initializable {
     @FXML
     void submitReview(MouseEvent event) {
         try {
-
             User currUser = Library.findUser(NavigationController.getLoggedPerson().getUsername());
             // get input and replace whitespace characters (space, tab, newline) with a single space
-            String comment = comment_input.getText().replaceAll("\\s+", " ");
+            String comment = comment_input.getText().replaceAll("\\s+", " ").strip();
 
             if (comment.isEmpty()) {
                 comment = " ";
@@ -89,18 +88,22 @@ public class UserReviewBookController implements Initializable {
                     break;
                 case "2":
                     currUser.reviewBook(currBook, 2, comment);
+                    UserBookDetailsController.setCurrBook(currBook);
                     NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 case "3":
                     currUser.reviewBook(currBook, 3, comment);
+                    UserBookDetailsController.setCurrBook(currBook);
                     NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 case "4":
                     currUser.reviewBook(currBook, 4, comment);
+                    UserBookDetailsController.setCurrBook(currBook);
                     NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 case "5":
                     currUser.reviewBook(currBook, 5, comment);
+                    UserBookDetailsController.setCurrBook(currBook);
                     NavigationController.showAlert(AlertType.INFORMATION, "Review Submitted Successfully","/views/user_bookDetails.fxml");
                     break;
                 default:

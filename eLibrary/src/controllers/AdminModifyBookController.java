@@ -93,7 +93,7 @@ public class AdminModifyBookController implements Initializable {
     // admin changes user info - buttons OnClick handlers
     @FXML
     void changeTitle(MouseEvent event) {
-        String newTitle = title_input.getText().replaceAll("\\s+", " ");
+        String newTitle = title_input.getText().replaceAll("\\s+", " ").strip();
         admin.changeBookTitle(currBook, newTitle);
         NavigationController.loadCenter("/views/admin_modifyBook.fxml");
     }
@@ -130,14 +130,14 @@ public class AdminModifyBookController implements Initializable {
 
     @FXML
     void changeAuthor(MouseEvent event) {
-        String newAuthor = author_input.getText().replaceAll("\\s+", " ");
+        String newAuthor = author_input.getText().replaceAll("\\s+", " ").strip();
         admin.changeBookAuthor(currBook, newAuthor);
         NavigationController.loadCenter("/views/admin_modifyBook.fxml");
     }
 
     @FXML
     void changePublisher(MouseEvent event) {
-        String newPublisher = publisher_input.getText().replaceAll("\\s+", " ");
+        String newPublisher = publisher_input.getText().replaceAll("\\s+", " ").strip();
         admin.changeBookPublisher(currBook, newPublisher);
         NavigationController.loadCenter("/views/admin_modifyBook.fxml");
     }
@@ -183,7 +183,7 @@ public class AdminModifyBookController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             if (currBook == null) {
-                // if currBook null the page cannot be initialized - no need for null check in the other functions - button handlers 
+                // if currBook null the page cannot be initialized - no need for null check in the button handlers 
                 throw new NullPointerException();
             }
 

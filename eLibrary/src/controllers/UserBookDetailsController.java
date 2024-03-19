@@ -88,7 +88,7 @@ public class UserBookDetailsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             if (currBook == null) {
-                // if currBook null the page cannot be initialized - no need for null check in the other functions - button handlers 
+                // if currBook null the page cannot be initialized - no need for null check in the button handlers 
                 throw new NullPointerException();
             }
 

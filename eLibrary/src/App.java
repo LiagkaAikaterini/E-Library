@@ -3,14 +3,11 @@ import java.util.ArrayList;
 
 import controllers.NavigationController;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 import models.*;
-import models.Book.Review;
 
 public class App extends Application  {
 
-    // MAYBE NOT IN INIT BUT IN START!!!!
     @Override
     public void init() {
         Library.initializeData();
@@ -18,60 +15,10 @@ public class App extends Application  {
 
     @Override
     public void start(Stage primaryStage) {
-     
-
-        
-        /*
-        System.out.println();
-        System.out.println("ADMINS");
-        System.out.println();
-        for (Admin user : Library.getAllAdmins()) {
-            System.out.println(user.getUsername());
-        }
-
-        System.out.println();
-        System.out.println("USERS");
-        System.out.println();
-        for (User user : Library.getAllUsers()) {
-            System.out.println(user.getUsername());
-            for (String bo : user.getBorrowHistory()) {
-                System.out.println("History books");
-            }
-        }
-
-        System.out.println();
-        System.out.println("Books");
-        System.out.println();
-        for (Book b : Library.getAllBooks()) {
-            System.out.println(b.getTitle());
-            System.out.println(b.getCopiesAvailable());
-            System.out.println(b.getAvgRating());
-            for (Review r : b.getReviews()) {
-                System.out.println("Review of book");
-                System.out.println(r.getRating());
-                System.out.println(r.getComment());
-            }
-        }
-         
-
-
-         System.out.println();
-         System.out.println("Books");
-         System.out.println();
-         for (Category b : Library.getAllCategories()) {
-             System.out.println(b.getName());
-             for (String r : b.getBooksISBN()) {
-                 System.out.println(r);
-             }
-         }
-
-         */
-        
         //dummyDataCreation();
 
         NavigationController.setStage(primaryStage);
         NavigationController.loadPage("/views/home.fxml");
-    
     }
 
     @Override
@@ -85,7 +32,7 @@ public class App extends Application  {
    
 
 
-    // dummy data generation - it was used once to create data to put in the Library
+    // dummy data generation - it was used once to create data to put in the Library when it was empty
     public static void dummyDataCreation() {
         Library.setAllAdmins(new ArrayList<>());
         Library.setAllUsers(new ArrayList<>());

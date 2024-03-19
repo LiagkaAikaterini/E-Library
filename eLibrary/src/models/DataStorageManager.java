@@ -13,12 +13,13 @@ import java.util.List;
 
 public class DataStorageManager {
     /*
-     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * i have not handle if the file does NOT exist - it just throws an exception 
-     * because i wanna avoid misspellings that will cause ser and deser to target diff files 
+     * i have not handle case if the file does NOT exist - it just throws an exception 
+     * because i wanna avoid mispellings that will cause serialization and deserialization to target different files 
      */
 
-    // serialize whole list of any type
+    /* 
+     *  serialize whole list of any type
+     */ 
     public static <T> void serialize(String filePath, List<T> dataList){
         try {
             File file = new File(filePath);
@@ -39,23 +40,14 @@ public class DataStorageManager {
         }
     }
 
-    // deserialize whole list of any type
+    /* 
+     *  deserialize whole list of any type
+     */
     @SuppressWarnings("unchecked")
     public static <T> List<T> deserialize(String filePath) {
         List<T> dataList = null;
         try {
             File file = new File(filePath);
-            
-            /*
-            // case if there is no data yet
-            if (file.exists()) {
-                // if file is empty return empty array list
-                if (file.length() == 0) {
-                    dataList = new ArrayList<>();
-                    return dataList;
-                }
-            }
-            */
 
             FileInputStream fileIn = new FileInputStream(file);
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -76,6 +68,7 @@ public class DataStorageManager {
             c.printStackTrace();
         }
 
+        
         if (dataList == null) {
             return new ArrayList<>();
         }

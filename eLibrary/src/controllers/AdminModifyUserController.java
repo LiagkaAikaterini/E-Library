@@ -92,7 +92,7 @@ public class AdminModifyUserController implements Initializable {
     @FXML
     void changeUsername(MouseEvent event) {
         try { 
-            String newUsername = username_input.getText();
+            String newUsername = username_input.getText().strip();
             admin.changeUserUsername(currUser, newUsername);
             NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
@@ -105,7 +105,7 @@ public class AdminModifyUserController implements Initializable {
     @FXML
     void changeFirstName(MouseEvent event) {
   
-        String newFirstname = firstaname_input.getText().replaceAll("\\s+", " ");
+        String newFirstname = firstaname_input.getText().replaceAll("\\s+", " ").strip();
         admin.changeUserFirstname(currUser, newFirstname);
         NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         
@@ -114,7 +114,7 @@ public class AdminModifyUserController implements Initializable {
     @FXML
     void changeLastName(MouseEvent event) {
     
-        String newLastname = lastname_input.getText().replaceAll("\\s+", " ");
+        String newLastname = lastname_input.getText().replaceAll("\\s+", " ").strip();
         admin.changeUserLastname(currUser, newLastname);
         NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         
@@ -136,7 +136,7 @@ public class AdminModifyUserController implements Initializable {
     @FXML
     void changeEmail(MouseEvent event) {
         try { 
-            String newEmail = email_input.getText();
+            String newEmail = email_input.getText().strip();
             admin.changeUserEmail(currUser, newEmail);
             NavigationController.loadCenter("/views/admin_modifyUser.fxml");
         }
@@ -147,7 +147,7 @@ public class AdminModifyUserController implements Initializable {
 
     @FXML
     void changeAddress(MouseEvent event) {
-        String newAddress = address_input.getText().replaceAll("\\s+", " ");
+        String newAddress = address_input.getText().replaceAll("\\s+", " ").strip();
         admin.changeUserAddress(currUser, newAddress);
         NavigationController.loadCenter("/views/admin_modifyUser.fxml");
     }

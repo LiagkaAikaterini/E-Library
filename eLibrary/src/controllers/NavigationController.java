@@ -20,11 +20,11 @@ public class NavigationController {
     private static Stage stage;
     private static BorderPane mainLayout;
     
-
+    // loads a page that is before login
     public static void loadPage(String fxmlFile) {
         try {
             Parent root = FXMLLoader.load(NavigationController.class.getResource(fxmlFile));            
-            Scene scene = new Scene(root, 800, 550);
+            Scene scene = new Scene(root, 600, 400);
             stage.setTitle("Medialab");
             stage.setScene(scene);
             stage.show();
@@ -33,6 +33,7 @@ public class NavigationController {
         }
     }
 
+    // loads a page that is after login
     public static void loadCenter(String fxmlFile) {
         try {            
             mainLayout.setCenter(FXMLLoader.load(NavigationController.class.getResource(fxmlFile)));
@@ -41,11 +42,10 @@ public class NavigationController {
         }
     }
 
-
+    // creates custom alert and redirects to a new page is reloadPagePath is not empty
+    // returns the button type the user pressed when he closes the alert
     public static ButtonType showAlert(AlertType alertType, String message, String reloadPagePath) {
         Alert customAlert = new Alert(alertType);
-        //customAlert.setAlertType(alertType);
-        //customAlert.setTitle(title);
         customAlert.setHeaderText(null);
         customAlert.setContentText(message);
 

@@ -52,8 +52,8 @@ public class LoginController {
     // login handler
     @FXML
     void login(MouseEvent event) {
-        String username = username_input.getText();
-        String password = password_input.getText();
+        String username = username_input.getText().strip();
+        String password = password_input.getText().strip();
 
         try {
             UserBase existingUser = Library.authenticateUser(username, password);
