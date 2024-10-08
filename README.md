@@ -1,5 +1,3 @@
-
-https://github.com/user-attachments/assets/a21e77f5-2e74-4ede-8609-1e47c8f0d0fc
 # E-Library
 Developed in Java, as part of the NTUA course Multimedia Technology 2023-2024, this project implements an electronic library, enabling administrators to manage library resources and users to search, borrow books, and provide feedback.
 
