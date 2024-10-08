@@ -22,3 +22,23 @@ To run this project locally on your machine, follow these steps:
    Where the local-path-to-your-javafx-sdk should be replaced with the local path to the JavaFX SDK in your machine.
       
 **6.** To run the project, simply execute the `App.java` file.
+
+## Implementation Details
+All the core requirements outlined in the project specifications have been successfully implemented. For additional assumptions made during development and an explanation of the structure and logic followed, please refer to the following files:
+
+- [project_requirements.pdf](project_requirements.pdf): Description of implementation details and requirements.
+- [medialab_report.pdf](medialab_report.pdf): Explanation of the overall structure and logic, as well as additional assumptions made during development.
+
+This documents can provide a clearer understanding of the choices made throughout the project.
+
+## Login - Signup
+In this E-Library, when the project is running, any user can create a new account as a User or an Admin. But we sould note 2 things:
+- To create a new Admin account you will be prompted to enter an **Admin Registration Password** , which is supposedly provided by the Library. This password is set to:
+  ```bash
+  d4yur7g
+  ``` 
+- There is a default admin saved into the system with the following credentials:
+  **Username:**    `medialab` 
+  **Password:**    `medialab_2024`
+
+
