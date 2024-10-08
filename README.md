@@ -33,10 +33,7 @@ This documents can provide a clearer understanding of the choices made throughou
 
 ## Login - Signup
 In this E-Library, when the project is running, any user can create a new account as a User or an Admin. But we sould note 2 things:
-- To create a new Admin account you will be prompted to enter an **Admin Registration Password** , which is supposedly provided by the Library. This password is set to:
-  ```bash
-  d4yur7g
-  ``` 
+- To create a new Admin account you will be prompted to enter an **Admin Registration Password** , which is supposedly provided by the Library. This password is set to: `d4yur7g` 
 - There is a default admin saved into the system with the following credentials:
 
   **Username:**    `medialab` 
