@@ -9,6 +9,7 @@ To run this project locally on your machine, follow these steps:
 **2.** Clone this GitHub Repository using the command:
    ```bash
    git clone https://github.com/LiagkaAikaterini/E-Library.git
+```
 
 **3.** Delete the .vscode/launch.json file: This file is specific to the original environment and must be recreated for your setup.
 
@@ -17,4 +18,5 @@ To run this project locally on your machine, follow these steps:
 **5.** Add a vmArgs line: In the newly created .vscode/launch.json file, add the following line under configurations:
    ```bash
    "vmArgs": "--module-path local-path-to-your-javafx-sdk/lib --add-modules javafx.controls,javafx.fxml"
+```
 Where the local-path-to-your-javafx-sdk should be replaced with the local path to the JavaFX SDK in your machine.
