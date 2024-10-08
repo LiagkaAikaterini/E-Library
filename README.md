@@ -18,7 +18,7 @@ To run this project locally on your machine, follow these steps:
 **5.** Add a `vmArgs` line: In the newly created `.vscode/launch.json` file, add the following line under configurations:
    ```bash
    "vmArgs": "--module-path local-path-to-your-javafx-sdk/lib --add-modules javafx.controls,javafx.fxml"
-```
-      Where the local-path-to-your-javafx-sdk should be replaced with the local path to the JavaFX SDK in your machine.
+   ```
+   Where the local-path-to-your-javafx-sdk should be replaced with the local path to the JavaFX SDK in your machine.
       
 **6.** To run the project, simply execute the `App.java` file.
