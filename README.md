@@ -3,6 +3,7 @@ Developed in Java, as part of the NTUA course Multimedia Technology 2023-2024, t
 
 ## Presentation of the E-Library UI
 
+https://github.com/user-attachments/assets/da1d89a2-2747-4283-92c8-a7490ee833a6
 
 
 ## Configuration 
