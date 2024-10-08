@@ -1,6 +1,9 @@
 # E-Library
 Developed in Java, as part of the NTUA course Multimedia Technology 2023-2024, this project implements an electronic library, enabling administrators to manage library resources and users to search, borrow books, and provide feedback.
 
+## Presentation of the E-Library UI
+https://drive.google.com/file/d/1qjhah6ONP-U55_sKYj3jF6IipMDemYnd/view?usp=sharing
+
 ## Configuration 
 To run this project locally on your machine, follow these steps:
 
@@ -40,4 +43,8 @@ In this E-Library, when the project is running, any user can create a new accoun
 
   **Password:**    `medialab_2024`
 
+- There are also some dummy users created, so that there are Borrows, Ratings and Reviews in our system. To access any of these users someone can use one of the following Usernames with the same Password:
 
+  **Username:**    `john_doe` `jane_smith` `mike_jones` `emma_brown` `michael_smith`
+
+  **Password:**    `11111`
