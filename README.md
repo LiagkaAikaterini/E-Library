@@ -2,7 +2,8 @@
 Developed in Java, as part of the NTUA course Multimedia Technology 2023-2024, this project implements an electronic library, enabling administrators to manage library resources and users to search, borrow books, and provide feedback.
 
 ## Presentation of the E-Library UI
-[![Watch the video](https://i.sstatic.net/Vp2cE.png)](https://drive.google.com/file/d/1qjhah6ONP-U55_sKYj3jF6IipMDemYnd/view?usp=sharing)
+
+
 
 ## Configuration 
 To run this project locally on your machine, follow these steps:
