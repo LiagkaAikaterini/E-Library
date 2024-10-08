@@ -38,7 +38,9 @@ In this E-Library, when the project is running, any user can create a new accoun
   d4yur7g
   ``` 
 - There is a default admin saved into the system with the following credentials:
+
   **Username:**    `medialab` 
+
   **Password:**    `medialab_2024`
 
 
